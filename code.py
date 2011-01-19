@@ -3,7 +3,6 @@
 #if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 #This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 
-
 class BotSettings(object):
     #this object will hold all global settings for the application
     __settings = {"ERRORHANDLERAPP":"Notepad", "ADVERTISEMENT":"Buying memoricide [s1] | Liliana Vess [s2] | Sorin Markov [s5]", "LOGIN_WAIT":45,
@@ -169,8 +168,8 @@ class Prices(object):
         
 class PackPrices(Prices):
     #pricelist for buying and selling packs
-    __sell_prices = {"M11": 4, "M10": 4, "SOM" : 4, "ZEN": 4, "WWK": 4, "ROE": 4, "ME1": 4, "ME2": 4, "ME3": 4}
-    __buy_prices = {"M11": 3, "M10": 3, "SOM" : 3, "ZEN": 3, "WWK": 3, "ROE": 3, "ME1": 3, "ME2": 3, "ME3": 3}
+    __sell_prices = {"M11": 4, "M10": 4, "SOM" : 4, "ZEN": 4, "WWK": 4, "ROE": 4, "ME1": 4, "ME2": 4, "ME3": 4, "ME4":4}
+    __buy_prices = {"M11": 3, "M10": 3, "SOM" : 3, "ZEN": 3, "WWK": 3, "ROE": 3, "ME1": 3, "ME2": 3, "ME3": 3, "ME4":4}
     def __init__(self):
         super(PackPrices, self).__init__()
     def set_buy_price(self, name, price):
@@ -496,6 +495,8 @@ class ISell(Interface):
         self.__pack_prices = PackPrices()
         self.app_region = app_region
         
+
+        
     def set_windows(self, giving_region, taking_region):
         self.giving_region = giving_region
         #these are the pre-confirmation window regions
@@ -618,7 +619,8 @@ class ISell(Interface):
             running_total += (product["quantity"]) * (product["sell"])
             print("Quantity for current product is " + str(product["quantity"]) + "and Price is " + str(product["sell"]))
         return running_total
-        
+    
+    
     def take_ticket(self, number):
         #if loc cache is saved, then just click on saved locations, otherwise use image match
         #to find locations to click then save into cache then save into cache for next pass through loop
@@ -794,7 +796,7 @@ class ISell(Interface):
                                             raise ErrorHandler("NUMBERS DO NOT MATCH")
                             
                         product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), amount=amount)
-                        giving_products.append(product_obj)
+                        giving_products_found.append(product_obj)
                                             
                         Settings.MinSimilarity = current_sim
                         del(current_sim)
@@ -807,10 +809,10 @@ class ISell(Interface):
             
             #get image of number expected to scan for it first, to save time, else search through all other numbers
             expected_number = 0
-            for product in giving_products:
+            for product in giving_products_found:
                 expected_number += product["quantity"] * product["sell"]
             if recieving_name_region.exists(self._images.get_ticket_text()):
-                if recieving_number_region.exists(self._get_number(number=expected_number, category="trade", subcategory="giving_window"))
+                if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="giving_window")):
                     print("YAY FUCKING YAY")
             
         else:
