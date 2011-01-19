@@ -1,0 +1,70 @@
+Hello, my partner and I own a small chain of hobby shops. We sell all types of hobby stuff including baseball, basketball, hockey, and Magic the Gathering Trading Cards. Recently we have expanded our sales of Magic the Gathering Trading Cards to include Magic the Gathering Online Cards. This is something we just started buying and selling but is shaping up to be a very important part of our Magic the Gathering sales. This is an online video game. It is a MMOG (Massively Multiplayer Online Game). We will provide an account so that you can get much more in-depth of how the game works. 
+
+This bot needs to interface with the Magic the Gathering Online game. It will act like a human player. It will paste all the trade messages, and interface with our other bots. This application will sit in the background and advertise itself by pasting an editable message. When a player wants to trade with the bot he will open a trade, quote prices, and take event tickets from the player to complete the trade. We need a buying feature that will allow players to sell us there cards in exchange for event tickets. We need it to keep track of the change from each transaction. When the player comes back he will be able to use that towards his next purchase. 
+
+If you would like to bid on this but want to see the way the game works, or how some of the free bots work let us know and we can give you access to an account and the software for you to test and get familiar with. The client can be freely downloaded on the internet so feel free to get familar with it if you want to before you make your bid. 
+
+General Info: 
+•	The bot needs to interface with a price-list of thousands of cards that we will provide. This list is always changing and being updated so it needs to be a text file that we can replace when needed. We will provide a sample of the price-list used. 
+•	The bot will need to keep track of player's credit. When someone uses our bot to sell or buy cards it is not always an even value. Therefore the bot must keep track of the change so when the user comes back his change from the last purchase is there. We can provide a sample credit list. 
+•	The Bot will need to keep track of its sales, stock, and profit. 
+•	This bot needs to act either as a standalone bot, or as part of a farm of bots that all send and receive information between one another. 
+•	This bot needs to be able to trade with players, cancel trades, and use some in game menu features that allow it to update its inventory list and items for trade. 
+•	This bot needs to post messages in the trade channel, classified board, and Private message screens. 
+
+Bot App: 
+
+
+Important functions 
+
+This bot must be able to work as a stand-alone piece of software, or as part of a farm of several systems working together and sharing information. When in stand-alone mode it will keep all its own records. These records include a Price-list, players Credit, Personal Price list and Backup Price-list. All functions of farm mode should be available in stand-alone mode except the Auto-transfer function, restocking function, and unified credit function. 
+
+In Farm mode there needs to be a central point of storage for the player's credit and for bots stock, this should all act as 1 system. So no matter which bot a player trades with his credit will follow him to each bot. The games private message system can be used to accomplish updating and changing credit. It can also be used to accomplish modifying bots stock. 
+General Tab 
+This tab will need to set all the general information the bot will need to function properly 
+o	Bot User-name and Password 
+o	Location of the local Mtgo.exe file 
+o	How often the MTGO Game client restarts. 
+o	Max amount of time before the current trade is canceled 
+o	Max amount of inactivity time before the trade is canceled 
+o	A mode select that allows the bot to only buy, only sell, or buy and sell. 
+o	A setting that has the bot act as a stand-alone bot or work as part of a team of bots that uses a shared inventory, credit list, and prices. 
+Buy Tab 
+o	Which Set(s) to purchase 
+o	What to buy (Rare, Uncommon, Common, Land, Foil, Boosters, Avatars) 
+o	Max number of each rarity type to buy (Rare, Uncommon, Common) 
+o	The max number of boosters, and avatars to buy 
+o	The max number of foils to buy also separated by rarity 
+Message tab 
+This allows us to set the messages that the bot pastes in the trade window, on the classified ads, and in the trade room. This tab will also need to 
+•	Post a separate message in the classified area when it's open for a trade, and when it is busy and cannot accept a trade. 
+•	Have an option to post either Cards that it is selling and their price or cards that it's buying and their price in the classified section. This option should have features to set it by highest value, lowest value, popularity, and by the number of stock. This setting should also have an override in case we want to use a custom message in this area. 
+•	All of these messages and any separators should be 100% configurable and should allow us to use the games custom formatting. 
+•	A reply message to reply to private messages from other players that are not part of the bot farm. After the reply the bot should close the message 
+Price tab 
+Allows us to input a separate modifier that change the sell prices and buy prices of each category of items and each set 
+o	An option to override the modifier on single items and allow us to set a personal price. 
+o	An option to modify items with a higher value differently then items with a lower value. This can work on a threshold basis. For instance any item worth over 5 tickets can use this separate threshold modifier instead of the category modifiers above. 
+Auto-transfer Tab (Farm Mode Only) 
+This tab allows us to set some general settings for the Auto-transfer function. 
+•	There needs to be an input area that will allow us to put the names of all the other bots in the bot farm here this setting will determine which bots it interacts with to update user credit, stock levels, and when it needs to transfer. This will also act as a security function. Keeping other people from stumbling on to this functionality 
+•	There should be a way to set this function so it is enabled or disabled. 
+Price editor Tab 
+This tab should allow us to set our personal prices on single cards, but should not change the prices in the pricelist that we provide. Any personal prices we set should be saved in a separate file or on a database. 
+•	This needs to be able to sort cards by Rarity, Price, and Set. 
+•	There needs to be a way to override the number of that card it buys. For instance if we have it set to buy 4 of each rare card but on a few cards we want it to always buy it, or never buy it we want to be able to adjust that. 
+•	This should list the prices from the main pricelist we provide, and also the edited price in the personal price-list 
+•	
+Administration: 
+•	We would like to be able to interface with these bots from another computer on our network while they are running without interfering with their functionality. This feature is for remote administration. We do not care how it communicates with the bot application as long as it works. It can also use another Game account and receive commands in the trade window if this would be the most efficient way. 
+o	We need to be able to set and change user's credit. 
+o	We need to be able to regulate if the user can take currency off the bot or just regular inventory. (example: we sell bot credits from our website. If a user buys Bot Credits, we do not want him to be able to take currency off the bot. We only want to allow him to take cards) 
+o	The ability to initiate a transfer between bots. 
+o	A way to report if the bot is trading, transferring, not online, or is malfunctioning. 
+
+Interface, Farm Mode, Errors and other Functions: 
+In farm mode the buy bots will need to be able to give cards to the selling bot, and the selling bots will need to give currency to the buy bots. Also update the stock, and player's credit to share amongst all of our other bots. 
+If any price errors come along we would like it to default to a value that's very high some of these cards are worth a lot of money. We do not want to give them away. 
+We are flexible with the interface, and functionality of these bots. These are what we would really like to see. If some of them are impractical or will take too long to develop then let us know and we will make changes where necessary. 
+The administration portion and farm mode can be done anyway you think is best. If you think some of it is too impractical or have a way to do it faster, easier, better then again please let us know. We are very flexible when it comes to this kind of stuff. 
+We would also like a lasting relationship with our developer(s) we will need this software to be maintained and upgraded from time to time. We tried to think of everything with this paper. Please take the time to read it and ask any questions that you need to get extra information you need. 
