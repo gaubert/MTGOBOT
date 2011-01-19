@@ -75,7 +75,6 @@
 </span><span class="cmt">#if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 </span><span class="cmt">#This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 </span>
-
 <span class="kw">class</span> BotSettings(object):
     <span class="cmt">#this object will hold all global settings for the application
 </span>    __settings = {<span class="str">"ERRORHANDLERAPP"</span>:<span class="str">"Notepad"</span>, <span class="str">"ADVERTISEMENT"</span>:<span class="str">"Buying memoricide [s1] | Liliana Vess [s2] | Sorin Markov [s5]"</span>, <span class="str">"LOGIN_WAIT"</span>:<span class="dig">45</span>,
@@ -241,8 +240,8 @@
 
 <span class="kw">class</span> PackPrices(Prices):
     <span class="cmt">#pricelist for buying and selling packs
-</span>    __sell_prices = {<span class="str">"M11"</span>: <span class="dig">4</span>, <span class="str">"M10"</span>: <span class="dig">4</span>, <span class="str">"SOM"</span> : <span class="dig">4</span>, <span class="str">"ZEN"</span>: <span class="dig">4</span>, <span class="str">"WWK"</span>: <span class="dig">4</span>, <span class="str">"ROE"</span>: <span class="dig">4</span>, <span class="str">"ME1"</span>: <span class="dig">4</span>, <span class="str">"ME2"</span>: <span class="dig">4</span>, <span class="str">"ME3"</span>: <span class="dig">4</span>}
-    __buy_prices = {<span class="str">"M11"</span>: <span class="dig">3</span>, <span class="str">"M10"</span>: <span class="dig">3</span>, <span class="str">"SOM"</span> : <span class="dig">3</span>, <span class="str">"ZEN"</span>: <span class="dig">3</span>, <span class="str">"WWK"</span>: <span class="dig">3</span>, <span class="str">"ROE"</span>: <span class="dig">3</span>, <span class="str">"ME1"</span>: <span class="dig">3</span>, <span class="str">"ME2"</span>: <span class="dig">3</span>, <span class="str">"ME3"</span>: <span class="dig">3</span>}
+</span>    __sell_prices = {<span class="str">"M11"</span>: <span class="dig">4</span>, <span class="str">"M10"</span>: <span class="dig">4</span>, <span class="str">"SOM"</span> : <span class="dig">4</span>, <span class="str">"ZEN"</span>: <span class="dig">4</span>, <span class="str">"WWK"</span>: <span class="dig">4</span>, <span class="str">"ROE"</span>: <span class="dig">4</span>, <span class="str">"ME1"</span>: <span class="dig">4</span>, <span class="str">"ME2"</span>: <span class="dig">4</span>, <span class="str">"ME3"</span>: <span class="dig">4</span>, <span class="str">"ME4"</span>:<span class="dig">4</span>}
+    __buy_prices = {<span class="str">"M11"</span>: <span class="dig">3</span>, <span class="str">"M10"</span>: <span class="dig">3</span>, <span class="str">"SOM"</span> : <span class="dig">3</span>, <span class="str">"ZEN"</span>: <span class="dig">3</span>, <span class="str">"WWK"</span>: <span class="dig">3</span>, <span class="str">"ROE"</span>: <span class="dig">3</span>, <span class="str">"ME1"</span>: <span class="dig">3</span>, <span class="str">"ME2"</span>: <span class="dig">3</span>, <span class="str">"ME3"</span>: <span class="dig">3</span>, <span class="str">"ME4"</span>:<span class="dig">4</span>}
     <span class="kw">def</span> __init__(self):
         super(PackPrices, self).__init__()
     <span class="kw">def</span> set_buy_price(self, name, price):
@@ -568,6 +567,8 @@
         self.__pack_prices = PackPrices()
         self.app_region = app_region
 
+
+
     <span class="kw">def</span> set_windows(self, giving_region, taking_region):
         self.giving_region = giving_region
         <span class="cmt">#these are the pre-confirmation window regions
@@ -690,6 +691,7 @@
             running_total += (product[<span class="str">"quantity"</span>]) * (product[<span class="str">"sell"</span>])
             <span class="kw">print</span>(<span class="str">"Quantity for current product is "</span> + str(product[<span class="str">"quantity"</span>]) + <span class="str">"and Price is "</span> + str(product[<span class="str">"sell"</span>]))
         <span class="kw">return</span> running_total
+
 
     <span class="kw">def</span> take_ticket(self, number):
         <span class="cmt">#if loc cache is saved, then just click on saved locations, otherwise use image match
@@ -866,7 +868,7 @@
                                             <span class="kw">raise</span> ErrorHandler(<span class="str">"NUMBERS DO NOT MATCH"</span>)
 
                         product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), amount=amount)
-                        giving_products.append(product_obj)
+                        giving_products_found.append(product_obj)
 
                         Settings.MinSimilarity = current_sim
                         <span class="kw">del</span>(current_sim)
@@ -879,10 +881,10 @@
 
             <span class="cmt">#get image of number expected to scan for it first, to save time, else search through all other numbers
 </span>            expected_number = <span class="dig">0</span>
-            <span class="kw">for</span> product <span class="kw">in</span> giving_products:
+            <span class="kw">for</span> product <span class="kw">in</span> giving_products_found:
                 expected_number += product[<span class="str">"quantity"</span>] * product[<span class="str">"sell"</span>]
             <span class="kw">if</span> recieving_name_region.exists(self._images.get_ticket_text()):
-                <span class="kw">if</span> recieving_number_region.exists(self._get_number(number=expected_number, category=<span class="str">"trade"</span>, subcategory=<span class="str">"giving_window"</span>))
+                <span class="kw">if</span> recieving_number_region.exists(self._images.get_number(number=expected_number, category=<span class="str">"trade"</span>, subcategory=<span class="str">"giving_window"</span>)):
                     <span class="kw">print</span>(<span class="str">"YAY FUCKING YAY"</span>)
 
         <span class="kw">else</span>:
