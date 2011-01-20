@@ -3,8 +3,6 @@
 #if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 #This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 
-import functools
-
 def memorize(func):
     """
     Cache the results of the function so it doesn't need
@@ -12,8 +10,7 @@ def memorize(func):
     """
     cache = {}
     
-    @functools.wrap(func)
-    def wrapper(f*args):
+    def wrapper(*args):
         if args in cache:
             return cache[args]
             
@@ -632,8 +629,7 @@ class ISell(Interface):
         print("finished while loop")
         
         return products
-    
-    @memorize 
+     
     def calculate_products_to_tickets(self, products_dict):
         #this takes all the products as a parameter and returns the number of tickets that should be taken
         running_total = 0
@@ -833,9 +829,11 @@ class ISell(Interface):
             expected_number = 0
             for product in giving_products_found:
                 expected_number += product["quantity"] * product["sell"]
+            print(str(expected_number))
             if recieving_name_region.exists(self._images.get_ticket_text()):
                 if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="giving_window")):
                     print("YAY FUCKING YAY")
+                    return True
             
         else:
             raise ErrorHandler("Could not find confirm window")
