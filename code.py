@@ -776,13 +776,13 @@ class ISell(Interface):
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
             recieving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+42, 30, 13)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+41, 143, 13)
+            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+42, 143, 13)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+391, 30, 13)
-            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+391, 143, 13)
+            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+392, 30, 13)
+            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+392, 143, 13)
             found=True
             #scan the giving window
-            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            hover(Location(giving_name_region.getX(), giving_name_region.getY()))
             while found:
                 found=False
                 for product_abbr in pack_names_keys:
