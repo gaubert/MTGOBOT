@@ -3,6 +3,25 @@
 #if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 #This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 
+import functools
+
+def memorize(func):
+    """
+    Cache the results of the function so it doesn't need
+    to be called again, if the same arguments are provided
+    """
+    cache = {}
+    
+    @functools.wrap(func)
+    def wrapper(f*args):
+        if args in cache:
+            return cache[args]
+            
+        result = func(*args)
+        cache[args] = result
+        return result
+    return wrapper
+    
 class BotSettings(object):
     #this object will hold all global settings for the application
     __settings = {"ERRORHANDLERAPP":"Notepad", "ADVERTISEMENT":"Buying memoricide [s1] | Liliana Vess [s2] | Sorin Markov [s5]", "LOGIN_WAIT":45,
@@ -515,8 +534,9 @@ class ISell(Interface):
     def tickets_to_take_for_packs(self):
         print("running tickets to take for packs")
         #scan the numbers of packs taken and determine number of tickets to take
-        """takes the mode to check to make sure Bot is in correct mode, returns the number of tickets to takes
-        in the form of the Images.number[] format"""
+        """
+        returns the number of tickets to takes in the form of the Images.number[] format
+        """
             
         #start search for pack image
         #call image search function with giving window region and all pack images as parameters
@@ -612,6 +632,8 @@ class ISell(Interface):
         print("finished while loop")
         
         return products
+    
+    @memorize 
     def calculate_products_to_tickets(self, products_dict):
         #this takes all the products as a parameter and returns the number of tickets that should be taken
         running_total = 0
