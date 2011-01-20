@@ -75,6 +75,22 @@
 </span><span class="cmt">#if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 </span><span class="cmt">#This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 </span>
+<span class="kw">def</span> memorize(func):
+    <span class="str">"""
+    Cache the results of the function so it doesn't need
+    to be called again, if the same arguments are provided
+    """</span>
+    cache = {}
+
+    <span class="kw">def</span> wrapper(*args):
+        <span class="kw">if</span> args <span class="kw">in</span> cache:
+            <span class="kw">return</span> cache[args]
+
+        result = func(*args)
+        cache[args] = result
+        <span class="kw">return</span> result
+    <span class="kw">return</span> wrapper
+
 <span class="kw">class</span> BotSettings(object):
     <span class="cmt">#this object will hold all global settings for the application
 </span>    __settings = {<span class="str">"ERRORHANDLERAPP"</span>:<span class="str">"Notepad"</span>, <span class="str">"ADVERTISEMENT"</span>:<span class="str">"Buying memoricide [s1] | Liliana Vess [s2] | Sorin Markov [s5]"</span>, <span class="str">"LOGIN_WAIT"</span>:<span class="dig">45</span>,
@@ -587,8 +603,9 @@
     <span class="kw">def</span> tickets_to_take_for_packs(self):
         <span class="kw">print</span>(<span class="str">"running tickets to take for packs"</span>)
         <span class="cmt">#scan the numbers of packs taken and determine number of tickets to take
-</span>        <span class="str">"""takes the mode to check to make sure Bot is in correct mode, returns the number of tickets to takes
-        in the form of the Images.number[] format"""</span>
+</span>        <span class="str">"""
+        returns the number of tickets to takes in the form of the Images.number[] format
+        """</span>
 
         <span class="cmt">#start search for pack image
 </span>        <span class="cmt">#call image search function with giving window region and all pack images as parameters
@@ -684,6 +701,7 @@
         <span class="kw">print</span>(<span class="str">"finished while loop"</span>)
 
         <span class="kw">return</span> products
+
     <span class="kw">def</span> calculate_products_to_tickets(self, products_dict):
         <span class="cmt">#this takes all the products as a parameter and returns the number of tickets that should be taken
 </span>        running_total = <span class="dig">0</span>
@@ -830,13 +848,13 @@
 </span>            <span class="cmt">#number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
 </span>            recieving_number_region = Region(confirm_button.getX()-<span class="dig">288</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">30</span>, <span class="dig">13</span>)
             <span class="cmt">#height for each product is 13px, and 4px buffer vertically between each product slot
-</span>            recieving_name_region = Region(confirm_button.getX()-<span class="dig">253</span>, confirm_button.getY()+<span class="dig">41</span>, <span class="dig">143</span>, <span class="dig">13</span>)
+</span>            recieving_name_region = Region(confirm_button.getX()-<span class="dig">253</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">143</span>, <span class="dig">13</span>)
             <span class="cmt">#confirm products giving
-</span>            giving_number_region = Region(confirm_button.getX()-<span class="dig">288</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">30</span>, <span class="dig">13</span>)
-            giving_name_region = Region(confirm_button.getX()-<span class="dig">253</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">143</span>, <span class="dig">13</span>)
+</span>            giving_number_region = Region(confirm_button.getX()-<span class="dig">288</span>, confirm_button.getY()+<span class="dig">392</span>, <span class="dig">30</span>, <span class="dig">13</span>)
+            giving_name_region = Region(confirm_button.getX()-<span class="dig">253</span>, confirm_button.getY()+<span class="dig">392</span>, <span class="dig">143</span>, <span class="dig">13</span>)
             found=True
             <span class="cmt">#scan the giving window
-</span>            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+</span>            hover(Location(giving_name_region.getX(), giving_name_region.getY()))
             <span class="kw">while</span> found:
                 found=False
                 <span class="kw">for</span> product_abbr <span class="kw">in</span> pack_names_keys:
@@ -883,9 +901,11 @@
 </span>            expected_number = <span class="dig">0</span>
             <span class="kw">for</span> product <span class="kw">in</span> giving_products_found:
                 expected_number += product[<span class="str">"quantity"</span>] * product[<span class="str">"sell"</span>]
+            <span class="kw">print</span>(str(expected_number))
             <span class="kw">if</span> recieving_name_region.exists(self._images.get_ticket_text()):
                 <span class="kw">if</span> recieving_number_region.exists(self._images.get_number(number=expected_number, category=<span class="str">"trade"</span>, subcategory=<span class="str">"giving_window"</span>)):
                     <span class="kw">print</span>(<span class="str">"YAY FUCKING YAY"</span>)
+                    <span class="kw">return</span> True
 
         <span class="kw">else</span>:
             <span class="kw">raise</span> ErrorHandler(<span class="str">"Could not find confirm window"</span>)

@@ -3,6 +3,22 @@
 #if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 #This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 
+def memorize(func):
+    """
+    Cache the results of the function so it doesn't need
+    to be called again, if the same arguments are provided
+    """
+    cache = {}
+    
+    def wrapper(*args):
+        if args in cache:
+            return cache[args]
+            
+        result = func(*args)
+        cache[args] = result
+        return result
+    return wrapper
+    
 class BotSettings(object):
     #this object will hold all global settings for the application
     __settings = {"ERRORHANDLERAPP":"Notepad", "ADVERTISEMENT":"Buying memoricide [s1] | Liliana Vess [s2] | Sorin Markov [s5]", "LOGIN_WAIT":45,
@@ -515,8 +531,9 @@ class ISell(Interface):
     def tickets_to_take_for_packs(self):
         print("running tickets to take for packs")
         #scan the numbers of packs taken and determine number of tickets to take
-        """takes the mode to check to make sure Bot is in correct mode, returns the number of tickets to takes
-        in the form of the Images.number[] format"""
+        """
+        returns the number of tickets to takes in the form of the Images.number[] format
+        """
             
         #start search for pack image
         #call image search function with giving window region and all pack images as parameters
@@ -612,6 +629,7 @@ class ISell(Interface):
         print("finished while loop")
         
         return products
+     
     def calculate_products_to_tickets(self, products_dict):
         #this takes all the products as a parameter and returns the number of tickets that should be taken
         running_total = 0
@@ -758,13 +776,13 @@ class ISell(Interface):
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
             recieving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+42, 30, 13)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+41, 143, 13)
+            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+42, 143, 13)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+391, 30, 13)
-            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+391, 143, 13)
+            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+392, 30, 13)
+            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+392, 143, 13)
             found=True
             #scan the giving window
-            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            hover(Location(giving_name_region.getX(), giving_name_region.getY()))
             while found:
                 found=False
                 for product_abbr in pack_names_keys:
@@ -811,9 +829,11 @@ class ISell(Interface):
             expected_number = 0
             for product in giving_products_found:
                 expected_number += product["quantity"] * product["sell"]
+            print(str(expected_number))
             if recieving_name_region.exists(self._images.get_ticket_text()):
                 if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="giving_window")):
                     print("YAY FUCKING YAY")
+                    return True
             
         else:
             raise ErrorHandler("Could not find confirm window")
