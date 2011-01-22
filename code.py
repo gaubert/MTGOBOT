@@ -773,12 +773,12 @@ class ISell(Interface):
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-            recieving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+41, 30, 14)
+            recieving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+41, 30, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+41, 143, 14)
+            recieving_name_region = Region(confirm_button.getX()-256, confirm_button.getY()+41, 143, 14)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+391, 30, 14)
-            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+391, 143, 14)
+            giving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+391, 30, 14)
+            giving_name_region = Region(confirm_button.getX()-256, confirm_button.getY()+391, 143, 14)
             found=True
             #scan the giving window
             hover(Location(giving_name_region.getX(), giving_name_region.getY()))
