@@ -582,7 +582,6 @@ class ISell(Interface):
                 
                 if product_abbr in list_of_product_names:
                     continue
-                    
                 print("reached line 479 pack_text_name = " + product_abbr)
                 #determine which packs are in the giving window
                 pack = self._images.get_packs_text(product_abbr)
@@ -630,7 +629,6 @@ class ISell(Interface):
         
         return products
 
-    @memorize
     def calculate_products_to_tickets(self, products_dict):
         #this takes all the products as a parameter and returns the number of tickets that should be taken
         running_total = 0
@@ -775,12 +773,12 @@ class ISell(Interface):
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-            recieving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+42, 30, 13)
+            recieving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+41, 30, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+42, 143, 13)
+            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+41, 143, 14)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+392, 30, 13)
-            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+392, 143, 13)
+            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+391, 30, 14)
+            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+391, 143, 14)
             found=True
             #scan the giving window
             hover(Location(giving_name_region.getX(), giving_name_region.getY()))
