@@ -297,7 +297,6 @@ class Interface(object):
         #need to create parent class that has slow_click to pass on
         #will click on a target or location with designated mouse button
         wait(0.2)
-        print("starting slow click")
         if loc == None:
             target_match = self._app_region.find(target)
             loc = target_match.getTarget()
@@ -313,7 +312,6 @@ class Interface(object):
             mouseUp(Button.RIGHT)
         else:
             mouseUp(Button.LEFT)
-        print("finishing slow click on " + str(loc))
             
 class IChat(Interface):
     
@@ -765,8 +763,8 @@ class ISell(Interface):
         
         if isinstance(confirm_button, Match):
             #keeps record of products found and their amount so far
-            list_of_product_names = set()
-            giving_products_found = {}
+            list_of_product_names = []
+            giving_products_found = []
             pack_names_keys = self._images.get_pack_keys()
             pack_names = self._images.get_packs_text()
             numbers = self._images.get_number(number=None, category="trade", subcategory="giving_window")
@@ -775,10 +773,10 @@ class ISell(Interface):
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
             recieving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+41, 30, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-256, confirm_button.getY()+41, 143, 14)
+            recieving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+41, 160, 14)
             #confirm products giving
             giving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+391, 30, 14)
-            giving_name_region = Region(confirm_button.getX()-256, confirm_button.getY()+391, 143, 14)
+            giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+391, 160, 14)
             found=True
             #scan the giving window
             hover(Location(giving_name_region.getX(), giving_name_region.getY()))
@@ -796,7 +794,9 @@ class ISell(Interface):
                         Settings.MinSimilarity = 1
                         passes = 0
                         while passes < 1:
+                            print(str(passes))
                             for number in range(len(numbers)):
+                                print(str(number))
                                 if number == 0:
                                     continue
                                 if giving_number_region.exists(numbers[number]):
