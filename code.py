@@ -18,7 +18,7 @@ def memorize(func):
         cache[args] = result
         return result
     return wrapper
-    
+
 class BotSettings(object):
     #this object will hold all global settings for the application
     __settings = {"ERRORHANDLERAPP":"Notepad", "ADVERTISEMENT":"Buying memoricide [s1] | Liliana Vess [s2] | Sorin Markov [s5]", "LOGIN_WAIT":45,
@@ -317,7 +317,7 @@ class Interface(object):
             
 class IChat(Interface):
     
-    #Text recognition is EXPERIMENTAL, SIKULI X only currently, INCONSISTENT RESULTS
+    #Text recognition is EXPERIMENTAL, SIKULI X only, currently, and INCONSISTENT RESULTS
     def wait_for_text(self, string, wait, region):
         """takes the text sought, max time to wait, and a region object of the chat window as paramters, returns True if found, false otherwise"""
         #this uses experimental functions that aren't 100% accurate, wait for improvements of text recognition before using
@@ -408,7 +408,7 @@ class IClassified(Interface):
             self._slow_click(target=self._images.get_menu("marketplace"))
             self._slow_click(target=self._images.get_menu("classified"))
         return True
-        
+
     def set_posting(self):
         #set the ad to be displayed in classified
         """parameters: ad = the message to be posted in classified, images = images object"""
@@ -429,7 +429,7 @@ class IClassified(Interface):
         else:
             raise ErrorHandler("Cannot find posting area")
             return False
-            
+
     def remove_posting(self):
         self.go_to_classified()
         #removes advertisement
@@ -629,7 +629,8 @@ class ISell(Interface):
         print("finished while loop")
         
         return products
-     
+
+    @memorize
     def calculate_products_to_tickets(self, products_dict):
         #this takes all the products as a parameter and returns the number of tickets that should be taken
         running_total = 0
@@ -693,7 +694,7 @@ class ISell(Interface):
             taken += take
             print("Line 665, taken = "+str(taken) + " and take=" + str(take))
         return taken
-        
+    
     def return_ticket(self, number):
         #clicks on the decrease ticket to return one ticket
         pass
