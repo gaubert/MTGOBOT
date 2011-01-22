@@ -369,7 +369,6 @@
         <span class="cmt">#need to create parent class that has slow_click to pass on
 </span>        <span class="cmt">#will click on a target or location with designated mouse button
 </span>        <span class="skw">wait</span>(<span class="dig">0.2</span>)
-        <span class="kw">print</span>(<span class="str">"starting slow click"</span>)
         <span class="kw">if</span> loc == None:
             target_match = self._app_region.<span class="skw">find</span>(target)
             loc = target_match.getTarget()
@@ -385,11 +384,10 @@
             mouseUp(Button.RIGHT)
         <span class="kw">else</span>:
             mouseUp(Button.LEFT)
-        <span class="kw">print</span>(<span class="str">"finishing slow click on "</span> + str(loc))
 
 <span class="kw">class</span> IChat(Interface):
 
-    <span class="cmt">#Text recognition is EXPERIMENTAL, SIKULI X only currently, INCONSISTENT RESULTS
+    <span class="cmt">#Text recognition is EXPERIMENTAL, SIKULI X only, currently, and INCONSISTENT RESULTS
 </span>    <span class="kw">def</span> wait_for_text(self, string, <span class="skw">wait</span>, region):
         <span class="str">"""takes the text sought, max time to wait, and a region object of the chat window as paramters, returns True if found, false otherwise"""</span>
         <span class="cmt">#this uses experimental functions that aren't 100% accurate, wait for improvements of text recognition before using
@@ -654,7 +652,6 @@
 </span>
                 <span class="kw">if</span> product_abbr <span class="kw">in</span> list_of_product_names:
                     <span class="kw">continue</span>
-
                 <span class="kw">print</span>(<span class="str">"reached line 479 pack_text_name = "</span> + product_abbr)
                 <span class="cmt">#determine which packs are in the giving window
 </span>                pack = self._images.get_packs_text(product_abbr)
@@ -838,20 +835,20 @@
 
         <span class="kw">if</span> isinstance(confirm_button, Match):
             <span class="cmt">#keeps record of products found and their amount so far
-</span>            list_of_product_names = set()
-            giving_products_found = {}
+</span>            list_of_product_names = []
+            giving_products_found = []
             pack_names_keys = self._images.get_pack_keys()
             pack_names = self._images.get_packs_text()
             numbers = self._images.get_number(number=None, category=<span class="str">"trade"</span>, subcategory=<span class="str">"giving_window"</span>)
             <span class="cmt">#confirm products receiving
 </span>            <span class="cmt">#set the regions of a single product and and the amount slow
 </span>            <span class="cmt">#number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-</span>            recieving_number_region = Region(confirm_button.getX()-<span class="dig">288</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">30</span>, <span class="dig">13</span>)
+</span>            recieving_number_region = Region(confirm_button.getX()-<span class="dig">290</span>, confirm_button.getY()+<span class="dig">41</span>, <span class="dig">30</span>, <span class="dig">14</span>)
             <span class="cmt">#height for each product is 13px, and 4px buffer vertically between each product slot
-</span>            recieving_name_region = Region(confirm_button.getX()-<span class="dig">253</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">143</span>, <span class="dig">13</span>)
+</span>            recieving_name_region = Region(confirm_button.getX()-<span class="dig">257</span>, confirm_button.getY()+<span class="dig">41</span>, <span class="dig">160</span>, <span class="dig">14</span>)
             <span class="cmt">#confirm products giving
-</span>            giving_number_region = Region(confirm_button.getX()-<span class="dig">288</span>, confirm_button.getY()+<span class="dig">392</span>, <span class="dig">30</span>, <span class="dig">13</span>)
-            giving_name_region = Region(confirm_button.getX()-<span class="dig">253</span>, confirm_button.getY()+<span class="dig">392</span>, <span class="dig">143</span>, <span class="dig">13</span>)
+</span>            giving_number_region = Region(confirm_button.getX()-<span class="dig">290</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">30</span>, <span class="dig">14</span>)
+            giving_name_region = Region(confirm_button.getX()-<span class="dig">257</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">160</span>, <span class="dig">14</span>)
             found=True
             <span class="cmt">#scan the giving window
 </span>            hover(Location(giving_name_region.getX(), giving_name_region.getY()))
@@ -869,7 +866,9 @@
                         Settings.MinSimilarity = <span class="dig">1</span>
                         passes = <span class="dig">0</span>
                         <span class="kw">while</span> passes &lt; <span class="dig">1</span>:
+                            <span class="kw">print</span>(str(passes))
                             <span class="kw">for</span> number <span class="kw">in</span> range(len(numbers)):
+                                <span class="kw">print</span>(str(number))
                                 <span class="kw">if</span> number == <span class="dig">0</span>:
                                     <span class="kw">continue</span>
                                 <span class="kw">if</span> giving_number_region.exists(numbers[number]):

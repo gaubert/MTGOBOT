@@ -18,7 +18,7 @@ def memorize(func):
         cache[args] = result
         return result
     return wrapper
-    
+
 class BotSettings(object):
     #this object will hold all global settings for the application
     __settings = {"ERRORHANDLERAPP":"Notepad", "ADVERTISEMENT":"Buying memoricide [s1] | Liliana Vess [s2] | Sorin Markov [s5]", "LOGIN_WAIT":45,
@@ -297,7 +297,6 @@ class Interface(object):
         #need to create parent class that has slow_click to pass on
         #will click on a target or location with designated mouse button
         wait(0.2)
-        print("starting slow click")
         if loc == None:
             target_match = self._app_region.find(target)
             loc = target_match.getTarget()
@@ -313,11 +312,10 @@ class Interface(object):
             mouseUp(Button.RIGHT)
         else:
             mouseUp(Button.LEFT)
-        print("finishing slow click on " + str(loc))
             
 class IChat(Interface):
     
-    #Text recognition is EXPERIMENTAL, SIKULI X only currently, INCONSISTENT RESULTS
+    #Text recognition is EXPERIMENTAL, SIKULI X only, currently, and INCONSISTENT RESULTS
     def wait_for_text(self, string, wait, region):
         """takes the text sought, max time to wait, and a region object of the chat window as paramters, returns True if found, false otherwise"""
         #this uses experimental functions that aren't 100% accurate, wait for improvements of text recognition before using
@@ -408,7 +406,7 @@ class IClassified(Interface):
             self._slow_click(target=self._images.get_menu("marketplace"))
             self._slow_click(target=self._images.get_menu("classified"))
         return True
-        
+
     def set_posting(self):
         #set the ad to be displayed in classified
         """parameters: ad = the message to be posted in classified, images = images object"""
@@ -429,7 +427,7 @@ class IClassified(Interface):
         else:
             raise ErrorHandler("Cannot find posting area")
             return False
-            
+
     def remove_posting(self):
         self.go_to_classified()
         #removes advertisement
@@ -582,7 +580,6 @@ class ISell(Interface):
                 
                 if product_abbr in list_of_product_names:
                     continue
-                    
                 print("reached line 479 pack_text_name = " + product_abbr)
                 #determine which packs are in the giving window
                 pack = self._images.get_packs_text(product_abbr)
@@ -629,7 +626,7 @@ class ISell(Interface):
         print("finished while loop")
         
         return products
-     
+
     def calculate_products_to_tickets(self, products_dict):
         #this takes all the products as a parameter and returns the number of tickets that should be taken
         running_total = 0
@@ -693,7 +690,7 @@ class ISell(Interface):
             taken += take
             print("Line 665, taken = "+str(taken) + " and take=" + str(take))
         return taken
-        
+    
     def return_ticket(self, number):
         #clicks on the decrease ticket to return one ticket
         pass
@@ -766,20 +763,20 @@ class ISell(Interface):
         
         if isinstance(confirm_button, Match):
             #keeps record of products found and their amount so far
-            list_of_product_names = set()
-            giving_products_found = {}
+            list_of_product_names = []
+            giving_products_found = []
             pack_names_keys = self._images.get_pack_keys()
             pack_names = self._images.get_packs_text()
             numbers = self._images.get_number(number=None, category="trade", subcategory="giving_window")
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-            recieving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+42, 30, 13)
+            recieving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+41, 30, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+42, 143, 13)
+            recieving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+41, 160, 14)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-288, confirm_button.getY()+392, 30, 13)
-            giving_name_region = Region(confirm_button.getX()-253, confirm_button.getY()+392, 143, 13)
+            giving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+391, 30, 14)
+            giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+391, 160, 14)
             found=True
             #scan the giving window
             hover(Location(giving_name_region.getX(), giving_name_region.getY()))
@@ -797,7 +794,9 @@ class ISell(Interface):
                         Settings.MinSimilarity = 1
                         passes = 0
                         while passes < 1:
+                            print(str(passes))
                             for number in range(len(numbers)):
+                                print(str(number))
                                 if number == 0:
                                     continue
                                 if giving_number_region.exists(numbers[number]):
