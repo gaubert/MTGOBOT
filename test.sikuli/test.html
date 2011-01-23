@@ -70,8 +70,10 @@
 <h2>test.sikuli\test.sikuli</h2> <a href="test.sikuli\test.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-sys.path.append("c:/users/darkray16/desktop\my dropbox\MTGO Bot\")
-<span class="kw">import</span> mod
+number1 = Pattern(<img src="../Images/numbers/trade/confirm/number_04.png" />).similar(<span class="dig">0.9</span>)
+match1 = exists(number1)
+<span class="kw">if</span> match1:
+        hover(match1.getTarget())
 </pre>
 </body>
 </html>

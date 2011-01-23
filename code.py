@@ -104,10 +104,10 @@ class Images(object):
     12: "../Images/numbers/trade/number_12.png", 13: "../Images/numbers/trade/number_13.png", 14: "../Images/numbers/trade/number_14.png", 15: "../Images/numbers/trade/number_50.png", 16: "../Images/numbers/trade/number_16.png", 17: "../Images/numbers/trade/number_17.png",
     18: "../Images/numbers/trade/number_18.png", 19: "../Images/numbers/trade/number_19.png", 20: "../Images/numbers/trade/number_20.png"},
     "confirm":{
-    1:"../Images/numbers/trade/confirm/number_1.png", 2:"../Images/numbers/trade/confirm/number_2.png", 3:"../Images/numbers/trade/confirm/number_3.png", 4:"../Images/numbers/trade/confirm/number_4.png", 5:"../Images/numbers/trade/confirm/number_1.png", 
-    6:"../Images/numbers/trade/confirm/number_6.png", 7:"../Images/numbers/trade/confirm/number_7.png", 8:"../Images/numbers/trade/confirm/number_8.png", 9:"../Images/numbers/trade/confirm/number_9.png", 10:"../Images/numbers/trade/confirm/number_10.png", 
-    11:"../Images/numbers/trade/confirm/number_7.png", 12:"../Images/numbers/trade/confirm/number_12.png", 13:"../Images/numbers/trade/confirm/number_13.png", 14:"../Images/numbers/trade/confirm/number_14.png", 15:"../Images/numbers/trade/confirm/number_15.png", 
-    16:"../Images/numbers/trade/confirm/number_8.png", 17:"../Images/numbers/trade/confirm/number_17.png", 18:"../Images/numbers/trade/confirm/number_18.png", 19:"../Images/numbers/trade/confirm/number_19.png", 20:"../Images/numbers/trade/confirm/number_20.png"}}}
+    1:"../Images/numbers/trade/confirm/number_01.png", 2:"../Images/numbers/trade/confirm/number_02.png", 3:"../Images/numbers/trade/confirm/number_03.png", 4:"../Images/numbers/trade/confirm/number_04.png", 5:"../Images/numbers/trade/confirm/number_05.png", 
+    6:"../Images/numbers/trade/confirm/number_06.png", 7:"../Images/numbers/trade/confirm/number_07.png", 8:"../Images/numbers/trade/confirm/number_08.png", 9:"../Images/numbers/trade/confirm/number_09.png", 10:"../Images/numbers/trade/confirm/number_10.png", 
+    11:"../Images/numbers/trade/confirm/number_11.png", 12:"../Images/numbers/trade/confirm/number_12.png", 13:"../Images/numbers/trade/confirm/number_13.png", 14:"../Images/numbers/trade/confirm/number_14.png", 15:"../Images/numbers/trade/confirm/number_15.png", 
+    16:"../Images/numbers/trade/confirm/number_16.png", 17:"../Images/numbers/trade/confirm/number_17.png", 18:"../Images/numbers/trade/confirm/number_18.png", 19:"../Images/numbers/trade/confirm/number_19.png", 20:"../Images/numbers/trade/confirm/number_20.png"}}}
     def get_number(self, number = None, category = None, subcategory = None):
         if category and subcategory and number:
             return self.__number[category][subcategory][number]
@@ -775,15 +775,17 @@ class ISell(Interface):
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-            recieving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+41, 30, 14)
+            recieving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+41, 34, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
             recieving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+41, 160, 14)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+380, 35, 25)
+            giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+391, 34, 14)
             giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+391, 160, 14)
             found=True
             #scan the giving window
             hover(Location(giving_number_region.getX(), giving_number_region.getY()))
+            hover(Location(giving_number_region.getX()+35, giving_number_region.getY()+35))
+            
             while found:
                 found=False
                 for product_abbr in pack_names_keys:
@@ -796,7 +798,6 @@ class ISell(Interface):
                         list_of_product_names.append(product_abbr)
                         current_sim = Settings.MinSimilarity
                         Settings.MinSimilarity = 1
-                        print(str(passes))
                         for number in range(len(numbers)):
                             print(str(number))
                             if number == 0:
