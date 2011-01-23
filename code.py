@@ -97,13 +97,17 @@ class Images(object):
         
     #store images of each number in a tuple
     #the image for numbers depend on the context, e.g. number images in the giving window are different from the ones in collection or taking_window
-    __number = {"trade":{"giving_window":{1: "../Images/numbers/trade/number_01.png", 2: "../Images/numbers/trade/number_02.png", 3: "../Images/numbers/trade/number_03.png", 4: "../Images/numbers/trade/number_04.png", 5: "../Images/numbers/trade/number_05.png",
+    __number = {"trade":{
+    "pre_confirm":{
+    1: "../Images/numbers/trade/number_01.png", 2: "../Images/numbers/trade/number_02.png", 3: "../Images/numbers/trade/number_03.png", 4: "../Images/numbers/trade/number_04.png", 5: "../Images/numbers/trade/number_05.png",
     6: "../Images/numbers/trade/number_06.png", 7: "../Images/numbers/trade/number_07.png", 8: "../Images/numbers/trade/number_08.png", 9: "../Images/numbers/trade/number_09.png", 10: "../Images/numbers/trade/number_10.png", 11: "../Images/numbers/trade/number_11.png",
     12: "../Images/numbers/trade/number_12.png", 13: "../Images/numbers/trade/number_13.png", 14: "../Images/numbers/trade/number_14.png", 15: "../Images/numbers/trade/number_50.png", 16: "../Images/numbers/trade/number_16.png", 17: "../Images/numbers/trade/number_17.png",
-    18: "../Images/numbers/trade/number_18.png", 19: "../Images/numbers/trade/number_19.png", 20: "../Images/numbers/trade/number_20.png"}, "taking_window":{1:"../Images/numbers/trade/number_1.png", 2:"../Images/numbers/trade/number_2.png", 3:"../Images/numbers/trade/number_3.png", 
-    4:"../Images/numbers/trade/number_4.png", 5:"../Images/numbers/trade/number_5.png", 6:"../Images/numbers/trade/number_6.png", 7:"../Images/numbers/trade/number_7.png", 8:"../Images/numbers/trade/number_8.png", 9:"../Images/numbers/trade/number_9.png", 
-    10:"../Images/numbers/trade/number_10.png", 11:"../Images/numbers/trade/number_11.png", 12:"../Images/numbers/trade/number_12.png", 13:"../Images/numbers/trade/number_13.png", 14:"../Images/numbers/trade/number_14.png", 15:"../Images/numbers/trade/number_15.png", 
-    16:"../Images/numbers/trade/number_16.png", 17:"../Images/numbers/trade/number_17.png", 18:"../Images/numbers/trade/number_18.png", 19:"../Images/numbers/trade/number_19.png", 20:"../Images/numbers/trade/number_20.png", }}}
+    18: "../Images/numbers/trade/number_18.png", 19: "../Images/numbers/trade/number_19.png", 20: "../Images/numbers/trade/number_20.png"},
+    "confirm":{
+    1:"../Images/numbers/trade/confirm/number_1.png", 2:"../Images/numbers/trade/confirm/number_2.png", 3:"../Images/numbers/trade/confirm/number_3.png", 4:"../Images/numbers/trade/confirm/number_4.png", 5:"../Images/numbers/trade/confirm/number_1.png", 
+    6:"../Images/numbers/trade/confirm/number_6.png", 7:"../Images/numbers/trade/confirm/number_7.png", 8:"../Images/numbers/trade/confirm/number_8.png", 9:"../Images/numbers/trade/confirm/number_9.png", 10:"../Images/numbers/trade/confirm/number_10.png", 
+    11:"../Images/numbers/trade/confirm/number_7.png", 12:"../Images/numbers/trade/confirm/number_12.png", 13:"../Images/numbers/trade/confirm/number_13.png", 14:"../Images/numbers/trade/confirm/number_14.png", 15:"../Images/numbers/trade/confirm/number_15.png", 
+    16:"../Images/numbers/trade/confirm/number_8.png", 17:"../Images/numbers/trade/confirm/number_17.png", 18:"../Images/numbers/trade/confirm/number_18.png", 19:"../Images/numbers/trade/confirm/number_19.png", 20:"../Images/numbers/trade/confirm/number_20.png"}}}
     def get_number(self, number = None, category = None, subcategory = None):
         if category and subcategory and number:
             return self.__number[category][subcategory][number]
@@ -592,7 +596,7 @@ class ISell(Interface):
                     list_of_product_names.append(product_abbr)
                     
                     print(str(product_abbr))
-                    numbers_list = self._images.get_number(category = "trade", subcategory = "giving_window")
+                    numbers_list = self._images.get_number(category = "trade", subcategory = "pre_confirm")
                     passes = 0
                     while passes < 3:
                         for key in range(len(numbers_list)):
@@ -714,7 +718,7 @@ class ISell(Interface):
         
     def pre_confirm_scan_sale(self, products_giving):
         """takes the total number of products taken by customer and checks to see if the correct amount of tickets are in the taking window"""
-        numbers = self._images.get_number(category="trade", subcategory="giving_window")
+        numbers = self._images.get_number(category="trade", subcategory="pre_confirm")
         
         ticket = self._images.get_ticket_text()
         
@@ -734,7 +738,7 @@ class ISell(Interface):
         if scan_region_product.exists(ticket):
             print("found ticket in taking window")
             #for performance, start the number scan with the expected number
-            if scan_region_number.exists(self._images.get_number(number=expected_total, category="trade", subcategory="giving_window")):
+            if scan_region_number.exists(self._images.get_number(number=expected_total, category="trade", subcategory="pre_confirm")):
                 tickets_found = expected_total
             else:
                 for number, number_image in numbers.items():
@@ -767,7 +771,7 @@ class ISell(Interface):
             giving_products_found = []
             pack_names_keys = self._images.get_pack_keys()
             pack_names = self._images.get_packs_text()
-            numbers = self._images.get_number(number=None, category="trade", subcategory="giving_window")
+            numbers = self._images.get_number(number=None, category="trade", subcategory="confirm")
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
@@ -775,11 +779,11 @@ class ISell(Interface):
             #height for each product is 13px, and 4px buffer vertically between each product slot
             recieving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+41, 160, 14)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-290, confirm_button.getY()+391, 30, 14)
+            giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+380, 35, 25)
             giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+391, 160, 14)
             found=True
             #scan the giving window
-            hover(Location(giving_name_region.getX(), giving_name_region.getY()))
+            hover(Location(giving_number_region.getX(), giving_number_region.getY()))
             while found:
                 found=False
                 for product_abbr in pack_names_keys:
@@ -792,25 +796,15 @@ class ISell(Interface):
                         list_of_product_names.append(product_abbr)
                         current_sim = Settings.MinSimilarity
                         Settings.MinSimilarity = 1
-                        passes = 0
-                        while passes < 1:
-                            print(str(passes))
-                            for number in range(len(numbers)):
-                                print(str(number))
-                                if number == 0:
-                                    continue
-                                if giving_number_region.exists(numbers[number]):
-                                    print("CURRENT NUMBER STRING FOUND " + str(numbers[number]))
-                                    if passes == 0:
-                                        amount = number
-                                        passes+=1
-                                    else:
-                                        if number == amount:
-                                            number_exists = True
-                                            passes+=1
-                                            break
-                                        else:
-                                            raise ErrorHandler("NUMBERS DO NOT MATCH")
+                        print(str(passes))
+                        for number in range(len(numbers)):
+                            print(str(number))
+                            if number == 0:
+                                continue
+                            if giving_number_region.exists(numbers[number]):
+                                print("CURRENT NUMBER STRING FOUND " + str(numbers[number]))
+                                amount = number
+                                break
                             
                         product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), amount=amount)
                         giving_products_found.append(product_obj)
@@ -830,7 +824,7 @@ class ISell(Interface):
                 expected_number += product["quantity"] * product["sell"]
             print(str(expected_number))
             if recieving_name_region.exists(self._images.get_ticket_text()):
-                if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="giving_window")):
+                if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")):
                     print("YAY FUCKING YAY")
                     return True
             
@@ -852,7 +846,7 @@ class ISell(Interface):
         #INSERT PRE-CONFIRM TRANSACTION CHECK HERE#
         
         #image of the total number of tickets to take
-        number_image = self._images.get_number(number = number_of_tickets, category = "trade", subcategory = "giving_window")
+        number_image = self._images.get_number(number = number_of_tickets, category = "trade", subcategory = "pre_confirm")
         
         self.pre_confirm_scan_sale(products_giving=self.products_giving)
         
@@ -860,15 +854,16 @@ class ISell(Interface):
         #check to make sure correct number of tickets taken
         
         #INSERT PRE-FINAL TRANSACTION CHECK HERE#
-        if(exists(number_image)):
-            #scan confirmation screen multiple times in different ways before clicking final confirm
-            final_scan_result = self.confirmation_scan()
-            if final_scan_result:
-                print("passed final check")
-                self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
-            else:
-                print("failed final check")
-                self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
+        
+        #scan confirmation screen multiple times in different ways before clicking final confirm
+        final_scan_result = self.confirmation_scan()
+        if final_scan_result:
+            print("passed final check")
+            self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
+        else:
+            print("failed final check")
+            self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
+            
         #INSERT FINAL TRANSACTION CHECK HERE#
         
         
