@@ -912,8 +912,6 @@ class FrontInterface(Interface):
             #no more pages end the pack scan
             #for debugging, remove in final
             print("finished loading packs")
-
-            
 class Customer(object):
 
     def __init__(self, name):
