@@ -807,7 +807,7 @@ class ISell(Interface):
                                 amount = number
                                 break
                             
-                        product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), quantity=amount)
+                        product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), amount=amount)
                         giving_products_found.append(product_obj)
                                             
                         Settings.MinSimilarity = current_sim
