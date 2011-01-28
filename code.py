@@ -786,14 +786,17 @@ class ISell(Interface):
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-            recieving_number_region = Region(confirm_button.getX()-289, confirm_button.getY()+41, 34, 14)
+            recieving_number_region = Region(confirm_button.getX()-289, confirm_button.getY()+42, 34, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-254, confirm_button.getY()+41, 160, 14)
+            recieving_name_region = Region(confirm_button.getX()-254, confirm_button.getY()+42, 160, 14)
             #confirm products giving
             giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+392, 34, 14)
             giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+392, 160, 14)
             found=True
             #scan the giving window
+            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            wait(2)
+            hover(Location(recieving_number_region.getX()+34, recieving_number_region.getY()+14))
             
             while found:
                 print("while loop run")
@@ -839,10 +842,11 @@ class ISell(Interface):
                 expected_number += product["quantity"] * product["sell"]
             print(str(expected_number))
             hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
-            ticket_text_image = Pattern(self._images.get_ticket_text()).similar(0.8)
+            ticket_text_image = Pattern(self._images.get_ticket_text()).similar(1)
             if recieving_name_region.exists(ticket_text_image):
-                print("YAY FUCKING YAY")
-                if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")):
+                print(str(recieving_number_region.getY()) + ", " + str(recieving_number_region.getX()))
+                expected_number_image = Pattern(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")).similar(0.7)
+                if recieving_number_region.exists(expected_number_image):
                     print("event ticket number found")
                     return True
             
@@ -874,6 +878,8 @@ class ISell(Interface):
         #INSERT PRE-FINAL TRANSACTION CHECK HERE#
         
         #scan confirmation screen multiple times in different ways before clicking final confirm
+        
+        #INSERT FINAL TRANSACTION CHECK HERE#
         final_scan_result = self.confirmation_scan()
         if final_scan_result:
             print("passed final check")
@@ -882,7 +888,6 @@ class ISell(Interface):
             print("failed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
             
-        #INSERT FINAL TRANSACTION CHECK HERE#
         
         
 class IBuy(ITrade):
