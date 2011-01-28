@@ -153,8 +153,8 @@ class Images(object):
     __packs_name_list = ["ME4", "SOM", "M11", "ZEN", "WWK"]
     
     __packs_images = {"M11":"../Images/product/packs/Magic2011.png", "M10":"../Images/product/packs/Magic2010.png", "10E":"../Images/product/packs/UrzasLegacy.png", "9ED":"../Images/product/packs/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/Scars.png", "ROE":"../Images/product/packs/RiseEldrazi.png", "WWK":"../Images/product/packs/Worldwake.png", "ZEN":"../Images/product/packs/Zendikar.png","UZS":"../Images/product/packs/UrzasSaga.png", "UZL":"../Images/product/packs/UrzasLegacy.png", "ARB":"../Images/product/packs/AlaraReborn.png", "CSP":"../Images/product/packs/Coldsnap.png", "CON":"../Images/product/packs/Conflux.png", "DIS":"../Images/product/packs/Dissension.png", "EXO":"../Images/product/packs/Exodus.png", "FUT":"../Images/product/packs/Future.png", "CHK":"../Images/product/packs/KamigawaChampions.png", "LEG":"../Images/product/packs/Legions.png", "LRW":"../Images/product/packs/Lorwyn.png", "MOR":"../Images/product/packs/Morningtide.png", "PLC":"../Images/product/packs/PlanarChaos.png", "ALA":"../Images/product/packs/ShardsAlara.png", "STH":"../Images/product/packs/Stronghold.png", "WTH":"../Images/product/packs/Weatherlight.png", "ME4":"../Images/product/packs/Masters4.png", "ME3":"../Images/product/packs/Masters3.png", "ME2":"../Images/product/packs/Masters2.png", "ME1":"../Images/product/packs/Masters1.png", "ALB":"../Images/product/packs/AlaraBlock.png"},
-    __packs_text = {"confirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/Eldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
-                    "preconfirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png"}}
+    __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/Eldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
+                    "confirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png"}}
     def get_pack_keys(self):
         return self.__packs_name_list
     def get_packs_text(self, phase, filename=None):
@@ -636,7 +636,7 @@ class ISell(Interface):
                     break
             #if first scan area was already set, then relative distance from last region
             #scan area will be slightly larger than estimated height of product slot to compensate for any variances, to compensate for larger region, the Y coordinate -1
-            scan_region = Region(scan_region.getX(), scan_region.getY()+17, 195, 17)
+            scan_region = Region(scan_region.getX(), scan_region.getY()+17, scan_region.getW(), scan_region.getH())
             print("reassigning scan region")
         print("finished while loop")
         
@@ -804,11 +804,11 @@ class ISell(Interface):
                     #if the product was already scanned, then skip it in for loop
                     if product_abbr in list_of_product_names:
                         continue
-                    if giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(0.9)) and not product_abbr in giving_products_found:
+                    if giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(0.8)) and not product_abbr in giving_products_found:
                         print("confirmation window: "+product_abbr+" found")
                         list_of_product_names.append(product_abbr)
                         current_sim = Settings.MinSimilarity
-                        Settings.MinSimilarity = 0.9
+                        Settings.MinSimilarity = 0.8
                         
                         #if still at 0 after for loop, error raised
                         amount = 0
@@ -829,8 +829,8 @@ class ISell(Interface):
                         if amount == 0:
                             raise ErrorHandler("Could not find a number for product: " + str(product_abbr))
                         found=True
-                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+17, giving_number_region.getW(), giving_number_region.getH())
-                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+17, giving_name_region.getW(), giving_name_region.getH())
+                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+16, giving_number_region.getW(), giving_number_region.getH())
+                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+16, giving_name_region.getW(), giving_name_region.getH())
                         break
             
             #get image of number expected to scan for it first, to save time, else search through all other numbers
@@ -838,6 +838,7 @@ class ISell(Interface):
             for product in giving_products_found:
                 expected_number += product["quantity"] * product["sell"]
             print(str(expected_number))
+            hover(Location(recieving_name_region.getX(), recieving_name_region.getY()))
             if recieving_name_region.exists(self._images.get_ticket_text()):
                 if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")):
                     print("YAY FUCKING YAY")
