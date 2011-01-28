@@ -640,10 +640,9 @@
         <span class="kw">print</span>(<span class="str">"running search for images"</span>)
         <span class="cmt">#searches a certain area for any image in a dictionary
 </span>        <span class="str">"""takes a region image, a dictionary of images an returns the key for the image found"""</span>
-        pack_names_list = self._images.get_pack_keys()
 
         <span class="cmt">#combine all cards and packs for sale into a list
-</span>        product_names_list = pack_names_list
+</span>        pack_names_list = self._images.get_pack_keys()
 
         images = self._images.get_packs_text(phase=<span class="str">"preconfirm"</span>)
         <span class="cmt">#if area searched contains a full sized scroll bar, then scroll down
@@ -668,11 +667,8 @@
 </span>        found = True
         <span class="kw">while</span> found:
             found = None
-            <span class="kw">for</span> product_abbr <span class="kw">in</span> product_names_list:
-                <span class="cmt">#if current pack has already been itemized, then skip it
-</span>
-                <span class="kw">if</span> product_abbr <span class="kw">in</span> list_of_product_names:
-                    <span class="kw">continue</span>
+            <span class="kw">for</span> product_abbr <span class="kw">in</span> pack_names_list:
+
                 <span class="kw">print</span>(<span class="str">"reached line 479 pack_text_name = "</span> + product_abbr)
                 <span class="cmt">#determine which packs are in the giving window
 </span>                pack = self._images.get_packs_text(phase=<span class="str">"preconfirm"</span>, filename=product_abbr)
@@ -682,27 +678,23 @@
                     found = True
                     <span class="kw">print</span>(str(pack) + <span class="str">" found!"</span>)
 
-                    list_of_product_names.append(product_abbr)
-
                     <span class="kw">print</span>(str(product_abbr))
                     numbers_list = self._images.get_number(category = <span class="str">"trade"</span>, subcategory = <span class="str">"preconfirm"</span>)
-                    passes = <span class="dig">0</span>
-                    <span class="kw">while</span> passes &lt; <span class="dig">3</span>:
-                        <span class="kw">for</span> key <span class="kw">in</span> range(len(numbers_list)):
-                            <span class="kw">if</span> key == <span class="dig">0</span>:
-                                <span class="kw">continue</span>
-                            searchPattern = Pattern(numbers_list[key]).similar(<span class="dig">0.8</span>)
-                            <span class="kw">if</span>(scan_region.exists(searchPattern)):
-                                <span class="kw">if</span> passes == <span class="dig">0</span>:
-                                    amount = key
-                                    passes+=<span class="dig">1</span>
-                                    <span class="kw">break</span>
-                                <span class="kw">else</span>:
-                                    <span class="kw">if</span> key == amount:
-                                        passes+=<span class="dig">1</span>
-                                        <span class="kw">break</span>
-                                    <span class="kw">else</span>:
-                                        <span class="kw">print</span>(<span class="str">"NUMBERS DO NOT MATCH"</span>)
+
+                    <span class="kw">for</span> key <span class="kw">in</span> range(len(numbers_list)):
+                        <span class="kw">if</span> key == <span class="dig">0</span>:
+                            <span class="kw">continue</span>
+                        searchPattern = Pattern(numbers_list[key]).similar(<span class="dig">0.8</span>)
+                        <span class="kw">if</span>(scan_region.exists(searchPattern)):
+                            amount = key
+                            <span class="cmt">#for booster packs, there is a specific order in which they appear in the list,
+</span>                            <span class="cmt">#when a pack is found, remove all packs before and including that pack in the keys
+</span>                            <span class="cmt">#list as they will not appear any further below
+</span>                            pack_index = pack_names_list.index(product_abbr)+<span class="dig">1</span>
+                            pack_names_list = pack_names_list[pack_index:]
+
+                            <span class="kw">break</span>
+
                     <span class="kw">print</span>(<span class="str">"amount = "</span>+str(key))
                     product = Product(name = product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), quantity = amount)
                     products.append(product)
@@ -712,6 +704,7 @@
                 <span class="kw">if</span> found == True:
                     <span class="kw">print</span>(<span class="str">"found is true"</span>)
                     <span class="kw">break</span>
+
             <span class="cmt">#if first scan area was already set, then relative distance from last region
 </span>            <span class="cmt">#scan area will be slightly larger than estimated height of product slot to compensate for any variances, to compensate for larger region, the Y coordinate -1
 </span>            scan_region = Region(scan_region.getX(), scan_region.getY()+<span class="dig">17</span>, scan_region.getW(), scan_region.getH())
@@ -882,12 +875,8 @@
                 found=False
                 <span class="kw">for</span> product_abbr <span class="kw">in</span> pack_names_keys:
                     <span class="kw">print</span>(<span class="str">"looking for "</span> + str(product_abbr))
-                    <span class="cmt">#if the product was already scanned, then skip it in for loop
-</span>                    <span class="kw">if</span> product_abbr <span class="kw">in</span> list_of_product_names:
-                        <span class="kw">continue</span>
                     <span class="kw">if</span> giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(<span class="dig">0.8</span>)) <span class="kw">and</span> <span class="kw">not</span> product_abbr <span class="kw">in</span> giving_products_found:
                         <span class="kw">print</span>(<span class="str">"confirmation window: "</span>+product_abbr+<span class="str">" found"</span>)
-                        list_of_product_names.append(product_abbr)
                         current_sim = Settings.MinSimilarity
                         Settings.MinSimilarity = <span class="dig">0.8</span>
 
@@ -900,6 +889,13 @@
                             <span class="kw">if</span> giving_number_region.exists(numbers[number]):
                                 <span class="kw">print</span>(<span class="str">"CURRENT NUMBER STRING FOUND "</span> + str(numbers[number]))
                                 amount = number
+
+                                <span class="cmt">#packs are listed in Magic in the same sequence they are listed in the list of pack keys,
+</span>                                <span class="cmt">#if a pack is found, all packs including it and before, are removed from the list of packs
+</span>                                <span class="cmt">#to search
+</span>                                pack_index = pack_names_keys.index(product_abbr) + <span class="dig">1</span>
+                                pack_names_keys = pack_names_keys[pack_index:]
+
                                 <span class="kw">break</span>
 
                         product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), quantity=amount)
@@ -910,8 +906,8 @@
                         <span class="kw">if</span> amount == <span class="dig">0</span>:
                             <span class="kw">raise</span> ErrorHandler(<span class="str">"Could not find a number for product: "</span> + str(product_abbr))
                         found=True
-                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+<span class="dig">16</span>, giving_number_region.getW(), giving_number_region.getH())
-                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+<span class="dig">16</span>, giving_name_region.getW(), giving_name_region.getH())
+                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+<span class="dig">17</span>, giving_number_region.getW(), giving_number_region.getH())
+                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+<span class="dig">17</span>, giving_name_region.getW(), giving_name_region.getH())
                         <span class="kw">break</span>
 
             <span class="cmt">#get image of number expected to scan for it first, to save time, else search through all other numbers
@@ -919,6 +915,9 @@
             <span class="kw">for</span> product <span class="kw">in</span> giving_products_found:
                 expected_number += product[<span class="str">"quantity"</span>] * product[<span class="str">"sell"</span>]
             <span class="kw">print</span>(str(expected_number))
+
+            <span class="kw">if</span> expected_number == <span class="dig">0</span>:
+                <span class="kw">return</span> False
             hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
             ticket_text_image = Pattern(self._images.get_ticket_text()).similar(<span class="dig">1</span>)
             <span class="kw">if</span> recieving_name_region.exists(ticket_text_image):
@@ -927,9 +926,8 @@
                     <span class="kw">print</span>(<span class="str">"event ticket number found"</span>)
 
                     <span class="kw">return</span> True
-
-        <span class="kw">else</span>:
-            <span class="kw">raise</span> ErrorHandler(<span class="str">"Could not find confirm window"</span>)
+                <span class="kw">else</span>:
+                    <span class="kw">return</span> False
 
     <span class="kw">def</span> complete_sale(self):
         <span class="kw">print</span>(<span class="str">"running complete_sale"</span>)
@@ -962,6 +960,7 @@
         <span class="kw">if</span> final_scan_result:
             <span class="kw">print</span>(<span class="str">"passed final check"</span>)
             self._slow_click(target=self._images.get_trade(phase=<span class="str">"confirm"</span>, filename=<span class="str">"confirm_button"</span>))
+            <span class="skw">wait</span>(Pattern(self._images.get_ok_button()), <span class="dig">600</span>)
             self._slow_click(target=self._images.get_ok_button(), button=<span class="str">"LEFT"</span>)
 
         <span class="kw">else</span>:
@@ -1196,7 +1195,8 @@
         <span class="cmt">#check if bot is part of a bot network before trying to transfer items
 </span>        <span class="kw">if</span>(self.settings.getSetting(<span class="str">"NETWORK"</span>)):
             self.transfer_mode()
-            self.default_mode()
+
+        self.default_mode()
 
     <span class="kw">def</span> buy_mode(self):
         <span class="cmt">#puts the bot into buy mode, will wait for trade request

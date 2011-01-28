@@ -568,10 +568,9 @@ class ISell(Interface):
         print("running search for images")
         #searches a certain area for any image in a dictionary
         """takes a region image, a dictionary of images an returns the key for the image found"""
-        pack_names_list = self._images.get_pack_keys()
         
         #combine all cards and packs for sale into a list
-        product_names_list = pack_names_list
+        pack_names_list = self._images.get_pack_keys()
         
         images = self._images.get_packs_text(phase="preconfirm")
         #if area searched contains a full sized scroll bar, then scroll down
@@ -596,11 +595,8 @@ class ISell(Interface):
         found = True
         while found:
             found = None
-            for product_abbr in product_names_list:
-                #if current pack has already been itemized, then skip it
-                
-                if product_abbr in list_of_product_names:
-                    continue
+            for product_abbr in pack_names_list:
+            
                 print("reached line 479 pack_text_name = " + product_abbr)
                 #determine which packs are in the giving window
                 pack = self._images.get_packs_text(phase="preconfirm", filename=product_abbr)
@@ -610,27 +606,23 @@ class ISell(Interface):
                     found = True
                     print(str(pack) + " found!")
                     
-                    list_of_product_names.append(product_abbr)
-                    
                     print(str(product_abbr))
                     numbers_list = self._images.get_number(category = "trade", subcategory = "preconfirm")
-                    passes = 0
-                    while passes < 3:
-                        for key in range(len(numbers_list)):
-                            if key == 0:
-                                continue
-                            searchPattern = Pattern(numbers_list[key]).similar(0.8)
-                            if(scan_region.exists(searchPattern)):
-                                if passes == 0:
-                                    amount = key
-                                    passes+=1
-                                    break
-                                else:
-                                    if key == amount:
-                                        passes+=1
-                                        break
-                                    else:
-                                        print("NUMBERS DO NOT MATCH")
+                    
+                    for key in range(len(numbers_list)):
+                        if key == 0:
+                            continue
+                        searchPattern = Pattern(numbers_list[key]).similar(0.8)
+                        if(scan_region.exists(searchPattern)):
+                            amount = key
+                            #for booster packs, there is a specific order in which they appear in the list,
+                            #when a pack is found, remove all packs before and including that pack in the keys
+                            #list as they will not appear any further below
+                            pack_index = pack_names_list.index(product_abbr)+1
+                            pack_names_list = pack_names_list[pack_index:]
+                            
+                            break
+                            
                     print("amount = "+str(key))
                     product = Product(name = product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), quantity = amount)
                     products.append(product)
@@ -640,6 +632,7 @@ class ISell(Interface):
                 if found == True:
                     print("found is true")
                     break
+            
             #if first scan area was already set, then relative distance from last region
             #scan area will be slightly larger than estimated height of product slot to compensate for any variances, to compensate for larger region, the Y coordinate -1
             scan_region = Region(scan_region.getX(), scan_region.getY()+17, scan_region.getW(), scan_region.getH())
@@ -810,12 +803,8 @@ class ISell(Interface):
                 found=False
                 for product_abbr in pack_names_keys:
                     print("looking for " + str(product_abbr))
-                    #if the product was already scanned, then skip it in for loop
-                    if product_abbr in list_of_product_names:
-                        continue
                     if giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(0.8)) and not product_abbr in giving_products_found:
                         print("confirmation window: "+product_abbr+" found")
-                        list_of_product_names.append(product_abbr)
                         current_sim = Settings.MinSimilarity
                         Settings.MinSimilarity = 0.8
                         
@@ -828,6 +817,13 @@ class ISell(Interface):
                             if giving_number_region.exists(numbers[number]):
                                 print("CURRENT NUMBER STRING FOUND " + str(numbers[number]))
                                 amount = number
+                                
+                                #packs are listed in Magic in the same sequence they are listed in the list of pack keys,
+                                #if a pack is found, all packs including it and before, are removed from the list of packs
+                                #to search
+                                pack_index = pack_names_keys.index(product_abbr) + 1
+                                pack_names_keys = pack_names_keys[pack_index:]
+                                
                                 break
                             
                         product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), quantity=amount)
@@ -838,8 +834,8 @@ class ISell(Interface):
                         if amount == 0:
                             raise ErrorHandler("Could not find a number for product: " + str(product_abbr))
                         found=True
-                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+16, giving_number_region.getW(), giving_number_region.getH())
-                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+16, giving_name_region.getW(), giving_name_region.getH())
+                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+17, giving_number_region.getW(), giving_number_region.getH())
+                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+17, giving_name_region.getW(), giving_name_region.getH())
                         break
             
             #get image of number expected to scan for it first, to save time, else search through all other numbers
@@ -847,6 +843,9 @@ class ISell(Interface):
             for product in giving_products_found:
                 expected_number += product["quantity"] * product["sell"]
             print(str(expected_number))
+            
+            if expected_number == 0:
+                return False
             hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
             ticket_text_image = Pattern(self._images.get_ticket_text()).similar(1)
             if recieving_name_region.exists(ticket_text_image):
@@ -855,9 +854,8 @@ class ISell(Interface):
                     print("event ticket number found")
                     
                     return True
-                    
-        else:
-            raise ErrorHandler("Could not find confirm window")
+                else:
+                    return False
             
     def complete_sale(self):
         print("running complete_sale")
@@ -890,6 +888,7 @@ class ISell(Interface):
         if final_scan_result:
             print("passed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
+            wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
             
         else:
@@ -1124,7 +1123,8 @@ class Controller(object):
         #check if bot is part of a bot network before trying to transfer items
         if(self.settings.getSetting("NETWORK")):
             self.transfer_mode()
-            self.default_mode()
+        
+        self.default_mode()
         
     def buy_mode(self):
         #puts the bot into buy mode, will wait for trade request
