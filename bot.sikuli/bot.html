@@ -154,10 +154,16 @@
     <span class="kw">def</span> get_blank(self):
         <span class="kw">return</span> self.__blank
 
+    <span class="cmt">#image of the ok button, e.g. after completing a trade
+</span>    __ok_button = <img src="../Images/ok_button.png" />
+    <span class="kw">def</span> get_ok_button(self):
+        <span class="kw">return</span> self.__ok_button
+
     <span class="cmt">#stores image of a ticket
 </span>    __ticket =  <img src="../Images/trade/get_ticket/ticket.png" />
     <span class="kw">def</span> get_ticket(self):
         <span class="kw">return</span> self.__ticket
+
     <span class="cmt">#stores image of a ticket text
 </span>    __ticket_text =     <img src="../Images/product/misc/text/event_ticket_text.png" />
     <span class="kw">def</span> get_ticket_text(self):
@@ -222,11 +228,11 @@
 
     <span class="cmt">#stores the images of each pack
 </span>    <span class="cmt">#this is a list of all packs to buy and sell
-</span>    __packs_name_list = [<span class="str">"ME4"</span>, <span class="str">"SOM"</span>, <span class="str">"M11"</span>, <span class="str">"ZEN"</span>, <span class="str">"WWK"</span>]
+</span>    __packs_name_list = [<span class="str">"M11"</span>, <span class="str">"ME4"</span>, <span class="str">"SOM"</span>, <span class="str">"WWK"</span>, <span class="str">"ZEN"</span>]
 
     __packs_images = {<span class="str">"M11"</span>:<img src="../Images/product/packs/Magic2011.png" />, <span class="str">"M10"</span>:<img src="../Images/product/packs/Magic2010.png" />, <span class="str">"10E"</span>:<img src="../Images/product/packs/UrzasLegacy.png" />, <span class="str">"9ED"</span>:<img src="../Images/product/packs/Magic9.png" />, <span class="str">"8ED"</span>:<img src="../Images/product/packs/Magic8.png" />, <span class="str">"7ED"</span>:<img src="../Images/product/packs/Magic7.png" />, <span class="str">"SOM"</span>:<img src="../Images/product/packs/Scars.png" />, <span class="str">"ROE"</span>:<img src="../Images/product/packs/RiseEldrazi.png" />, <span class="str">"WWK"</span>:<img src="../Images/product/packs/Worldwake.png" />, <span class="str">"ZEN"</span>:<img src="../Images/product/packs/Zendikar.png" />,<span class="str">"UZS"</span>:<img src="../Images/product/packs/UrzasSaga.png" />, <span class="str">"UZL"</span>:<img src="../Images/product/packs/UrzasLegacy.png" />, <span class="str">"ARB"</span>:<img src="../Images/product/packs/AlaraReborn.png" />, <span class="str">"CSP"</span>:<img src="../Images/product/packs/Coldsnap.png" />, <span class="str">"CON"</span>:<img src="../Images/product/packs/Conflux.png" />, <span class="str">"DIS"</span>:<img src="../Images/product/packs/Dissension.png" />, <span class="str">"EXO"</span>:<img src="../Images/product/packs/Exodus.png" />, <span class="str">"FUT"</span>:<img src="../Images/product/packs/Future.png" />, <span class="str">"CHK"</span>:<img src="../Images/product/packs/KamigawaChampions.png" />, <span class="str">"LEG"</span>:<img src="../Images/product/packs/Legions.png" />, <span class="str">"LRW"</span>:<img src="../Images/product/packs/Lorwyn.png" />, <span class="str">"MOR"</span>:<img src="../Images/product/packs/Morningtide.png" />, <span class="str">"PLC"</span>:<img src="../Images/product/packs/PlanarChaos.png" />, <span class="str">"ALA"</span>:<img src="../Images/product/packs/ShardsAlara.png" />, <span class="str">"STH"</span>:<img src="../Images/product/packs/Stronghold.png" />, <span class="str">"WTH"</span>:<img src="../Images/product/packs/Weatherlight.png" />, <span class="str">"ME4"</span>:<img src="../Images/product/packs/Masters4.png" />, <span class="str">"ME3"</span>:<img src="../Images/product/packs/Masters3.png" />, <span class="str">"ME2"</span>:<img src="../Images/product/packs/Masters2.png" />, <span class="str">"ME1"</span>:<img src="../Images/product/packs/Masters1.png" />, <span class="str">"ALB"</span>:<img src="../Images/product/packs/AlaraBlock.png" />},
-    __packs_text = {<span class="str">"confirm"</span>: {<span class="str">"M11"</span>:<img src="../Images/product/packs/text/Magic2011.png" />, <span class="str">"M10"</span>:<img src="../Images/product/packs/text/Magic2010.png" />, <span class="str">"10E"</span>:<img src="../Images/product/packs/text/UrzasLegacy.png" />, <span class="str">"9ED"</span>:<img src="../Images/product/packs/text/Magic9.png" />, <span class="str">"8ED"</span>:<img src="../Images/product/packs/Magic8.png" />, <span class="str">"7ED"</span>:<img src="../Images/product/packs/Magic7.png" />, <span class="str">"SOM"</span>:<img src="../Images/product/packs/text/Scars.png" />, <span class="str">"ZEN"</span>:<img src="../Images/product/packs/text/Zendikar.png" />, <span class="str">"WWK"</span>:<img src="../Images/product/packs/text/Worldwake.png" />, <span class="str">"ROE"</span>:<img src="../Images/product/packs/text/Eldrazi.png" />, <span class="str">"UZS"</span>:<img src="../Images/product/packs/text/UrzasSaga.png" />, <span class="str">"UZL"</span>:<img src="../Images/product/packs/text/UrzasLegacy.png" />, <span class="str">"ARB"</span>:<img src="../Images/product/packs/text/AlaraReborn.png" />, <span class="str">"CSP"</span>:<img src="../Images/product/packs/text/Coldsnap.png" />, <span class="str">"CON"</span>:<img src="../Images/product/packs/text/Conflux.png" />, <span class="str">"DIS"</span>:<img src="../Images/product/packs/text/Dissension.png" />, <span class="str">"EXO"</span>:<img src="../Images/product/packs/text/Exodus.png" />, <span class="str">"FUT"</span>:<img src="../Images/product/packs/text/Future.png" />, <span class="str">"CHK"</span>:<img src="../Images/product/packs/text/KamigawaChampions.png" />, <span class="str">"LEG"</span>:<img src="../Images/product/packs/text/Legions.png" />, <span class="str">"LRW"</span>:<img src="../Images/product/packs/text/Lorwyn.png" />, <span class="str">"MOR"</span>:<img src="../Images/product/packs/text/Morningtide.png" />, <span class="str">"PLC"</span>:<img src="../Images/product/packs/text/PlanarChaos.png" />, <span class="str">"ALA"</span>:<img src="../Images/product/packs/text/ShardsAlara.png" />, <span class="str">"STH"</span>:<img src="../Images/product/packs/text/Stronghold.png" />, <span class="str">"WTH"</span>:<img src="../Images/product/packs/text/Weatherlight.png" />, <span class="str">"ME4"</span>:<img src="../Images/product/packs/text/Masters4.png" />, <span class="str">"ME3"</span>:<img src="../Images/product/packs/text/Masters3.png" />, <span class="str">"ME2"</span>:<img src="../Images/product/packs/text/Masters2.png" />, <span class="str">"ME1"</span>:<img src="../Images/product/packs/text/Masters1.png" />, <span class="str">"ALB"</span>:<img src="../Images/product/packs/text/AlaraBlock.png" />},
-                    <span class="str">"preconfirm"</span>:{<span class="str">"M11"</span>:<img src="../Images/product/packs/text/confirm/Magic2011.png" />, <span class="str">"ME4"</span>:<img src="../Images/product/packs/text/confirm/Masters4.png" />, <span class="str">"SOM"</span>:<img src="../Images/product/packs/text/confirm/Scars.png" />, <span class="str">"ZEN"</span>:<img src="../Images/product/packs/text/confirm/Zendikar.png" />, <span class="str">"WWK"</span>:<img src="../Images/product/packs/text/confirm/Worldwake.png" />, <span class="str">"ROE"</span>:<img src="../Images/product/packs/text/confirm/RiseEldrazi.png" />}}
+    __packs_text = {<span class="str">"preconfirm"</span>: {<span class="str">"M11"</span>:<img src="../Images/product/packs/text/Magic2011.png" />, <span class="str">"M10"</span>:<img src="../Images/product/packs/text/Magic2010.png" />, <span class="str">"10E"</span>:<img src="../Images/product/packs/text/UrzasLegacy.png" />, <span class="str">"9ED"</span>:<img src="../Images/product/packs/text/Magic9.png" />, <span class="str">"8ED"</span>:<img src="../Images/product/packs/Magic8.png" />, <span class="str">"7ED"</span>:<img src="../Images/product/packs/Magic7.png" />, <span class="str">"SOM"</span>:<img src="../Images/product/packs/text/Scars.png" />, <span class="str">"ZEN"</span>:<img src="../Images/product/packs/text/Zendikar.png" />, <span class="str">"WWK"</span>:<img src="../Images/product/packs/text/Worldwake.png" />, <span class="str">"ROE"</span>:<img src="../Images/product/packs/text/Eldrazi.png" />, <span class="str">"UZS"</span>:<img src="../Images/product/packs/text/UrzasSaga.png" />, <span class="str">"UZL"</span>:<img src="../Images/product/packs/text/UrzasLegacy.png" />, <span class="str">"ARB"</span>:<img src="../Images/product/packs/text/AlaraReborn.png" />, <span class="str">"CSP"</span>:<img src="../Images/product/packs/text/Coldsnap.png" />, <span class="str">"CON"</span>:<img src="../Images/product/packs/text/Conflux.png" />, <span class="str">"DIS"</span>:<img src="../Images/product/packs/text/Dissension.png" />, <span class="str">"EXO"</span>:<img src="../Images/product/packs/text/Exodus.png" />, <span class="str">"FUT"</span>:<img src="../Images/product/packs/text/Future.png" />, <span class="str">"CHK"</span>:<img src="../Images/product/packs/text/KamigawaChampions.png" />, <span class="str">"LEG"</span>:<img src="../Images/product/packs/text/Legions.png" />, <span class="str">"LRW"</span>:<img src="../Images/product/packs/text/Lorwyn.png" />, <span class="str">"MOR"</span>:<img src="../Images/product/packs/text/Morningtide.png" />, <span class="str">"PLC"</span>:<img src="../Images/product/packs/text/PlanarChaos.png" />, <span class="str">"ALA"</span>:<img src="../Images/product/packs/text/ShardsAlara.png" />, <span class="str">"STH"</span>:<img src="../Images/product/packs/text/Stronghold.png" />, <span class="str">"WTH"</span>:<img src="../Images/product/packs/text/Weatherlight.png" />, <span class="str">"ME4"</span>:<img src="../Images/product/packs/text/Masters4.png" />, <span class="str">"ME3"</span>:<img src="../Images/product/packs/text/Masters3.png" />, <span class="str">"ME2"</span>:<img src="../Images/product/packs/text/Masters2.png" />, <span class="str">"ME1"</span>:<img src="../Images/product/packs/text/Masters1.png" />, <span class="str">"ALB"</span>:<img src="../Images/product/packs/text/AlaraBlock.png" />},
+                    <span class="str">"confirm"</span>:{<span class="str">"M11"</span>:<img src="../Images/product/packs/text/confirm/Magic2011.png" />, <span class="str">"ME4"</span>:<img src="../Images/product/packs/text/confirm/Masters4.png" />, <span class="str">"SOM"</span>:<img src="../Images/product/packs/text/confirm/Scars.png" />, <span class="str">"ZEN"</span>:<img src="../Images/product/packs/text/confirm/Zendikar.png" />, <span class="str">"WWK"</span>:<img src="../Images/product/packs/text/confirm/Worldwake.png" />, <span class="str">"ROE"</span>:<img src="../Images/product/packs/text/confirm/RiseEldrazi.png" />}}
     <span class="kw">def</span> get_pack_keys(self):
         <span class="kw">return</span> self.__packs_name_list
     <span class="kw">def</span> get_packs_text(self, phase, filename=None):
@@ -708,7 +714,7 @@
                     <span class="kw">break</span>
             <span class="cmt">#if first scan area was already set, then relative distance from last region
 </span>            <span class="cmt">#scan area will be slightly larger than estimated height of product slot to compensate for any variances, to compensate for larger region, the Y coordinate -1
-</span>            scan_region = Region(scan_region.getX(), scan_region.getY()+<span class="dig">17</span>, <span class="dig">195</span>, <span class="dig">17</span>)
+</span>            scan_region = Region(scan_region.getX(), scan_region.getY()+<span class="dig">17</span>, scan_region.getW(), scan_region.getH())
             <span class="kw">print</span>(<span class="str">"reassigning scan region"</span>)
         <span class="kw">print</span>(<span class="str">"finished while loop"</span>)
 
@@ -858,16 +864,20 @@
             <span class="cmt">#confirm products receiving
 </span>            <span class="cmt">#set the regions of a single product and and the amount slow
 </span>            <span class="cmt">#number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-</span>            recieving_number_region = Region(confirm_button.getX()-<span class="dig">291</span>, confirm_button.getY()+<span class="dig">41</span>, <span class="dig">34</span>, <span class="dig">14</span>)
+</span>            recieving_number_region = Region(confirm_button.getX()-<span class="dig">289</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">34</span>, <span class="dig">14</span>)
             <span class="cmt">#height for each product is 13px, and 4px buffer vertically between each product slot
-</span>            recieving_name_region = Region(confirm_button.getX()-<span class="dig">257</span>, confirm_button.getY()+<span class="dig">41</span>, <span class="dig">160</span>, <span class="dig">14</span>)
+</span>            recieving_name_region = Region(confirm_button.getX()-<span class="dig">254</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">160</span>, <span class="dig">14</span>)
             <span class="cmt">#confirm products giving
-</span>            giving_number_region = Region(confirm_button.getX()-<span class="dig">291</span>, confirm_button.getY()+<span class="dig">392</span>, <span class="dig">34</span>, <span class="dig">14</span>)
-            giving_name_region = Region(confirm_button.getX()-<span class="dig">257</span>, confirm_button.getY()+<span class="dig">392</span>, <span class="dig">160</span>, <span class="dig">14</span>)
+</span>            giving_number_region = Region(confirm_button.getX()-<span class="dig">291</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">34</span>, <span class="dig">14</span>)
+            giving_name_region = Region(confirm_button.getX()-<span class="dig">257</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">160</span>, <span class="dig">14</span>)
             found=True
             <span class="cmt">#scan the giving window
-</span>
+</span>            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            <span class="skw">wait</span>(<span class="dig">2</span>)
+            hover(Location(recieving_number_region.getX()+<span class="dig">34</span>, recieving_number_region.getY()+<span class="dig">14</span>))
+
             <span class="kw">while</span> found:
+                <span class="kw">print</span>(<span class="str">"while loop run"</span>)
                 hover(Location(giving_number_region.getX(), giving_number_region.getY()))
                 found=False
                 <span class="kw">for</span> product_abbr <span class="kw">in</span> pack_names_keys:
@@ -875,18 +885,18 @@
                     <span class="cmt">#if the product was already scanned, then skip it in for loop
 </span>                    <span class="kw">if</span> product_abbr <span class="kw">in</span> list_of_product_names:
                         <span class="kw">continue</span>
-                    <span class="kw">if</span> giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(<span class="dig">0.9</span>)) <span class="kw">and</span> <span class="kw">not</span> product_abbr <span class="kw">in</span> giving_products_found:
+                    <span class="kw">if</span> giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(<span class="dig">0.8</span>)) <span class="kw">and</span> <span class="kw">not</span> product_abbr <span class="kw">in</span> giving_products_found:
                         <span class="kw">print</span>(<span class="str">"confirmation window: "</span>+product_abbr+<span class="str">" found"</span>)
                         list_of_product_names.append(product_abbr)
                         current_sim = Settings.MinSimilarity
-                        Settings.MinSimilarity = <span class="dig">1</span>
+                        Settings.MinSimilarity = <span class="dig">0.8</span>
 
                         <span class="cmt">#if still at 0 after for loop, error raised
 </span>                        amount = <span class="dig">0</span>
                         <span class="kw">for</span> number <span class="kw">in</span> range(len(numbers)):
-                            <span class="kw">print</span>(str(number))
                             <span class="kw">if</span> number == <span class="dig">0</span>:
                                 <span class="kw">continue</span>
+                            <span class="kw">print</span>(numbers[number])
                             <span class="kw">if</span> giving_number_region.exists(numbers[number]):
                                 <span class="kw">print</span>(<span class="str">"CURRENT NUMBER STRING FOUND "</span> + str(numbers[number]))
                                 amount = number
@@ -899,19 +909,23 @@
                         <span class="kw">del</span>(current_sim)
                         <span class="kw">if</span> amount == <span class="dig">0</span>:
                             <span class="kw">raise</span> ErrorHandler(<span class="str">"Could not find a number for product: "</span> + str(product_abbr))
-
                         found=True
-                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+<span class="dig">14</span>, <span class="dig">30</span>, <span class="dig">14</span>)
-                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+<span class="dig">17</span>, <span class="dig">143</span>, <span class="dig">14</span>)
+                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+<span class="dig">16</span>, giving_number_region.getW(), giving_number_region.getH())
+                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+<span class="dig">16</span>, giving_name_region.getW(), giving_name_region.getH())
+                        <span class="kw">break</span>
 
             <span class="cmt">#get image of number expected to scan for it first, to save time, else search through all other numbers
 </span>            expected_number = <span class="dig">0</span>
             <span class="kw">for</span> product <span class="kw">in</span> giving_products_found:
                 expected_number += product[<span class="str">"quantity"</span>] * product[<span class="str">"sell"</span>]
             <span class="kw">print</span>(str(expected_number))
-            <span class="kw">if</span> recieving_name_region.exists(self._images.get_ticket_text()):
-                <span class="kw">if</span> recieving_number_region.exists(self._images.get_number(number=expected_number, category=<span class="str">"trade"</span>, subcategory=<span class="str">"confirm"</span>)):
-                    <span class="kw">print</span>(<span class="str">"YAY FUCKING YAY"</span>)
+            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            ticket_text_image = Pattern(self._images.get_ticket_text()).similar(<span class="dig">1</span>)
+            <span class="kw">if</span> recieving_name_region.exists(ticket_text_image):
+                expected_number_image = Pattern(self._images.get_number(number=expected_number, category=<span class="str">"trade"</span>, subcategory=<span class="str">"confirm"</span>)).similar(<span class="dig">0.7</span>)
+                <span class="kw">if</span> recieving_number_region.exists(expected_number_image):
+                    <span class="kw">print</span>(<span class="str">"event ticket number found"</span>)
+
                     <span class="kw">return</span> True
 
         <span class="kw">else</span>:
@@ -942,16 +956,18 @@
         <span class="cmt">#INSERT PRE-FINAL TRANSACTION CHECK HERE#
 </span>
         <span class="cmt">#scan confirmation screen multiple times in different ways before clicking final confirm
+</span>
+        <span class="cmt">#INSERT FINAL TRANSACTION CHECK HERE#
 </span>        final_scan_result = self.confirmation_scan()
         <span class="kw">if</span> final_scan_result:
             <span class="kw">print</span>(<span class="str">"passed final check"</span>)
             self._slow_click(target=self._images.get_trade(phase=<span class="str">"confirm"</span>, filename=<span class="str">"confirm_button"</span>))
+            self._slow_click(target=self._images.get_ok_button(), button=<span class="str">"LEFT"</span>)
+
         <span class="kw">else</span>:
             <span class="kw">print</span>(<span class="str">"failed final check"</span>)
             self._slow_click(target=self._images.get_trade(phase=<span class="str">"confirm"</span>, filename=<span class="str">"cancel_button"</span>))
 
-        <span class="cmt">#INSERT FINAL TRANSACTION CHECK HERE#
-</span>
 
 <span class="kw">class</span> IBuy(ITrade):
     <span class="cmt">#this class is used when the bot is put into buy mode during a trade

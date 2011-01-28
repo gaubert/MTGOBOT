@@ -81,11 +81,17 @@ class Images(object):
     __blank = "../Images/trade/blank.png"
     def get_blank(self):
         return self.__blank
+    
+    #image of the ok button, e.g. after completing a trade
+    __ok_button = "../Images/ok_button.png"
+    def get_ok_button(self):
+        return self.__ok_button
         
     #stores image of a ticket
     __ticket =	"../Images/trade/get_ticket/ticket.png"
     def get_ticket(self):
         return self.__ticket
+        
     #stores image of a ticket text
     __ticket_text =	"../Images/product/misc/text/event_ticket_text.png"
     def get_ticket_text(self):
@@ -150,7 +156,7 @@ class Images(object):
             
     #stores the images of each pack
     #this is a list of all packs to buy and sell
-    __packs_name_list = ["ME4", "SOM", "M11", "ZEN", "WWK"]
+    __packs_name_list = ["M11", "ME4", "SOM", "WWK", "ZEN"]
     
     __packs_images = {"M11":"../Images/product/packs/Magic2011.png", "M10":"../Images/product/packs/Magic2010.png", "10E":"../Images/product/packs/UrzasLegacy.png", "9ED":"../Images/product/packs/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/Scars.png", "ROE":"../Images/product/packs/RiseEldrazi.png", "WWK":"../Images/product/packs/Worldwake.png", "ZEN":"../Images/product/packs/Zendikar.png","UZS":"../Images/product/packs/UrzasSaga.png", "UZL":"../Images/product/packs/UrzasLegacy.png", "ARB":"../Images/product/packs/AlaraReborn.png", "CSP":"../Images/product/packs/Coldsnap.png", "CON":"../Images/product/packs/Conflux.png", "DIS":"../Images/product/packs/Dissension.png", "EXO":"../Images/product/packs/Exodus.png", "FUT":"../Images/product/packs/Future.png", "CHK":"../Images/product/packs/KamigawaChampions.png", "LEG":"../Images/product/packs/Legions.png", "LRW":"../Images/product/packs/Lorwyn.png", "MOR":"../Images/product/packs/Morningtide.png", "PLC":"../Images/product/packs/PlanarChaos.png", "ALA":"../Images/product/packs/ShardsAlara.png", "STH":"../Images/product/packs/Stronghold.png", "WTH":"../Images/product/packs/Weatherlight.png", "ME4":"../Images/product/packs/Masters4.png", "ME3":"../Images/product/packs/Masters3.png", "ME2":"../Images/product/packs/Masters2.png", "ME1":"../Images/product/packs/Masters1.png", "ALB":"../Images/product/packs/AlaraBlock.png"},
     __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/Eldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
@@ -790,8 +796,8 @@ class ISell(Interface):
             #height for each product is 13px, and 4px buffer vertically between each product slot
             recieving_name_region = Region(confirm_button.getX()-254, confirm_button.getY()+42, 160, 14)
             #confirm products giving
-            giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+392, 34, 14)
-            giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+392, 160, 14)
+            giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+391, 34, 14)
+            giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+391, 160, 14)
             found=True
             #scan the giving window
             hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
@@ -844,12 +850,12 @@ class ISell(Interface):
             hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
             ticket_text_image = Pattern(self._images.get_ticket_text()).similar(1)
             if recieving_name_region.exists(ticket_text_image):
-                print(str(recieving_number_region.getY()) + ", " + str(recieving_number_region.getX()))
                 expected_number_image = Pattern(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")).similar(0.7)
                 if recieving_number_region.exists(expected_number_image):
                     print("event ticket number found")
+                    
                     return True
-            
+                    
         else:
             raise ErrorHandler("Could not find confirm window")
             
@@ -884,11 +890,12 @@ class ISell(Interface):
         if final_scan_result:
             print("passed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
+            self._slow_click(target=self._images.get_ok_button(), button="LEFT")
+            
         else:
             print("failed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
             
-        
         
 class IBuy(ITrade):
     #this class is used when the bot is put into buy mode during a trade
