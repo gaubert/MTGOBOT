@@ -1,6 +1,6 @@
-ticket = Pattern("../Images/numbers/trade/number_02.png").similar(1)
+ticket = "Scars.png"
 
 match = find(ticket)
 
 if match:
-    print("true")
+    hover(match.getTarget())

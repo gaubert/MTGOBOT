@@ -838,8 +838,8 @@ class ISell(Interface):
                         if amount == 0:
                             raise ErrorHandler("Could not find a number for product: " + str(product_abbr))
                         found=True
-                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+16, giving_number_region.getW(), giving_number_region.getH())
-                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+16, giving_name_region.getW(), giving_name_region.getH())
+                        giving_number_region = Region(giving_number_region.getX(), giving_number_region.getY()+17, giving_number_region.getW(), giving_number_region.getH())
+                        giving_name_region = Region(giving_name_region.getX(), giving_name_region.getY()+17, giving_name_region.getW(), giving_name_region.getH())
                         break
             
             #get image of number expected to scan for it first, to save time, else search through all other numbers
@@ -847,6 +847,9 @@ class ISell(Interface):
             for product in giving_products_found:
                 expected_number += product["quantity"] * product["sell"]
             print(str(expected_number))
+            
+            if expected_number == 0:
+                return False
             hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
             ticket_text_image = Pattern(self._images.get_ticket_text()).similar(1)
             if recieving_name_region.exists(ticket_text_image):
@@ -855,9 +858,8 @@ class ISell(Interface):
                     print("event ticket number found")
                     
                     return True
-                    
-        else:
-            raise ErrorHandler("Could not find confirm window")
+                else:
+                    return False
             
     def complete_sale(self):
         print("running complete_sale")
@@ -890,6 +892,7 @@ class ISell(Interface):
         if final_scan_result:
             print("passed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
+            wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
             
         else:
@@ -1124,7 +1127,8 @@ class Controller(object):
         #check if bot is part of a bot network before trying to transfer items
         if(self.settings.getSetting("NETWORK")):
             self.transfer_mode()
-            self.default_mode()
+        
+        self.default_mode()
         
     def buy_mode(self):
         #puts the bot into buy mode, will wait for trade request

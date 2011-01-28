@@ -70,12 +70,12 @@
 <h2>test.sikuli\test.sikuli</h2> <a href="test.sikuli\test.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-ticket = Pattern(<img src="../Images/numbers/trade/number_02.png" />).similar(<span class="dig">1</span>)
+ticket = <img src="Scars.png" />
 
 match = <span class="skw">find</span>(ticket)
 
 <span class="kw">if</span> match:
-    <span class="kw">print</span>(<span class="str">"true"</span>)
+    hover(match.getTarget())
 </pre>
 </body>
 </html>
