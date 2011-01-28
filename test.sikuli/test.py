@@ -1,5 +1,6 @@
-number = Pattern("../Images/numbers/trade/confirm/number_01.png")
+ticket = Pattern("../Images/numbers/trade/number_02.png").similar(1)
 
-with findAll(number) as matches:
-    while matches.hasNext():
-        print "found: ", matches.next()
+match = find(ticket)
+
+if match:
+    print("true")

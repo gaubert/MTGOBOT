@@ -70,11 +70,12 @@
 <h2>test.sikuli\test.sikuli</h2> <a href="test.sikuli\test.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-number = Pattern(<img src="../Images/numbers/trade/confirm/number_01.png" />)
+ticket = Pattern(<img src="../Images/numbers/trade/number_02.png" />).similar(<span class="dig">1</span>)
 
-<span class="kw">with</span> findAll(number) <span class="kw">as</span> matches:
-    <span class="kw">while</span> matches.hasNext():
-        <span class="kw">print</span> <span class="str">"found: "</span>, matches.next()
+match = <span class="skw">find</span>(ticket)
+
+<span class="kw">if</span> match:
+    <span class="kw">print</span>(<span class="str">"true"</span>)
 </pre>
 </body>
 </html>

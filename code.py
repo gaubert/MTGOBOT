@@ -786,9 +786,9 @@ class ISell(Interface):
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-            recieving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+41, 34, 14)
+            recieving_number_region = Region(confirm_button.getX()-289, confirm_button.getY()+41, 34, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+41, 160, 14)
+            recieving_name_region = Region(confirm_button.getX()-254, confirm_button.getY()+41, 160, 14)
             #confirm products giving
             giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+392, 34, 14)
             giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+392, 160, 14)
@@ -838,10 +838,12 @@ class ISell(Interface):
             for product in giving_products_found:
                 expected_number += product["quantity"] * product["sell"]
             print(str(expected_number))
-            hover(Location(recieving_name_region.getX(), recieving_name_region.getY()))
-            if recieving_name_region.exists(self._images.get_ticket_text()):
+            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            ticket_text_image = Pattern(self._images.get_ticket_text()).similar(0.8)
+            if recieving_name_region.exists(ticket_text_image):
+                print("YAY FUCKING YAY")
                 if recieving_number_region.exists(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")):
-                    print("YAY FUCKING YAY")
+                    print("event ticket number found")
                     return True
             
         else:
