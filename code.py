@@ -3,6 +3,12 @@
 #if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 #This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 
+#DEPENDENCIES
+#used in controller to set time of transaction for recording
+from datetime import datetime
+
+
+
 def memorize(func):
     """
     Cache the results of the function so it doesn't need
@@ -37,11 +43,7 @@ class BotSettings(object):
         #min pixel change to trigger onChange
         Settings.ObserveMinChangedPixels = 200
         #all find operations which don't use other regions should use this one
-        magic_online = App("Magic Online")
-        if not magic_online.window():
-            raise ErrorHandler("Please open and log into Magic Online")
-        else:
-            self.app_region = magic_online.window()
+        
         
     @classmethod
     def getSetting(cls, setting):
@@ -156,11 +158,11 @@ class Images(object):
             
     #stores the images of each pack
     #this is a list of all packs to buy and sell
-    __packs_name_list = ["M11", "ME4", "SOM", "WWK", "ZEN"]
+    __packs_name_list = ["M11", "ME4", "ROE", "SOM", "WWK", "ZEN"]
     
     __packs_images = {"M11":"../Images/product/packs/Magic2011.png", "M10":"../Images/product/packs/Magic2010.png", "10E":"../Images/product/packs/UrzasLegacy.png", "9ED":"../Images/product/packs/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/Scars.png", "ROE":"../Images/product/packs/RiseEldrazi.png", "WWK":"../Images/product/packs/Worldwake.png", "ZEN":"../Images/product/packs/Zendikar.png","UZS":"../Images/product/packs/UrzasSaga.png", "UZL":"../Images/product/packs/UrzasLegacy.png", "ARB":"../Images/product/packs/AlaraReborn.png", "CSP":"../Images/product/packs/Coldsnap.png", "CON":"../Images/product/packs/Conflux.png", "DIS":"../Images/product/packs/Dissension.png", "EXO":"../Images/product/packs/Exodus.png", "FUT":"../Images/product/packs/Future.png", "CHK":"../Images/product/packs/KamigawaChampions.png", "LEG":"../Images/product/packs/Legions.png", "LRW":"../Images/product/packs/Lorwyn.png", "MOR":"../Images/product/packs/Morningtide.png", "PLC":"../Images/product/packs/PlanarChaos.png", "ALA":"../Images/product/packs/ShardsAlara.png", "STH":"../Images/product/packs/Stronghold.png", "WTH":"../Images/product/packs/Weatherlight.png", "ME4":"../Images/product/packs/Masters4.png", "ME3":"../Images/product/packs/Masters3.png", "ME2":"../Images/product/packs/Masters2.png", "ME1":"../Images/product/packs/Masters1.png", "ALB":"../Images/product/packs/AlaraBlock.png"},
-    __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/Eldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
-                    "confirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png"}}
+    __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/RiseEldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
+                    "confirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png"}}
     def get_pack_keys(self):
         return self.__packs_name_list
     def get_packs_text(self, phase, filename=None):
@@ -294,10 +296,15 @@ class Bot(object):
 class Interface(object):
     #parent class for all Interface classes
     
-    def __init__(self, app_region):
+    def __init__(self):
         self._images = Images()
-        self._app_region = app_region
-
+        
+        magic_online = App("Magic Online")
+        if not magic_online.window():
+            raise ErrorHandler("Please open and log into Magic Online")
+        else:
+            self.app_region = magic_online.window()
+            
     def _define_region(self, image=None):
         #defines the region of the screen where the Magic Online app is located
         #limiting the interaction to a region will help improve performance
@@ -319,7 +326,7 @@ class Interface(object):
         #will click on a target or location with designated mouse button
         wait(0.2)
         if loc == None:
-            target_match = self._app_region.find(target)
+            target_match = self.app_region.find(target)
             loc = target_match.getTarget()
         if isinstance(loc, Location):
             hover(loc); wait(0.3)
@@ -346,14 +353,14 @@ class IChat(Interface):
             return False
             
     #methods for interacting with chat window
-    def __init__(self, app_region):
-        super(IChat, self).__init__(app_region)
+    def __init__(self):
+        super(IChat, self).__init__()
         
     def type_msg(self, msg):
         #if there is a minimize button click it first
         current_sim = Settings.MinSimilarity
         Settings.MinSimilarity = 0.4
-        loc = self._app_region.find(self._images.get_chat_window("type_area"))
+        loc = self.app_region.find(self._images.get_chat_window("type_area"))
         if loc is Match:
             self._slow_click(target=loc)
         self._slow_click(target=self._images.get_chat_window("type_area"))
@@ -363,13 +370,13 @@ class IChat(Interface):
         type(Key.ENTER)
         
     def wait_for_message(self, string, duration):
-        self._app_region.wait(self._images.get_chat_text(string), duration)
+        self.app_region.wait(self._images.get_chat_text(string), duration)
         
     def minimize_chat_window(self):
         #minimizes a chat window"
         """takes a minimize button image as parameter, returns True if found and clicked, returns False otherwise"""
         #lower the current similarity rating as the minimize button can be slightly different each time, then return the similarity rating to original number
-        minimize_button = self._app_region.exists(self._images.get_chat_window("minimize_button"), 20)
+        minimize_button = self.app_region.exists(self._images.get_chat_window("minimize_button"), 60)
         
         min_loc = minimize_button.getTarget()
         
@@ -378,7 +385,7 @@ class IChat(Interface):
     def minimize_chat_all(self):
         #minimizes all chat windows
         """Returns True if successul, returns false otherwise"""
-        matches = self._app_region.findAll(self._images.get_chat_window("minimize_button"))
+        matches = self.app_region.findAll(self._images.get_chat_window("minimize_button"))
         if matches:
             for found in matches:
                 match = found
@@ -391,8 +398,8 @@ class IChat(Interface):
 class ISignIn(Interface):
     #methods for interaction with login window
 
-    def __init__(self, app_region):
-        super(ISignIn, self).__init__(app_region)
+    def __init__(self):
+        super(ISignIn, self).__init__()
         
     def log_in(self):
         App.open('Magic Online')
@@ -416,11 +423,11 @@ class IClassified(Interface):
     #methods for interacting with classified
     #in final version, should contain methods to post ads, search classified, remove ads
     
-    def __init__(self, app_region):
-        super(IClassified, self).__init__(app_region)
+    def __init__(self):
+        super(IClassified, self).__init__()
         
     def go_to_classified(self):
-        if not self._app_region.exists(self._images.get_classified("search_posts")):   
+        if not self.app_region.exists(self._images.get_classified("search_posts")):   
             #if not in the classified section, go to it
             self._slow_click(target=self._images.get_menu("menu"))
             self._slow_click(target=self._images.get_menu("community"))
@@ -433,9 +440,9 @@ class IClassified(Interface):
         """parameters: ad = the message to be posted in classified, images = images object"""
         self.go_to_classified()
         #in case there is already a post, then edit it
-        if self._app_region.exists(self._images.get_classified("edit_posting")):
+        if self.app_region.exists(self._images.get_classified("edit_posting")):
             self._slow_click(target=self._images.get_classified("edit_posting"))
-        if self._app_region.exists(self._images.get_classified("posting")):
+        if self.app_region.exists(self._images.get_classified("posting")):
             self._slow_click(target=self._images.get_classified("posting"))
             wait(0.5)
             type(Controller.settings.getSetting("ADVERTISEMENT"))
@@ -452,7 +459,7 @@ class IClassified(Interface):
     def remove_posting(self):
         self.go_to_classified()
         #removes advertisement
-        if self._app_region.exists(self._images.get_classified("remove_posting")):
+        if self.app_region.exists(self._images.get_classified("remove_posting")):
             self._slow_click(target=self._images.get_classified("remove_posting"))
             return True
         else:
@@ -463,19 +470,19 @@ class IClassified(Interface):
 class ITrade(Interface):
     #methods for interaction in trade window
     
-    def __init__(self, app_region):
-        super(ITrade, self).__init__(app_region)
+    def __init__(self):
+        super(ITrade, self).__init__()
         
     def start_wait(self, type = "incoming_request"):
         #wait for whatever is passed in type parameter to show up
         #usually this will be used to wait for trade request
-        self._app_region.wait(self._images.get_trade(type), FOREVER)
+        self.app_region.wait(self._images.get_trade(type), FOREVER)
         return True
         
     def accept_trade(self):
         #click on the accept button for a trade
         print("accept_trade")
-        request_loc = self._app_region.exists(self._images.get_trade("accept_request"))
+        request_loc = self.app_region.exists(self._images.get_trade("accept_request"))
         print("453")
         if isinstance(request_loc, Match):
             print("455")
@@ -525,12 +532,9 @@ class ITrade(Interface):
 class ISell(Interface):
     #this class is used when the bot is put into temporary sell mode during a trade or perma sell mode prior to trade
     
-    def __init__(self, app_region):
-        super(ISell, self).__init__(app_region)
+    def __init__(self):
+        super(ISell, self).__init__()
         self.__pack_prices = PackPrices()
-        self.app_region = app_region
-        
-
         
     def set_windows(self, giving_region, taking_region):
         self.giving_region = giving_region
@@ -853,7 +857,7 @@ class ISell(Interface):
                 if recieving_number_region.exists(expected_number_image):
                     print("event ticket number found")
                     
-                    return True
+                    return giving_products_found
                 else:
                     return False
             
@@ -884,12 +888,18 @@ class ISell(Interface):
         #scan confirmation screen multiple times in different ways before clicking final confirm
         
         #INSERT FINAL TRANSACTION CHECK HERE#
-        final_scan_result = self.confirmation_scan()
-        if final_scan_result:
+        
+        #returns an object that holds all products sold if successful scan
+        #otherwise returns False
+        products_sold = self.confirmation_scan()
+        
+        if products_sold:
             print("passed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
             wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
+            
+            return products_sold
             
         else:
             print("failed final check")
@@ -899,8 +909,8 @@ class ISell(Interface):
 class IBuy(ITrade):
     #this class is used when the bot is put into buy mode during a trade
     
-    def __init__(self, app_region):
-        super(IBuy, self).__init__(app_region)
+    def __init__(self):
+        super(IBuy, self).__init__()
         
     
 class FrontInterface(Interface):
@@ -908,8 +918,8 @@ class FrontInterface(Interface):
     #for most methods, will require the Images library object
     #this class will contain methods which deal with the general ui of Magic
     #while other interface objects will contain methods for specific windows
-    def __init__(self, app_region):
-        super(FrontInterface, self).__init__(app_region)
+    def __init__(self):
+        super(FrontInterface, self).__init__()
         FrontInterface.trade_interface = ITrade()
         FrontInterface.login_interface = ISignIn()
         FrontInterface.classified = IClassified()
@@ -1012,15 +1022,12 @@ class Session(object):
     
     DBAL = DataStorage("notepad.exe")
 
-    def send_session_info(self):
+    def record(self):
         #send the session info to storage
         #calls the DataStorage class in order to send to storage
-        Session.DBL.write(self.__info)
+        pass
         
     #all the get and set methods
-    def get_session_info(self):
-        #get session info
-        return self.info
         
     def set_customer(self, name):
         self.customer = Customer(name)
@@ -1030,7 +1037,7 @@ class Session(object):
         
     def set_transaction(self, trans):
         """This function receives a dictionary of items sold, and items bought, and at what price"""
-        """Example : trans { "buyer" : "john", "bought": { "Magic 2011 Booster":"4", "Scars of Mirrodin Booster":"4", "Magic 2011":"4"}, "sold": {"Frost Titan":"20", "Venser, the Sojouner":"25"}"""
+        """Example : trans { "customer" : "john", "bought": { "Magic 2011 Booster":"4", "Scars of Mirrodin Booster":"4", "Magic 2011":"4"}, "sold": {"Frost Titan":"20", "Venser, the Sojouner":"25"}"""
         self.transaction = trans
         
     def get_transaction(self):
@@ -1054,12 +1061,12 @@ class Controller(object):
     
     def __init__(self):
         
-        self.Itrade = ITrade(Controller.settings.app_region)
-        self.Isell = ISell(Controller.settings.app_region)
-        self.Ibuy = IBuy(Controller.settings.app_region)
-        self.Isignin = ISignIn(Controller.settings.app_region)
-        self.Iclassified = IClassified(Controller.settings.app_region)
-        self.Ichat = IChat(Controller.settings.app_region)
+        self.Itrade = ITrade()
+        self.Isell = ISell()
+        self.Ibuy = IBuy()
+        self.Isignin = ISignIn()
+        self.Iclassified = IClassified()
+        self.Ichat = IChat()
         
         #make controller object a singleton class.  only one instance should be run at a time
         if Controller.__single:
@@ -1107,21 +1114,36 @@ class Controller(object):
                 
                 self.set_mode(mode="sell")
                 
+                #open a session to record data to
+                session = Session()
+                
                 if self.get_mode() == "sell":
-                    self.Ichat.type_msg("Entering selling mode.  To buy, please close and reopen a trade")
+                
+                    self.Ichat.type_msg("Entering selling mode.  When you are finished, please type \"done\" into the chat window")
                     self.Isell.set_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
                     #after customer signals that they are done, take tickets
                     self.Ichat.wait_for_message(string="done", duration=1200)
                     self.Ichat.type_msg("Calculating tickets...")
-                    self.Isell.complete_sale()
-                else:
-                    print("Could not find min button")
+                    products_sold = self.Isell.complete_sale()
                     
-                if self.get_mode() == "buy":
+                    sale = {}
+                    
+                    for product in products_sold:
+                        sale["sold"][product["name"]] = product["quantity"]
+                    
+                    
+                
+                elif self.get_mode() == "buy":
                     pass
-                    
+                
+                session.set_transaction(sale)
+                session.set_time(datetime.now())
+                session.record()
+                del(session)
+        
         #check if bot is part of a bot network before trying to transfer items
         if(self.settings.getSetting("NETWORK")):
+        
             self.transfer_mode()
         
         self.default_mode()

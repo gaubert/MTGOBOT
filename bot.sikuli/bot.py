@@ -156,11 +156,11 @@ class Images(object):
             
     #stores the images of each pack
     #this is a list of all packs to buy and sell
-    __packs_name_list = ["M11", "ME4", "SOM", "WWK", "ZEN"]
+    __packs_name_list = ["M11", "ME4", "ROE", "SOM", "WWK", "ZEN"]
     
     __packs_images = {"M11":"../Images/product/packs/Magic2011.png", "M10":"../Images/product/packs/Magic2010.png", "10E":"../Images/product/packs/UrzasLegacy.png", "9ED":"../Images/product/packs/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/Scars.png", "ROE":"../Images/product/packs/RiseEldrazi.png", "WWK":"../Images/product/packs/Worldwake.png", "ZEN":"../Images/product/packs/Zendikar.png","UZS":"../Images/product/packs/UrzasSaga.png", "UZL":"../Images/product/packs/UrzasLegacy.png", "ARB":"../Images/product/packs/AlaraReborn.png", "CSP":"../Images/product/packs/Coldsnap.png", "CON":"../Images/product/packs/Conflux.png", "DIS":"../Images/product/packs/Dissension.png", "EXO":"../Images/product/packs/Exodus.png", "FUT":"../Images/product/packs/Future.png", "CHK":"../Images/product/packs/KamigawaChampions.png", "LEG":"../Images/product/packs/Legions.png", "LRW":"../Images/product/packs/Lorwyn.png", "MOR":"../Images/product/packs/Morningtide.png", "PLC":"../Images/product/packs/PlanarChaos.png", "ALA":"../Images/product/packs/ShardsAlara.png", "STH":"../Images/product/packs/Stronghold.png", "WTH":"../Images/product/packs/Weatherlight.png", "ME4":"../Images/product/packs/Masters4.png", "ME3":"../Images/product/packs/Masters3.png", "ME2":"../Images/product/packs/Masters2.png", "ME1":"../Images/product/packs/Masters1.png", "ALB":"../Images/product/packs/AlaraBlock.png"},
-    __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/Eldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
-                    "confirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png"}}
+    __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/RiseEldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
+                    "confirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png"}}
     def get_pack_keys(self):
         return self.__packs_name_list
     def get_packs_text(self, phase, filename=None):
@@ -369,7 +369,7 @@ class IChat(Interface):
         #minimizes a chat window"
         """takes a minimize button image as parameter, returns True if found and clicked, returns False otherwise"""
         #lower the current similarity rating as the minimize button can be slightly different each time, then return the similarity rating to original number
-        minimize_button = self._app_region.exists(self._images.get_chat_window("minimize_button"), 20)
+        minimize_button = self._app_region.exists(self._images.get_chat_window("minimize_button"), 60)
         
         min_loc = minimize_button.getTarget()
         
@@ -853,7 +853,7 @@ class ISell(Interface):
                 if recieving_number_region.exists(expected_number_image):
                     print("event ticket number found")
                     
-                    return True
+                    return giving_products_found
                 else:
                     return False
             
@@ -884,12 +884,18 @@ class ISell(Interface):
         #scan confirmation screen multiple times in different ways before clicking final confirm
         
         #INSERT FINAL TRANSACTION CHECK HERE#
-        final_scan_result = self.confirmation_scan()
-        if final_scan_result:
+        
+        #returns an object that holds all products sold if successful scan
+        #otherwise returns False
+        products_sold = self.confirmation_scan()
+        
+        if products_sold:
             print("passed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
             wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
+            
+            return products_sold
             
         else:
             print("failed final check")
@@ -1018,9 +1024,6 @@ class Session(object):
         Session.DBL.write(self.__info)
         
     #all the get and set methods
-    def get_session_info(self):
-        #get session info
-        return self.info
         
     def set_customer(self, name):
         self.customer = Customer(name)
@@ -1030,7 +1033,7 @@ class Session(object):
         
     def set_transaction(self, trans):
         """This function receives a dictionary of items sold, and items bought, and at what price"""
-        """Example : trans { "buyer" : "john", "bought": { "Magic 2011 Booster":"4", "Scars of Mirrodin Booster":"4", "Magic 2011":"4"}, "sold": {"Frost Titan":"20", "Venser, the Sojouner":"25"}"""
+        """Example : trans { "customer" : "john", "bought": { "Magic 2011 Booster":"4", "Scars of Mirrodin Booster":"4", "Magic 2011":"4"}, "sold": {"Frost Titan":"20", "Venser, the Sojouner":"25"}"""
         self.transaction = trans
         
     def get_transaction(self):
@@ -1107,21 +1110,37 @@ class Controller(object):
                 
                 self.set_mode(mode="sell")
                 
+                #open a session to record data to
+                session = Session()
+                
                 if self.get_mode() == "sell":
                     self.Ichat.type_msg("Entering selling mode.  To buy, please close and reopen a trade")
                     self.Isell.set_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
                     #after customer signals that they are done, take tickets
                     self.Ichat.wait_for_message(string="done", duration=1200)
                     self.Ichat.type_msg("Calculating tickets...")
-                    self.Isell.complete_sale()
-                else:
-                    print("Could not find min button")
+                    products_sold = self.Isell.complete_sale()
                     
-                if self.get_mode() == "buy":
+                    sale = {}
+                    
+                    sale["customer"] = customer_name
+                    
+                    sale["sold"] = [product["name"] for product in products_sold]
+                    
+                    for product in products_sold:
+                        sale["sold"][product["name"]] = product["quantity"]
+                    
+                    session.set_transaction(sale)
+                    session.set_time()
+                    
+                    
+                elif self.get_mode() == "buy":
                     pass
-                    
+
+        
         #check if bot is part of a bot network before trying to transfer items
         if(self.settings.getSetting("NETWORK")):
+        
             self.transfer_mode()
         
         self.default_mode()
