@@ -75,6 +75,12 @@
 </span><span class="cmt">#if you have any questions about it, I can be emailed at Darkray16@yahoo.com
 </span><span class="cmt">#This is a bot that with automated behavior to run independantly on Magic the Gathering: Online
 </span>
+<span class="cmt">#DEPENDENCIES
+</span><span class="cmt">#used in controller to set time of transaction for recording
+</span><span class="kw">from</span> datetime <span class="kw">import</span> datetime
+
+selling_greeting = <span class="str">"Entering selling mode.  When you are finished, please type the word done into the chat window"</span>
+
 <span class="kw">def</span> memorize(func):
     <span class="str">"""
     Cache the results of the function so it doesn't need
@@ -109,11 +115,7 @@
         <span class="cmt">#min pixel change to trigger onChange
 </span>        Settings.ObserveMinChangedPixels = <span class="dig">200</span>
         <span class="cmt">#all find operations which don't use other regions should use this one
-</span>        magic_online = App(<span class="str">"Magic Online"</span>)
-        <span class="kw">if</span> <span class="kw">not</span> magic_online.window():
-            <span class="kw">raise</span> ErrorHandler(<span class="str">"Please open and log into Magic Online"</span>)
-        <span class="kw">else</span>:
-            self.app_region = magic_online.window()
+</span>
 
     @classmethod
     <span class="kw">def</span> getSetting(cls, setting):
@@ -185,7 +187,10 @@
     <span class="dig">1</span>:<img src="../Images/numbers/trade/confirm/number_01.png" />, <span class="dig">2</span>:<img src="../Images/numbers/trade/confirm/number_02.png" />, <span class="dig">3</span>:<img src="../Images/numbers/trade/confirm/number_03.png" />, <span class="dig">4</span>:<img src="../Images/numbers/trade/confirm/number_04.png" />, <span class="dig">5</span>:<img src="../Images/numbers/trade/confirm/number_05.png" />,
     <span class="dig">6</span>:<img src="../Images/numbers/trade/confirm/number_06.png" />, <span class="dig">7</span>:<img src="../Images/numbers/trade/confirm/number_07.png" />, <span class="dig">8</span>:<img src="../Images/numbers/trade/confirm/number_08.png" />, <span class="dig">9</span>:<img src="../Images/numbers/trade/confirm/number_09.png" />, <span class="dig">10</span>:<img src="../Images/numbers/trade/confirm/number_10.png" />,
     <span class="dig">11</span>:<img src="../Images/numbers/trade/confirm/number_11.png" />, <span class="dig">12</span>:<img src="../Images/numbers/trade/confirm/number_12.png" />, <span class="dig">13</span>:<img src="../Images/numbers/trade/confirm/number_13.png" />, <span class="dig">14</span>:<img src="../Images/numbers/trade/confirm/number_14.png" />, <span class="dig">15</span>:<img src="../Images/numbers/trade/confirm/number_15.png" />,
-    <span class="dig">16</span>:<img src="../Images/numbers/trade/confirm/number_16.png" />, <span class="dig">17</span>:<img src="../Images/numbers/trade/confirm/number_17.png" />, <span class="dig">18</span>:<img src="../Images/numbers/trade/confirm/number_18.png" />, <span class="dig">19</span>:<img src="../Images/numbers/trade/confirm/number_19.png" />, <span class="dig">20</span>:<img src="../Images/numbers/trade/confirm/number_20.png" />}}}
+    <span class="dig">16</span>:<img src="../Images/numbers/trade/confirm/number_16.png" />, <span class="dig">17</span>:<img src="../Images/numbers/trade/confirm/number_17.png" />, <span class="dig">18</span>:<img src="../Images/numbers/trade/confirm/number_18.png" />, <span class="dig">19</span>:<img src="../Images/numbers/trade/confirm/number_19.png" />, <span class="dig">20</span>:<img src="../Images/numbers/trade/confirm/number_20.png" />,
+    <span class="dig">21</span>:<img src="../Images/numbers/trade/confirm/number_11.png" />, <span class="dig">22</span>:<img src="../Images/numbers/trade/confirm/number_12.png" />, <span class="dig">23</span>:<img src="../Images/numbers/trade/confirm/number_13.png" />, <span class="dig">24</span>:<img src="../Images/numbers/trade/confirm/number_14.png" />, <span class="dig">25</span>:<img src="../Images/numbers/trade/confirm/number_15.png" />,
+    <span class="dig">26</span>:<img src="../Images/numbers/trade/confirm/number_11.png" />, <span class="dig">27</span>:<img src="../Images/numbers/trade/confirm/number_12.png" />, <span class="dig">28</span>:<img src="../Images/numbers/trade/confirm/number_13.png" />, <span class="dig">29</span>:<img src="../Images/numbers/trade/confirm/number_14.png" />, <span class="dig">30</span>:<img src="../Images/numbers/trade/confirm/number_15.png" />,
+    <span class="dig">31</span>:<img src="../Images/numbers/trade/confirm/number_11.png" />, <span class="dig">32</span>:<img src="../Images/numbers/trade/confirm/number_12.png" />, <span class="dig">33</span>:<img src="../Images/numbers/trade/confirm/number_13.png" />, <span class="dig">34</span>:<img src="../Images/numbers/trade/confirm/number_14.png" />}}}
     <span class="kw">def</span> get_number(self, number = None, category = None, subcategory = None):
         <span class="kw">if</span> category <span class="kw">and</span> subcategory <span class="kw">and</span> number:
             <span class="kw">return</span> self.__number[category][subcategory][number]
@@ -281,10 +286,13 @@
     __buy_prices = {<span class="str">"M11"</span>: <span class="dig">3</span>, <span class="str">"M10"</span>: <span class="dig">3</span>, <span class="str">"SOM"</span> : <span class="dig">3</span>, <span class="str">"ZEN"</span>: <span class="dig">3</span>, <span class="str">"WWK"</span>: <span class="dig">3</span>, <span class="str">"ROE"</span>: <span class="dig">3</span>, <span class="str">"ME1"</span>: <span class="dig">3</span>, <span class="str">"ME2"</span>: <span class="dig">3</span>, <span class="str">"ME3"</span>: <span class="dig">3</span>, <span class="str">"ME4"</span>:<span class="dig">4</span>}
     <span class="kw">def</span> __init__(self):
         super(PackPrices, self).__init__()
-    <span class="kw">def</span> set_buy_price(self, name, price):
+
+    <span class="cmt">#set prices is to be done in gui bot settings prior to transaction
+</span>    <span class="kw">def</span> set_buy_price(self, name, price):
         self.__buy_prices[name] = price
     <span class="kw">def</span> set_sell_price(self, name, price):
         self.__sell_prices[name] = price
+
     <span class="kw">def</span> get_buy_price(self, name):
         <span class="kw">return</span> self.__buy_prices[name]
     <span class="kw">def</span> get_sell_price(self, name):
@@ -315,6 +323,12 @@
     <span class="cmt"># is list of packs wanted and packs for sale
 </span>    <span class="kw">def</span> __init__(self):
         super(PacksList, self).__init__()
+
+        buylist = [<span class="str">"SOM"</span>, <span class="str">"ZEN"</span>, <span class="str">"WWK"</span>, <span class="str">"ME4"</span>, <span class="str">"M11"</span>, <span class="str">"ROE"</span>]
+
+    <span class="cmt">#returns a prioritized list of packs wanted, starting with most wanted
+</span>    <span class="kw">def</span> get_buy_list(self):
+        <span class="kw">return</span> self._buy_list
 
     <span class="kw">def</span> add_pack_to_have(self, packname, amount):
         self._have[packname] = amount
@@ -366,9 +380,14 @@
 <span class="kw">class</span> Interface(object):
     <span class="cmt">#parent class for all Interface classes
 </span>
-    <span class="kw">def</span> __init__(self, app_region):
+    <span class="kw">def</span> __init__(self):
         self._images = Images()
-        self._app_region = app_region
+
+        magic_online = App(<span class="str">"Magic Online"</span>)
+        <span class="kw">if</span> <span class="kw">not</span> magic_online.window():
+            <span class="kw">raise</span> ErrorHandler(<span class="str">"Please open and log into Magic Online"</span>)
+        <span class="kw">else</span>:
+            self.app_region = magic_online.window()
 
     <span class="kw">def</span> _define_region(self, image=None):
         <span class="cmt">#defines the region of the screen where the Magic Online app is located
@@ -391,7 +410,7 @@
 </span>        <span class="cmt">#will click on a target or location with designated mouse button
 </span>        <span class="skw">wait</span>(<span class="dig">0.2</span>)
         <span class="kw">if</span> loc == None:
-            target_match = self._app_region.<span class="skw">find</span>(target)
+            target_match = self.app_region.<span class="skw">find</span>(target)
             loc = target_match.getTarget()
         <span class="kw">if</span> isinstance(loc, Location):
             hover(loc); <span class="skw">wait</span>(<span class="dig">0.3</span>)
@@ -418,14 +437,14 @@
             <span class="kw">return</span> False
 
     <span class="cmt">#methods for interacting with chat window
-</span>    <span class="kw">def</span> __init__(self, app_region):
-        super(IChat, self).__init__(app_region)
+</span>    <span class="kw">def</span> __init__(self):
+        super(IChat, self).__init__()
 
     <span class="kw">def</span> type_msg(self, msg):
         <span class="cmt">#if there is a minimize button click it first
 </span>        current_sim = Settings.MinSimilarity
         Settings.MinSimilarity = <span class="dig">0.4</span>
-        loc = self._app_region.<span class="skw">find</span>(self._images.get_chat_window(<span class="str">"type_area"</span>))
+        loc = self.app_region.<span class="skw">find</span>(self._images.get_chat_window(<span class="str">"type_area"</span>))
         <span class="kw">if</span> loc <span class="kw">is</span> Match:
             self._slow_click(target=loc)
         self._slow_click(target=self._images.get_chat_window(<span class="str">"type_area"</span>))
@@ -434,14 +453,33 @@
         paste(msg); <span class="skw">wait</span>(<span class="dig">0.1</span>)
         <span class="skw">type</span>(Key.ENTER)
 
-    <span class="kw">def</span> wait_for_message(self, string, duration):
-        self._app_region.<span class="skw">wait</span>(self._images.get_chat_text(string), duration)
+    <span class="kw">def</span> wait_for_message(self, string, duration, greetings = None):
+        match = self.app_region.exists(self._images.get_chat_text(string), duration)
+
+        <span class="cmt">#if the word to search for already appears in the customer greeting then
+</span>        <span class="cmt">#must account for that and search for a second instance of that word
+</span>
+        <span class="cmt">#this will account for the word also appearing in the bots messages and hhhhy
+</span>        <span class="kw">if</span> greetings:
+            greetings_list = set(greetings)
+            <span class="kw">if</span> <span class="skw">type</span>(string).__name__ == <span class="str">"string"</span>:
+                <span class="kw">if</span> string <span class="kw">in</span> greetings:
+                    <span class="kw">pass</span>
+
+            <span class="kw">if</span> <span class="skw">type</span>(string).__name__ == <span class="str">"list"</span>:
+                <span class="kw">for</span> word <span class="kw">in</span> string:
+                    <span class="kw">if</span> word <span class="kw">in</span> greetings:
+                        word_found = True
+                        <span class="kw">break</span>
+
+
+
 
     <span class="kw">def</span> minimize_chat_window(self):
         <span class="cmt">#minimizes a chat window"
 </span>        <span class="str">"""takes a minimize button image as parameter, returns True if found and clicked, returns False otherwise"""</span>
         <span class="cmt">#lower the current similarity rating as the minimize button can be slightly different each time, then return the similarity rating to original number
-</span>        minimize_button = self._app_region.exists(self._images.get_chat_window(<span class="str">"minimize_button"</span>), <span class="dig">60</span>)
+</span>        minimize_button = self.app_region.exists(self._images.get_chat_window(<span class="str">"minimize_button"</span>), <span class="dig">60</span>)
 
         min_loc = minimize_button.getTarget()
 
@@ -450,7 +488,7 @@
     <span class="kw">def</span> minimize_chat_all(self):
         <span class="cmt">#minimizes all chat windows
 </span>        <span class="str">"""Returns True if successul, returns false otherwise"""</span>
-        matches = self._app_region.findAll(self._images.get_chat_window(<span class="str">"minimize_button"</span>))
+        matches = self.app_region.findAll(self._images.get_chat_window(<span class="str">"minimize_button"</span>))
         <span class="kw">if</span> matches:
             <span class="kw">for</span> found <span class="kw">in</span> matches:
                 match = found
@@ -463,8 +501,8 @@
 <span class="kw">class</span> ISignIn(Interface):
     <span class="cmt">#methods for interaction with login window
 </span>
-    <span class="kw">def</span> __init__(self, app_region):
-        super(ISignIn, self).__init__(app_region)
+    <span class="kw">def</span> __init__(self):
+        super(ISignIn, self).__init__()
 
     <span class="kw">def</span> log_in(self):
         App.open(<span class="str">'Magic Online'</span>)
@@ -488,11 +526,11 @@
     <span class="cmt">#methods for interacting with classified
 </span>    <span class="cmt">#in final version, should contain methods to post ads, search classified, remove ads
 </span>
-    <span class="kw">def</span> __init__(self, app_region):
-        super(IClassified, self).__init__(app_region)
+    <span class="kw">def</span> __init__(self):
+        super(IClassified, self).__init__()
 
     <span class="kw">def</span> go_to_classified(self):
-        <span class="kw">if</span> <span class="kw">not</span> self._app_region.exists(self._images.get_classified(<span class="str">"search_posts"</span>)):
+        <span class="kw">if</span> <span class="kw">not</span> self.app_region.exists(self._images.get_classified(<span class="str">"search_posts"</span>)):
             <span class="cmt">#if not in the classified section, go to it
 </span>            self._slow_click(target=self._images.get_menu(<span class="str">"menu"</span>))
             self._slow_click(target=self._images.get_menu(<span class="str">"community"</span>))
@@ -505,9 +543,9 @@
 </span>        <span class="str">"""parameters: ad = the message to be posted in classified, images = images object"""</span>
         self.go_to_classified()
         <span class="cmt">#in case there is already a post, then edit it
-</span>        <span class="kw">if</span> self._app_region.exists(self._images.get_classified(<span class="str">"edit_posting"</span>)):
+</span>        <span class="kw">if</span> self.app_region.exists(self._images.get_classified(<span class="str">"edit_posting"</span>)):
             self._slow_click(target=self._images.get_classified(<span class="str">"edit_posting"</span>))
-        <span class="kw">if</span> self._app_region.exists(self._images.get_classified(<span class="str">"posting"</span>)):
+        <span class="kw">if</span> self.app_region.exists(self._images.get_classified(<span class="str">"posting"</span>)):
             self._slow_click(target=self._images.get_classified(<span class="str">"posting"</span>))
             <span class="skw">wait</span>(<span class="dig">0.5</span>)
             <span class="skw">type</span>(Controller.settings.getSetting(<span class="str">"ADVERTISEMENT"</span>))
@@ -524,7 +562,7 @@
     <span class="kw">def</span> remove_posting(self):
         self.go_to_classified()
         <span class="cmt">#removes advertisement
-</span>        <span class="kw">if</span> self._app_region.exists(self._images.get_classified(<span class="str">"remove_posting"</span>)):
+</span>        <span class="kw">if</span> self.app_region.exists(self._images.get_classified(<span class="str">"remove_posting"</span>)):
             self._slow_click(target=self._images.get_classified(<span class="str">"remove_posting"</span>))
             <span class="kw">return</span> True
         <span class="kw">else</span>:
@@ -535,19 +573,19 @@
 <span class="kw">class</span> ITrade(Interface):
     <span class="cmt">#methods for interaction in trade window
 </span>
-    <span class="kw">def</span> __init__(self, app_region):
-        super(ITrade, self).__init__(app_region)
+    <span class="kw">def</span> __init__(self):
+        super(ITrade, self).__init__()
 
     <span class="kw">def</span> start_wait(self, <span class="skw">type</span> = <span class="str">"incoming_request"</span>):
         <span class="cmt">#wait for whatever is passed in type parameter to show up
 </span>        <span class="cmt">#usually this will be used to wait for trade request
-</span>        self._app_region.<span class="skw">wait</span>(self._images.get_trade(<span class="skw">type</span>), FOREVER)
+</span>        self.app_region.<span class="skw">wait</span>(self._images.get_trade(<span class="skw">type</span>), FOREVER)
         <span class="kw">return</span> True
 
     <span class="kw">def</span> accept_trade(self):
         <span class="cmt">#click on the accept button for a trade
 </span>        <span class="kw">print</span>(<span class="str">"accept_trade"</span>)
-        request_loc = self._app_region.exists(self._images.get_trade(<span class="str">"accept_request"</span>))
+        request_loc = self.app_region.exists(self._images.get_trade(<span class="str">"accept_request"</span>))
         <span class="kw">print</span>(<span class="str">"453"</span>)
         <span class="kw">if</span> isinstance(request_loc, Match):
             <span class="kw">print</span>(<span class="str">"455"</span>)
@@ -594,20 +632,22 @@
         <span class="kw">else</span>:
             <span class="kw">return</span> False
 
-<span class="kw">class</span> ISell(Interface):
-    <span class="cmt">#this class is used when the bot is put into temporary sell mode during a trade or perma sell mode prior to trade
-</span>
-    <span class="kw">def</span> __init__(self, app_region):
-        super(ISell, self).__init__(app_region)
-        self.__pack_prices = PackPrices()
-        self.app_region = app_region
-
-
-
-    <span class="kw">def</span> set_windows(self, giving_region, taking_region):
+    <span class="kw">def</span> set_giving_taking_windows(self, giving_region, taking_region):
         self.giving_region = giving_region
         <span class="cmt">#these are the pre-confirmation window regions
 </span>        self.taking_region = taking_region
+
+    <span class="kw">def</span> go_to_tickets_packs(self):
+        <span class="cmt">#go to the tickets section
+</span>        self._slow_click(target=self._images.get_trade(<span class="str">"version_menu"</span>))
+        self._slow_click(target=self._images.get_trade(<span class="str">"version_menu_packs_tickets"</span>))
+
+<span class="kw">class</span> ISell(ITrade):
+    <span class="cmt">#this class is used when the bot is put into temporary sell mode during a trade or perma sell mode prior to trade
+</span>
+    <span class="kw">def</span> __init__(self):
+        super(ISell, self).__init__()
+        self.__pack_prices = PackPrices()
 
     <span class="kw">def</span> tickets_to_take_for_cards(self):
         <span class="cmt">#scan which cards taken and how many and determine tickets to take ticket
@@ -781,11 +821,6 @@
         <span class="cmt">#clicks on the decrease ticket to return one ticket
 </span>        <span class="kw">pass</span>
 
-    <span class="kw">def</span> go_to_tickets(self):
-        <span class="cmt">#go to the tickets section
-</span>        self._slow_click(target=self._images.get_trade(<span class="str">"version_menu"</span>))
-        self._slow_click(target=self._images.get_trade(<span class="str">"version_menu_packs_tickets"</span>))
-
     <span class="kw">def</span> take_packs(self):
         <span class="cmt">#scans users collection for packs wanted
 </span>        <span class="kw">pass</span>
@@ -793,10 +828,6 @@
     <span class="kw">def</span> go_to_confirmation(self):
         confirm_button = self._images.get_trade(filename=<span class="str">"confirm_button"</span>)
         self._slow_click(target=confirm_button)
-
-    <span class="kw">def</span> complete_purchase(self):
-        <span class="cmt">#this is run when bot is in buy mode and user sends signal to complete transaction
-</span>        <span class="kw">pass</span>
 
     <span class="kw">def</span> preconfirm_scan_sale(self, products_giving):
         <span class="str">"""takes the total number of products taken by customer and checks to see if the correct amount of tickets are in the taking window"""</span>
@@ -935,9 +966,8 @@
 </span>        <span class="cmt">#does a check to make sure correct ticket amount was taken
 </span>        number_of_tickets = self.tickets_to_take_for_packs()
         <span class="kw">print</span>(<span class="str">"complete_sale step1 finished, number of tickets to take:%i"</span> % number_of_tickets)
-        region = self.taking_region
 
-        self.go_to_tickets()
+        self.go_to_tickets_packs()
         <span class="kw">print</span>(<span class="str">"complete_sale step2 finished"</span>)
         self.take_ticket(number_of_tickets)
 
@@ -977,8 +1007,49 @@
 <span class="kw">class</span> IBuy(ITrade):
     <span class="cmt">#this class is used when the bot is put into buy mode during a trade
 </span>
-    <span class="kw">def</span> __init__(self, app_region):
-        super(IBuy, self).__init__(app_region)
+    <span class="kw">def</span> __init__(self):
+        super(IBuy, self).__init__()
+        self.__pack_prices = PackPrices()
+
+    <span class="kw">def</span> take_packs(self):
+        <span class="cmt">#will take all packs found in the customers collection and in buy list
+</span>        self.go_to_tickets_packs()
+
+        buy_list = PacksList()
+        prices = PackPrices()
+
+    <span class="kw">def</span> complete_purchase(self, method=<span class="str">"A"</span>):
+        <span class="str">"""Will return the transactions details to be recorded if successul
+        else will return False"""</span>
+
+        <span class="kw">if</span> method == <span class="str">"A"</span>:
+            <span class="cmt">#take the products first, then tell customer how many tickets to take
+</span>            <span class="cmt">#requires IChat interface to be passed to tell customers how many tickets to take
+</span>            self.take_packs()
+
+        <span class="kw">elif</span> method == <span class="str">"B"</span>:
+            <span class="cmt">#let customer take tickets first, then take products totalling up to products taken
+</span>            <span class="cmt">#prompt users with IChat whether they want to sell cards, packs, or both
+</span>
+            <span class="cmt">#read the number of tickets taken
+</span>            number_of_tickets_taken = self.tickets_taken()
+
+            IChat.type_msg(<span class="str">"Type \"packs\" to sell packs, \"cards\" to sell cards, or \"both\"."</span>)
+
+            prompts = [<span class="str">"packs"</span>, <span class="str">"cards"</span>, <span class="str">"both"</span>]
+
+            response = IChat.wait_for_message(prompts)
+
+            <span class="kw">if</span> response == <span class="str">"packs"</span>:
+                self.take_packs(number_of_tickets)
+            <span class="kw">elif</span> response == <span class="str">"cards"</span>:
+                self.take_packs(number_of_tickets)
+            <span class="kw">elif</span> response == <span class="str">"both"</span>:
+                self.take_packs(number_of_tickets)
+                self.take_packs(number_of_tickets)
+
+
+
 
 
 <span class="kw">class</span> FrontInterface(Interface):
@@ -986,8 +1057,8 @@
 </span>    <span class="cmt">#for most methods, will require the Images library object
 </span>    <span class="cmt">#this class will contain methods which deal with the general ui of Magic
 </span>    <span class="cmt">#while other interface objects will contain methods for specific windows
-</span>    <span class="kw">def</span> __init__(self, app_region):
-        super(FrontInterface, self).__init__(app_region)
+</span>    <span class="kw">def</span> __init__(self):
+        super(FrontInterface, self).__init__()
         FrontInterface.trade_interface = ITrade()
         FrontInterface.login_interface = ISignIn()
         FrontInterface.classified = IClassified()
@@ -1090,10 +1161,10 @@
 </span>
     DBAL = DataStorage(<span class="str">"notepad.exe"</span>)
 
-    <span class="kw">def</span> send_session_info(self):
+    <span class="kw">def</span> record(self):
         <span class="cmt">#send the session info to storage
 </span>        <span class="cmt">#calls the DataStorage class in order to send to storage
-</span>        Session.DBL.write(self.__info)
+</span>        <span class="kw">pass</span>
 
     <span class="cmt">#all the get and set methods
 </span>
@@ -1129,12 +1200,14 @@
 
     <span class="kw">def</span> __init__(self):
 
-        self.Itrade = ITrade(Controller.settings.app_region)
-        self.Isell = ISell(Controller.settings.app_region)
-        self.Ibuy = IBuy(Controller.settings.app_region)
-        self.Isignin = ISignIn(Controller.settings.app_region)
-        self.Iclassified = IClassified(Controller.settings.app_region)
-        self.Ichat = IChat(Controller.settings.app_region)
+        self.Itrade = ITrade()
+        self.Isell = ISell()
+        self.Ibuy = IBuy()
+        self.Isignin = ISignIn()
+        self.Iclassified = IClassified()
+        self.Ichat = IChat()
+        self.selling_greeting = <span class="str">"""Entering selling mode.  When you are finished taking products, please type the word \"DONE\" in all lowercase"""</span>
+        self.buying_greeting = <span class="str">"""Entering buying mode.  I will search your collection for products to buy.  Please wait..."""</span>
 
         <span class="cmt">#make controller object a singleton class.  only one instance should be run at a time
 </span>        <span class="kw">if</span> Controller.__single:
@@ -1186,29 +1259,35 @@
 </span>                session = Session()
 
                 <span class="kw">if</span> self.get_mode() == <span class="str">"sell"</span>:
-                    self.Ichat.type_msg(<span class="str">"Entering selling mode.  To buy, please close and reopen a trade"</span>)
-                    self.Isell.set_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
+                    self.Ichat.type_msg(self.selling_greeting)
+                    self.Isell.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
                     <span class="cmt">#after customer signals that they are done, take tickets
-</span>                    self.Ichat.wait_for_message(string=<span class="str">"done"</span>, duration=<span class="dig">1200</span>)
+</span>
+                    self.Ichat.wait_for_message(string=<span class="str">"done"</span>, duration=<span class="dig">1200</span>)
+
                     self.Ichat.type_msg(<span class="str">"Calculating tickets..."</span>)
                     products_sold = self.Isell.complete_sale()
 
                     sale = {}
 
-                    sale[<span class="str">"customer"</span>] = customer_name
-
-                    sale[<span class="str">"sold"</span>] = [product[<span class="str">"name"</span>] <span class="kw">for</span> product <span class="kw">in</span> products_sold]
-
                     <span class="kw">for</span> product <span class="kw">in</span> products_sold:
                         sale[<span class="str">"sold"</span>][product[<span class="str">"name"</span>]] = product[<span class="str">"quantity"</span>]
 
-                    session.set_transaction(sale)
-                    session.set_time()
 
 
                 <span class="kw">elif</span> self.get_mode() == <span class="str">"buy"</span>:
-                    <span class="kw">pass</span>
+                    self.Ichat.type_msg(self.buying_greeting)
+                    <span class="cmt">#take packs from the customer
+</span>
+                    <span class="cmt">#now announce to customer how many tickets to take
+</span>
+                    <span class="cmt">#now complete the sale
+</span>                    <span class="kw">pass</span>
 
+                session.set_transaction(sale)
+                session.set_time(datetime.now())
+                session.record()
+                <span class="kw">del</span>(session)
 
         <span class="cmt">#check if bot is part of a bot network before trying to transfer items
 </span>        <span class="kw">if</span>(self.settings.getSetting(<span class="str">"NETWORK"</span>)):
