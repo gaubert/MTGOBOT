@@ -162,7 +162,7 @@ class Images(object):
             return self.__trade[phase][filename]
             
     #stores the screencaps for chat window
-    __chat = {"minimize_button":"../Images/chat/minimize_button.png", "type_area":"../Images/chat/type_area.png", "buddies": "../Images/buddies_tab.png", 'my_cart': "../Images/my_cart_tab.png", 'games': "../Images/games_tab.png", 'card': "../Images/card_tab.png", 'text':{"done":"../Images/chat/text/done.png"}}
+    __chat = {"minimize":"../Images/chat/minimize_button.png", "expand_close":"../Images/chat/expand_close_button.png", "type_area":"../Images/chat/type_area.png", "buddies": "../Images/buddies_tab.png", 'my_cart': "../Images/my_cart_tab.png", 'games': "../Images/games_tab.png", 'card': "../Images/card_tab.png", 'text':{"done":"../Images/chat/text/done.png"}}
     def get_chat_text(self, filename):
         return self.__chat['text'][filename]
     def get_chat_window(self, filename):
@@ -416,15 +416,18 @@ class IChat(Interface):
                     if word in greetings:
                         word_found = True
                         break
-        
-        
-        
-        
+    
+    def close_current_chat(self):
+        #closes the current chat window that is minimized to the right
+        close_button=Pattern(self._images.get_chat_window("expand_close")).targetOffset(11, 4)
+        if self.app_region.exists(close_button):
+            self._slow_click(target=close_button)
+    
     def minimize_chat_window(self):
         #minimizes a chat window"
         """takes a minimize button image as parameter, returns True if found and clicked, returns False otherwise"""
         #lower the current similarity rating as the minimize button can be slightly different each time, then return the similarity rating to original number
-        minimize_button = self.app_region.exists(self._images.get_chat_window("minimize_button"), 60)
+        minimize_button = self.app_region.exists(self._images.get_chat_window("minimize"), 60)
         
         min_loc = minimize_button.getTarget()
         
@@ -949,6 +952,7 @@ class ISell(ITrade):
             wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
             
+            self.Ichat.close_current_chat()
             return products_sold
             
         else:
@@ -1099,22 +1103,28 @@ class DataStorage(object):
     
     def __init__(self, program):
         """ program parameter is the executable file of the program to write data to, e.g. notepad.exe"""
-        DataStorage.__program = program
+        self._program = program
         
     def write(self, transaction):
-        switch(DataStorage.__program)
-        type(self.convertTransToString(transaction))
+        record_app = App("Notepad")
+        if not record_app.window():
+            App.open("Notepad"); wait(1)
+        record_app.focus()
+        type(self.convert_trans_to_string(transaction))
         wait(0.5)
-        switch("Magic Online")
-        #call RecordToFile object to handle writing in records
         
     def convert_trans_to_string(self, transaction):
-        string = ""
         """takes the transaction variable created in Session class and converts it to string"""
         #note, repr will not work because it doesn't remove curly brackets and colons
-        for key, value in transaction:
-            string += key + transaction[key]
-        return string
+        record_list = []
+        for mode, trans in transactions:
+            record_list.append(str("mode: " + mode + "  "))
+            for product,quantity in trans:
+                record_list.append(str(product+":"))
+                record_list.append(str(quantity))
+                
+        record_string = "".join(record_list)
+        return record_string
 
         
 class RecordToFile(object):
@@ -1140,12 +1150,13 @@ class RecordToFile(object):
 class Session(object):
     #object to contain info on each trade session
     
-    DBAL = DataStorage("notepad.exe")
-
+    def __init__(self):
+        self.db = DataStorage("Notepad")
+    
     def record(self):
         #send the session info to storage
         #calls the DataStorage class in order to send to storage
-        pass
+        self.db.write(self.transaction)
         
     #all the get and set methods
         
@@ -1159,6 +1170,7 @@ class Session(object):
         """This function receives a dictionary of items sold, and items bought, and at what price"""
         """Example : trans { "customer" : "john", "bought": { "Magic 2011 Booster":"4", "Scars of Mirrodin Booster":"4", "Magic 2011":"4"}, "sold": {"Frost Titan":"20", "Venser, the Sojouner":"25"}"""
         self.transaction = trans
+        print("transaction set")
         
     def get_transaction(self):
         return self.transaction
@@ -1248,14 +1260,13 @@ class Controller(object):
                 if self.get_mode() == "sell":
                     self.Ichat.type_msg(self.selling_greeting)
                     self.Isell.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
-                    
                     products_sold = self.Isell.complete_sale()
                     
-                    sale = {}
-                    
-                    for product in products_sold:
-                        sale["sold"][product["name"]] = product["quantity"]
-                    
+                    receipt = None
+                    if products_sold:
+                        receipt = {"sold":{}, "bought":{}}
+                        for product in products_sold:
+                            receipt["sold"][product["name"]] = product["quantity"]
                     
                 #enter buying mode
                 elif self.get_mode() == "buy":
@@ -1267,11 +1278,15 @@ class Controller(object):
                     #now complete the sale
                     pass
                 
-                session.set_transaction(sale)
-                session.set_time(datetime.now())
-                session.record()
-                del(session)
-        
+                if receipt is not None:
+                    session.set_transaction(receipt)
+                    session.set_time(datetime.now())
+                    session.record()
+                    del(session)
+                else:
+                    #record trade failure
+                    pass
+                    
         #check if bot is part of a bot network before trying to transfer items
         if(self.settings.getSetting("NETWORK")):
         
@@ -1302,5 +1317,5 @@ class Controller(object):
     
     
 #run the bot
-App = Bot()
-App.do_function()
+Bot_App = Bot()
+Bot_App.do_function()
