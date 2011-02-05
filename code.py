@@ -90,12 +90,12 @@ class Images(object):
         return self.__ok_button
         
     #stores image of a ticket
-    __ticket =	"../Images/trade/get_ticket/ticket.png"
+    __ticket =  "../Images/trade/get_ticket/ticket.png"
     def get_ticket(self):
         return self.__ticket
         
     #stores image of a ticket text
-    __ticket_text =	"../Images/product/misc/text/event_ticket_text.png"
+    __ticket_text = "../Images/product/misc/text/event_ticket_text.png"
     def get_ticket_text(self):
         return self.__ticket_text
         
@@ -116,9 +116,26 @@ class Images(object):
     6:"../Images/numbers/trade/confirm/number_06.png", 7:"../Images/numbers/trade/confirm/number_07.png", 8:"../Images/numbers/trade/confirm/number_08.png", 9:"../Images/numbers/trade/confirm/number_09.png", 10:"../Images/numbers/trade/confirm/number_10.png", 
     11:"../Images/numbers/trade/confirm/number_11.png", 12:"../Images/numbers/trade/confirm/number_12.png", 13:"../Images/numbers/trade/confirm/number_13.png", 14:"../Images/numbers/trade/confirm/number_14.png", 15:"../Images/numbers/trade/confirm/number_15.png", 
     16:"../Images/numbers/trade/confirm/number_16.png", 17:"../Images/numbers/trade/confirm/number_17.png", 18:"../Images/numbers/trade/confirm/number_18.png", 19:"../Images/numbers/trade/confirm/number_19.png", 20:"../Images/numbers/trade/confirm/number_20.png",
-    21:"../Images/numbers/trade/confirm/number_11.png", 22:"../Images/numbers/trade/confirm/number_12.png", 23:"../Images/numbers/trade/confirm/number_13.png", 24:"../Images/numbers/trade/confirm/number_14.png", 25:"../Images/numbers/trade/confirm/number_15.png", 
-    26:"../Images/numbers/trade/confirm/number_11.png", 27:"../Images/numbers/trade/confirm/number_12.png", 28:"../Images/numbers/trade/confirm/number_13.png", 29:"../Images/numbers/trade/confirm/number_14.png", 30:"../Images/numbers/trade/confirm/number_15.png", 
-    31:"../Images/numbers/trade/confirm/number_11.png", 32:"../Images/numbers/trade/confirm/number_12.png", 33:"../Images/numbers/trade/confirm/number_13.png", 34:"../Images/numbers/trade/confirm/number_14.png"}}}
+    21:"../Images/numbers/trade/confirm/number_21.png", 22:"../Images/numbers/trade/confirm/number_22.png", 23:"../Images/numbers/trade/confirm/number_23.png", 24:"../Images/numbers/trade/confirm/number_24.png", 25:"../Images/numbers/trade/confirm/number_25.png", 
+    26:"../Images/numbers/trade/confirm/number_26.png", 27:"../Images/numbers/trade/confirm/number_27.png", 28:"../Images/numbers/trade/confirm/number_28.png", 29:"../Images/numbers/trade/confirm/number_29.png", 30:"../Images/numbers/trade/confirm/number_30.png", 
+    31:"../Images/numbers/trade/confirm/number_31.png", 32:"../Images/numbers/trade/confirm/number_32.png", 33:"../Images/numbers/trade/confirm/number_33.png", 34:"../Images/numbers/trade/confirm/number_34.png", 35:"../Images/numbers/trade/confirm/number_35.png",
+    36:"../Images/numbers/trade/confirm/number_36.png", 37:"../Images/numbers/trade/confirm/number_37.png", 38:"../Images/numbers/trade/confirm/number_38.png", 39:"../Images/numbers/trade/confirm/number_39.png", 40:"../Images/numbers/trade/confirm/number_40.png",
+    41:"../Images/numbers/trade/confirm/number_41.png", 42:"../Images/numbers/trade/confirm/number_42.png", 43:"../Images/numbers/trade/confirm/number_43.png", 44:"../Images/numbers/trade/confirm/number_44.png", 45:"../Images/numbers/trade/confirm/number_45.png", 
+    46:"../Images/numbers/trade/confirm/number_46.png", 47:"../Images/numbers/trade/confirm/number_47.png", 48:"../Images/numbers/trade/confirm/number_48.png", 49:"../Images/numbers/trade/confirm/number_49.png", 50:"../Images/numbers/trade/confirm/number_50.png", 
+    51:"../Images/numbers/trade/confirm/number_51.png", 52:"../Images/numbers/trade/confirm/number_52.png", 53:"../Images/numbers/trade/confirm/number_53.png", 54:"../Images/numbers/trade/confirm/number_54.png", 55:"../Images/numbers/trade/confirm/number_55.png",
+    56:"../Images/numbers/trade/confirm/number_56.png", 57:"../Images/numbers/trade/confirm/number_57.png", 58:"../Images/numbers/trade/confirm/number_58.png", 59:"../Images/numbers/trade/confirm/number_59.png", 60:"../Images/numbers/trade/confirm/number_60.png",
+    61:"../Images/numbers/trade/confirm/number_61.png", 62:"../Images/numbers/trade/confirm/number_62.png", 63:"../Images/numbers/trade/confirm/number_63.png", 64:"../Images/numbers/trade/confirm/number_64.png", 65:"../Images/numbers/trade/confirm/number_65.png", 
+    66:"../Images/numbers/trade/confirm/number_66.png", 67:"../Images/numbers/trade/confirm/number_67.png", 68:"../Images/numbers/trade/confirm/number_68.png", 69:"../Images/numbers/trade/confirm/number_69.png", 70:"../Images/numbers/trade/confirm/number_70.png", 
+    71:"../Images/numbers/trade/confirm/number_71.png", 72:"../Images/numbers/trade/confirm/number_72.png", 73:"../Images/numbers/trade/confirm/number_73.png", 74:"../Images/numbers/trade/confirm/number_74.png", 75:"../Images/numbers/trade/confirm/number_75.png",
+    76:"../Images/numbers/trade/confirm/number_76.png", 77:"../Images/numbers/trade/confirm/number_77.png", 78:"../Images/numbers/trade/confirm/number_78.png", 79:"../Images/numbers/trade/confirm/number_79.png", 80:"../Images/numbers/trade/confirm/number_80.png",
+    81:"../Images/numbers/trade/confirm/number_81.png", 82:"../Images/numbers/trade/confirm/number_82.png", 83:"../Images/numbers/trade/confirm/number_83.png", 84:"../Images/numbers/trade/confirm/number_84.png", 85:"../Images/numbers/trade/confirm/number_85.png", 
+    86:"../Images/numbers/trade/confirm/number_86.png", 87:"../Images/numbers/trade/confirm/number_87.png", 88:"../Images/numbers/trade/confirm/number_88.png", 89:"../Images/numbers/trade/confirm/number_89.png", 90:"../Images/numbers/trade/confirm/number_90.png", 
+    91:"../Images/numbers/trade/confirm/number_91.png", 92:"../Images/numbers/trade/confirm/number_92.png", 93:"../Images/numbers/trade/confirm/number_93.png", 94:"../Images/numbers/trade/confirm/number_94.png", 95:"../Images/numbers/trade/confirm/number_95.png",
+    96:"../Images/numbers/trade/confirm/number_96.png", 97:"../Images/numbers/trade/confirm/number_97.png", 98:"../Images/numbers/trade/confirm/number_98.png", 99:"../Images/numbers/trade/confirm/number_99.png", 100:"../Images/numbers/trade/confirm/number_60.png",
+    101:"../Images/numbers/trade/confirm/number_101.png", 102:"../Images/numbers/trade/confirm/number_102.png", 103:"../Images/numbers/trade/confirm/number_103.png", 104:"../Images/numbers/trade/confirm/number_104.png", 105:"../Images/numbers/trade/confirm/number_105.png", 
+    106:"../Images/numbers/trade/confirm/number_106.png", 107:"../Images/numbers/trade/confirm/number_107.png", 108:"../Images/numbers/trade/confirm/number_108.png", 109:"../Images/numbers/trade/confirm/number_109.png", 110:"../Images/numbers/trade/confirm/number_110.png", 
+    111:"../Images/numbers/trade/confirm/number_111.png", 112:"../Images/numbers/trade/confirm/number_112.png", 113:"../Images/numbers/trade/confirm/number_113.png", 114:"../Images/numbers/trade/confirm/number_114.png", 115:"../Images/numbers/trade/confirm/number_115.png"
+    }}}
     def get_number(self, number = None, category = None, subcategory = None):
         if category and subcategory and number:
             return self.__number[category][subcategory][number]
@@ -503,6 +520,7 @@ class ITrade(Interface):
     
     def __init__(self):
         super(ITrade, self).__init__()
+        self.Ichat= IChat()
         
     def start_wait(self, type = "incoming_request"):
         #wait for whatever is passed in type parameter to show up
@@ -569,6 +587,11 @@ class ITrade(Interface):
         #go to the tickets section
         self._slow_click(target=self._images.get_trade("version_menu"))
         self._slow_click(target=self._images.get_trade("version_menu_packs_tickets"))
+            
+    def go_to_confirmation(self):
+        confirm_button = self._images.get_trade(filename="confirm_button")
+        self._slow_click(target=confirm_button)
+
     
 class ISell(ITrade):
     #this class is used when the bot is put into temporary sell mode during a trade or perma sell mode prior to trade
@@ -752,10 +775,6 @@ class ISell(ITrade):
     def take_packs(self):
         #scans users collection for packs wanted
         pass
-        
-    def go_to_confirmation(self):
-        confirm_button = self._images.get_trade(filename="confirm_button")
-        self._slow_click(target=confirm_button)
 
     def preconfirm_scan_sale(self, products_giving):
         """takes the total number of products taken by customer and checks to see if the correct amount of tickets are in the taking window"""
@@ -892,6 +911,11 @@ class ISell(ITrade):
         print("running complete_sale")
         #calls calculate_tickets_to_take to get the number of tickets to take and proceeds to take them, 
         #does a check to make sure correct ticket amount was taken
+        
+        self.Ichat.wait_for_message(string="done", duration=1200)
+        
+        self.Ichat.type_msg("Calculating tickets to take.  Please wait..")
+        
         number_of_tickets = self.tickets_to_take_for_packs()
         print("complete_sale step1 finished, number of tickets to take:%i" % number_of_tickets)
         
@@ -930,7 +954,7 @@ class ISell(ITrade):
         else:
             print("failed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
-            
+            return False
         
 class IBuy(ITrade):
     #this class is used when the bot is put into buy mode during a trade
@@ -946,6 +970,10 @@ class IBuy(ITrade):
         buy_list = PacksList()
         prices = PackPrices()
         
+        #take the packs
+        
+        return tickets_to_give
+    
     def complete_purchase(self, method="A"):
         """Will return the transactions details to be recorded if successul
         else will return False"""
@@ -953,7 +981,33 @@ class IBuy(ITrade):
         if method == "A":
             #take the products first, then tell customer how many tickets to take
             #requires IChat interface to be passed to tell customers how many tickets to take
-            self.take_packs()
+            running_total = self.take_packs()
+            running_total = self.take_cards()
+            
+            total_tickets_notice = 'Please take %i tickets.' % running_total
+            self.Ichat.type_msg(total_tickets_notice)
+            
+            #scan the giving region area, and click confirm when it hits right number
+            self.preconfirm_scan_purchase()
+            
+            self.go_to_confirmation()
+            
+            #run a final confirmation scan to check the products and tickets taken
+            products_bought = self.confirmation_scan()
+            
+            if products_bought:
+                print("passed final check")
+                
+                self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
+                wait(Pattern(self._images.get_ok_button()), 600)
+                self._slow_click(target=self._images.get_ok_button(), button="LEFT")
+            
+                return products_bought
+                
+            else:
+                print("failed final check")
+                self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
+                return False
             
         elif method == "B":
             #let customer take tickets first, then take products totalling up to products taken
@@ -962,19 +1016,18 @@ class IBuy(ITrade):
             #read the number of tickets taken
             number_of_tickets_taken = self.tickets_taken()
             
-            IChat.type_msg("Type \"packs\" to sell packs, \"cards\" to sell cards, or \"both\".")
+            self.Ichat.type_msg("Type \"packs\" to sell boosters, \"cards\" to sell singles")
             
             prompts = ["packs", "cards", "both"]
             
-            response = IChat.wait_for_message(prompts)
+            response = self.Ichat.wait_for_message(prompts)
             
             if response == "packs":
                 self.take_packs(number_of_tickets)
             elif response == "cards":
-                self.take_packs(number_of_tickets)
-            elif response == "both":
-                self.take_packs(number_of_tickets)
-                self.take_packs(number_of_tickets)
+                self.take_cards(number_of_tickets)
+            
+            
             
         
             
@@ -1195,11 +1248,7 @@ class Controller(object):
                 if self.get_mode() == "sell":
                     self.Ichat.type_msg(self.selling_greeting)
                     self.Isell.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
-                    #after customer signals that they are done, take tickets
                     
-                    self.Ichat.wait_for_message(string="done", duration=1200)
-                    
-                    self.Ichat.type_msg("Calculating tickets...")
                     products_sold = self.Isell.complete_sale()
                     
                     sale = {}

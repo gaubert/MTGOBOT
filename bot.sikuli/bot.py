@@ -90,12 +90,12 @@ class Images(object):
         return self.__ok_button
         
     #stores image of a ticket
-    __ticket =	"../Images/trade/get_ticket/ticket.png"
+    __ticket =  "../Images/trade/get_ticket/ticket.png"
     def get_ticket(self):
         return self.__ticket
         
     #stores image of a ticket text
-    __ticket_text =	"../Images/product/misc/text/event_ticket_text.png"
+    __ticket_text = "../Images/product/misc/text/event_ticket_text.png"
     def get_ticket_text(self):
         return self.__ticket_text
         
@@ -302,7 +302,7 @@ class Bot(object):
         self.primary_controller.startup()
         
     def do_function(self):
-        self.primary_controller.default_mode()
+        self.primary_controller.trade_mode()
         
         
 class Interface(object):
@@ -503,6 +503,7 @@ class ITrade(Interface):
     
     def __init__(self):
         super(ITrade, self).__init__()
+        self.Ichat= IChat()
         
     def start_wait(self, type = "incoming_request"):
         #wait for whatever is passed in type parameter to show up
@@ -569,6 +570,11 @@ class ITrade(Interface):
         #go to the tickets section
         self._slow_click(target=self._images.get_trade("version_menu"))
         self._slow_click(target=self._images.get_trade("version_menu_packs_tickets"))
+            
+    def go_to_confirmation(self):
+        confirm_button = self._images.get_trade(filename="confirm_button")
+        self._slow_click(target=confirm_button)
+
     
 class ISell(ITrade):
     #this class is used when the bot is put into temporary sell mode during a trade or perma sell mode prior to trade
@@ -752,10 +758,6 @@ class ISell(ITrade):
     def take_packs(self):
         #scans users collection for packs wanted
         pass
-        
-    def go_to_confirmation(self):
-        confirm_button = self._images.get_trade(filename="confirm_button")
-        self._slow_click(target=confirm_button)
 
     def preconfirm_scan_sale(self, products_giving):
         """takes the total number of products taken by customer and checks to see if the correct amount of tickets are in the taking window"""
@@ -892,6 +894,11 @@ class ISell(ITrade):
         print("running complete_sale")
         #calls calculate_tickets_to_take to get the number of tickets to take and proceeds to take them, 
         #does a check to make sure correct ticket amount was taken
+        
+        self.Ichat.wait_for_message(string="done", duration=1200)
+        
+        self.Ichat.wait_for_message("Calculating tickets to take.  Please wait..")
+        
         number_of_tickets = self.tickets_to_take_for_packs()
         print("complete_sale step1 finished, number of tickets to take:%i" % number_of_tickets)
         
@@ -930,7 +937,7 @@ class ISell(ITrade):
         else:
             print("failed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
-            
+            return False
         
 class IBuy(ITrade):
     #this class is used when the bot is put into buy mode during a trade
@@ -946,6 +953,10 @@ class IBuy(ITrade):
         buy_list = PacksList()
         prices = PackPrices()
         
+        #take the packs
+        
+        return tickets_to_give
+    
     def complete_purchase(self, method="A"):
         """Will return the transactions details to be recorded if successul
         else will return False"""
@@ -953,7 +964,33 @@ class IBuy(ITrade):
         if method == "A":
             #take the products first, then tell customer how many tickets to take
             #requires IChat interface to be passed to tell customers how many tickets to take
-            self.take_packs()
+            running_total = self.take_packs()
+            running_total = self.take_cards()
+            
+            total_tickets_notice = 'Please take %i tickets.' % running_total
+            self.Ichat.type_msg(total_tickets_notice)
+            
+            #scan the giving region area, and click confirm when it hits right number
+            self.preconfirm_scan_purchase()
+            
+            self.go_to_confirmation()
+            
+            #run a final confirmation scan to check the products and tickets taken
+            products_bought = self.confirmation_scan()
+            
+            if products_bought:
+                print("passed final check")
+                
+                self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
+                wait(Pattern(self._images.get_ok_button()), 600)
+                self._slow_click(target=self._images.get_ok_button(), button="LEFT")
+            
+                return products_bought
+                
+            else:
+                print("failed final check")
+                self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
+                return False
             
         elif method == "B":
             #let customer take tickets first, then take products totalling up to products taken
@@ -962,19 +999,18 @@ class IBuy(ITrade):
             #read the number of tickets taken
             number_of_tickets_taken = self.tickets_taken()
             
-            IChat.type_msg("Type \"packs\" to sell packs, \"cards\" to sell cards, or \"both\".")
+            self.Ichat.type_msg("Type \"packs\" to sell boosters, \"cards\" to sell singles")
             
             prompts = ["packs", "cards", "both"]
             
-            response = IChat.wait_for_message(prompts)
+            response = self.Ichat.wait_for_message(prompts)
             
             if response == "packs":
                 self.take_packs(number_of_tickets)
             elif response == "cards":
-                self.take_packs(number_of_tickets)
-            elif response == "both":
-                self.take_packs(number_of_tickets)
-                self.take_packs(number_of_tickets)
+                self.take_cards(number_of_tickets)
+            
+            
             
         
             
@@ -1165,7 +1201,10 @@ class Controller(object):
             else:
                 raise ErrorHandler("Default mode not set in bot settings")
                 
-    def default_mode(self):
+    def trade_mode(self, mode=None):
+        """if you wish to set the bot to only sell or buy, then set param mode to
+        "sell" or "buy" to force the bot mode"""
+        
         #puts the bot into sell mode, will wait for trade request
         if(self.Itrade.start_wait("incoming_request")):
             self.session = Session()
@@ -1180,20 +1219,19 @@ class Controller(object):
                 #signals that the customer is taking something and the transaction will be a sale
                 #wait(2)
                 #self.Itrade.giving_window_region.onChange(self.set_mode("sell"))
+                if not mode:
+                    mode="sell"
                 
-                self.set_mode(mode="sell")
-                
+                self.set_mode(mode=mode)
                 #open a session to record data to
                 session = Session()
                 
+                
+                #enter selling mode
                 if self.get_mode() == "sell":
                     self.Ichat.type_msg(self.selling_greeting)
                     self.Isell.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
-                    #after customer signals that they are done, take tickets
                     
-                    self.Ichat.wait_for_message(string="done", duration=1200)
-                    
-                    self.Ichat.type_msg("Calculating tickets...")
                     products_sold = self.Isell.complete_sale()
                     
                     sale = {}
@@ -1202,7 +1240,7 @@ class Controller(object):
                         sale["sold"][product["name"]] = product["quantity"]
                     
                     
-                
+                #enter buying mode
                 elif self.get_mode() == "buy":
                     self.Ichat.type_msg(self.buying_greeting)
                     #take packs from the customer
@@ -1222,28 +1260,8 @@ class Controller(object):
         
             self.transfer_mode()
         
-        self.default_mode()
+        self.trade_mode()
         
-    def buy_mode(self):
-        #puts the bot into buy mode, will wait for trade request
-            if(self.mode == "buy"):
-                if(self.__interface.wait_for("incoming_request")):
-                    print("trade requested")
-                    self.interface.trade = Session()
-                    self.interface.packs = PacksList()
-                    self.interface.cards = CardsList()
-                    if(self.interface.accept_request()):
-                        #scan customer collection for cards/packs wanted and take them
-                        #tell customer how many tickets their cards/packs are worth
-                        pass
-                        #confirm screen, triple check items and prices before final confirm
-                #check if bot is part of a bot network before trying to transfer items
-                if(self.settings.getSetting("NETWORK")):
-                    self.transfer_mode()
-                self.buy_mode()
-            else:
-                raise ErrorHandler("buy mode function called, but bot mode not set to buy")
-                
     def transfer_mode(self):
         #puts the bot into transfer mode, will check inventory and transfer items to other bots
         #check if bot is part of network
