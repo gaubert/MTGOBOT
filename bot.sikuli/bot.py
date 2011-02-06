@@ -116,9 +116,26 @@ class Images(object):
     6:"../Images/numbers/trade/confirm/number_06.png", 7:"../Images/numbers/trade/confirm/number_07.png", 8:"../Images/numbers/trade/confirm/number_08.png", 9:"../Images/numbers/trade/confirm/number_09.png", 10:"../Images/numbers/trade/confirm/number_10.png", 
     11:"../Images/numbers/trade/confirm/number_11.png", 12:"../Images/numbers/trade/confirm/number_12.png", 13:"../Images/numbers/trade/confirm/number_13.png", 14:"../Images/numbers/trade/confirm/number_14.png", 15:"../Images/numbers/trade/confirm/number_15.png", 
     16:"../Images/numbers/trade/confirm/number_16.png", 17:"../Images/numbers/trade/confirm/number_17.png", 18:"../Images/numbers/trade/confirm/number_18.png", 19:"../Images/numbers/trade/confirm/number_19.png", 20:"../Images/numbers/trade/confirm/number_20.png",
-    21:"../Images/numbers/trade/confirm/number_11.png", 22:"../Images/numbers/trade/confirm/number_12.png", 23:"../Images/numbers/trade/confirm/number_13.png", 24:"../Images/numbers/trade/confirm/number_14.png", 25:"../Images/numbers/trade/confirm/number_15.png", 
-    26:"../Images/numbers/trade/confirm/number_11.png", 27:"../Images/numbers/trade/confirm/number_12.png", 28:"../Images/numbers/trade/confirm/number_13.png", 29:"../Images/numbers/trade/confirm/number_14.png", 30:"../Images/numbers/trade/confirm/number_15.png", 
-    31:"../Images/numbers/trade/confirm/number_11.png", 32:"../Images/numbers/trade/confirm/number_12.png", 33:"../Images/numbers/trade/confirm/number_13.png", 34:"../Images/numbers/trade/confirm/number_14.png"}}}
+    21:"../Images/numbers/trade/confirm/number_21.png", 22:"../Images/numbers/trade/confirm/number_22.png", 23:"../Images/numbers/trade/confirm/number_23.png", 24:"../Images/numbers/trade/confirm/number_24.png", 25:"../Images/numbers/trade/confirm/number_25.png", 
+    26:"../Images/numbers/trade/confirm/number_26.png", 27:"../Images/numbers/trade/confirm/number_27.png", 28:"../Images/numbers/trade/confirm/number_28.png", 29:"../Images/numbers/trade/confirm/number_29.png", 30:"../Images/numbers/trade/confirm/number_30.png", 
+    31:"../Images/numbers/trade/confirm/number_31.png", 32:"../Images/numbers/trade/confirm/number_32.png", 33:"../Images/numbers/trade/confirm/number_33.png", 34:"../Images/numbers/trade/confirm/number_34.png", 35:"../Images/numbers/trade/confirm/number_35.png",
+    36:"../Images/numbers/trade/confirm/number_36.png", 37:"../Images/numbers/trade/confirm/number_37.png", 38:"../Images/numbers/trade/confirm/number_38.png", 39:"../Images/numbers/trade/confirm/number_39.png", 40:"../Images/numbers/trade/confirm/number_40.png",
+    41:"../Images/numbers/trade/confirm/number_41.png", 42:"../Images/numbers/trade/confirm/number_42.png", 43:"../Images/numbers/trade/confirm/number_43.png", 44:"../Images/numbers/trade/confirm/number_44.png", 45:"../Images/numbers/trade/confirm/number_45.png", 
+    46:"../Images/numbers/trade/confirm/number_46.png", 47:"../Images/numbers/trade/confirm/number_47.png", 48:"../Images/numbers/trade/confirm/number_48.png", 49:"../Images/numbers/trade/confirm/number_49.png", 50:"../Images/numbers/trade/confirm/number_50.png", 
+    51:"../Images/numbers/trade/confirm/number_51.png", 52:"../Images/numbers/trade/confirm/number_52.png", 53:"../Images/numbers/trade/confirm/number_53.png", 54:"../Images/numbers/trade/confirm/number_54.png", 55:"../Images/numbers/trade/confirm/number_55.png",
+    56:"../Images/numbers/trade/confirm/number_56.png", 57:"../Images/numbers/trade/confirm/number_57.png", 58:"../Images/numbers/trade/confirm/number_58.png", 59:"../Images/numbers/trade/confirm/number_59.png", 60:"../Images/numbers/trade/confirm/number_60.png",
+    61:"../Images/numbers/trade/confirm/number_61.png", 62:"../Images/numbers/trade/confirm/number_62.png", 63:"../Images/numbers/trade/confirm/number_63.png", 64:"../Images/numbers/trade/confirm/number_64.png", 65:"../Images/numbers/trade/confirm/number_65.png", 
+    66:"../Images/numbers/trade/confirm/number_66.png", 67:"../Images/numbers/trade/confirm/number_67.png", 68:"../Images/numbers/trade/confirm/number_68.png", 69:"../Images/numbers/trade/confirm/number_69.png", 70:"../Images/numbers/trade/confirm/number_70.png", 
+    71:"../Images/numbers/trade/confirm/number_71.png", 72:"../Images/numbers/trade/confirm/number_72.png", 73:"../Images/numbers/trade/confirm/number_73.png", 74:"../Images/numbers/trade/confirm/number_74.png", 75:"../Images/numbers/trade/confirm/number_75.png",
+    76:"../Images/numbers/trade/confirm/number_76.png", 77:"../Images/numbers/trade/confirm/number_77.png", 78:"../Images/numbers/trade/confirm/number_78.png", 79:"../Images/numbers/trade/confirm/number_79.png", 80:"../Images/numbers/trade/confirm/number_80.png",
+    81:"../Images/numbers/trade/confirm/number_81.png", 82:"../Images/numbers/trade/confirm/number_82.png", 83:"../Images/numbers/trade/confirm/number_83.png", 84:"../Images/numbers/trade/confirm/number_84.png", 85:"../Images/numbers/trade/confirm/number_85.png", 
+    86:"../Images/numbers/trade/confirm/number_86.png", 87:"../Images/numbers/trade/confirm/number_87.png", 88:"../Images/numbers/trade/confirm/number_88.png", 89:"../Images/numbers/trade/confirm/number_89.png", 90:"../Images/numbers/trade/confirm/number_90.png", 
+    91:"../Images/numbers/trade/confirm/number_91.png", 92:"../Images/numbers/trade/confirm/number_92.png", 93:"../Images/numbers/trade/confirm/number_93.png", 94:"../Images/numbers/trade/confirm/number_94.png", 95:"../Images/numbers/trade/confirm/number_95.png",
+    96:"../Images/numbers/trade/confirm/number_96.png", 97:"../Images/numbers/trade/confirm/number_97.png", 98:"../Images/numbers/trade/confirm/number_98.png", 99:"../Images/numbers/trade/confirm/number_99.png", 100:"../Images/numbers/trade/confirm/number_60.png",
+    101:"../Images/numbers/trade/confirm/number_101.png", 102:"../Images/numbers/trade/confirm/number_102.png", 103:"../Images/numbers/trade/confirm/number_103.png", 104:"../Images/numbers/trade/confirm/number_104.png", 105:"../Images/numbers/trade/confirm/number_105.png", 
+    106:"../Images/numbers/trade/confirm/number_106.png", 107:"../Images/numbers/trade/confirm/number_107.png", 108:"../Images/numbers/trade/confirm/number_108.png", 109:"../Images/numbers/trade/confirm/number_109.png", 110:"../Images/numbers/trade/confirm/number_110.png", 
+    111:"../Images/numbers/trade/confirm/number_111.png", 112:"../Images/numbers/trade/confirm/number_112.png", 113:"../Images/numbers/trade/confirm/number_113.png", 114:"../Images/numbers/trade/confirm/number_114.png", 115:"../Images/numbers/trade/confirm/number_115.png"
+    }}}
     def get_number(self, number = None, category = None, subcategory = None):
         if category and subcategory and number:
             return self.__number[category][subcategory][number]
@@ -145,7 +162,7 @@ class Images(object):
             return self.__trade[phase][filename]
             
     #stores the screencaps for chat window
-    __chat = {"minimize_button":"../Images/chat/minimize_button.png", "type_area":"../Images/chat/type_area.png", "buddies": "../Images/buddies_tab.png", 'my_cart': "../Images/my_cart_tab.png", 'games': "../Images/games_tab.png", 'card': "../Images/card_tab.png", 'text':{"done":"../Images/chat/text/done.png"}}
+    __chat = {"minimize":"../Images/chat/minimize_button.png", "expand_close":"../Images/chat/expand_close_button.png", "type_area":"../Images/chat/type_area.png", "buddies": "../Images/buddies_tab.png", 'my_cart': "../Images/my_cart_tab.png", 'games': "../Images/games_tab.png", 'card': "../Images/card_tab.png", 'text':{"done":"../Images/chat/text/done.png"}}
     def get_chat_text(self, filename):
         return self.__chat['text'][filename]
     def get_chat_window(self, filename):
@@ -399,15 +416,18 @@ class IChat(Interface):
                     if word in greetings:
                         word_found = True
                         break
-        
-        
-        
-        
+    
+    def close_current_chat(self):
+        #closes the current chat window that is minimized to the right
+        close_button=Pattern(self._images.get_chat_window("expand_close")).targetOffset(11, 4)
+        if self.app_region.exists(close_button):
+            self._slow_click(target=close_button)
+    
     def minimize_chat_window(self):
         #minimizes a chat window"
         """takes a minimize button image as parameter, returns True if found and clicked, returns False otherwise"""
         #lower the current similarity rating as the minimize button can be slightly different each time, then return the similarity rating to original number
-        minimize_button = self.app_region.exists(self._images.get_chat_window("minimize_button"), 60)
+        minimize_button = self.app_region.exists(self._images.get_chat_window("minimize"), 60)
         
         min_loc = minimize_button.getTarget()
         
@@ -897,7 +917,7 @@ class ISell(ITrade):
         
         self.Ichat.wait_for_message(string="done", duration=1200)
         
-        self.Ichat.wait_for_message("Calculating tickets to take.  Please wait..")
+        self.Ichat.type_msg("Calculating tickets to take.  Please wait..")
         
         number_of_tickets = self.tickets_to_take_for_packs()
         print("complete_sale step1 finished, number of tickets to take:%i" % number_of_tickets)
@@ -932,6 +952,7 @@ class ISell(ITrade):
             wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
             
+            self.Ichat.close_current_chat()
             return products_sold
             
         else:
@@ -1082,22 +1103,28 @@ class DataStorage(object):
     
     def __init__(self, program):
         """ program parameter is the executable file of the program to write data to, e.g. notepad.exe"""
-        DataStorage.__program = program
+        self._program = program
         
     def write(self, transaction):
-        switch(DataStorage.__program)
-        type(self.convertTransToString(transaction))
+        record_app = App("Notepad")
+        if not record_app.window():
+            App.open("Notepad"); wait(1)
+        record_app.focus()
+        type(self.convert_trans_to_string(transaction))
         wait(0.5)
-        switch("Magic Online")
-        #call RecordToFile object to handle writing in records
         
     def convert_trans_to_string(self, transaction):
-        string = ""
         """takes the transaction variable created in Session class and converts it to string"""
         #note, repr will not work because it doesn't remove curly brackets and colons
-        for key, value in transaction:
-            string += key + transaction[key]
-        return string
+        record_list = []
+        for mode, trans in transactions:
+            record_list.append(str("mode: " + mode + "  "))
+            for product,quantity in trans:
+                record_list.append(str(product+":"))
+                record_list.append(str(quantity))
+                
+        record_string = "".join(record_list)
+        return record_string
 
         
 class RecordToFile(object):
@@ -1123,12 +1150,13 @@ class RecordToFile(object):
 class Session(object):
     #object to contain info on each trade session
     
-    DBAL = DataStorage("notepad.exe")
-
+    def __init__(self):
+        self.db = DataStorage("Notepad")
+    
     def record(self):
         #send the session info to storage
         #calls the DataStorage class in order to send to storage
-        pass
+        self.db.write(self.transaction)
         
     #all the get and set methods
         
@@ -1142,6 +1170,7 @@ class Session(object):
         """This function receives a dictionary of items sold, and items bought, and at what price"""
         """Example : trans { "customer" : "john", "bought": { "Magic 2011 Booster":"4", "Scars of Mirrodin Booster":"4", "Magic 2011":"4"}, "sold": {"Frost Titan":"20", "Venser, the Sojouner":"25"}"""
         self.transaction = trans
+        print("transaction set")
         
     def get_transaction(self):
         return self.transaction
@@ -1231,14 +1260,13 @@ class Controller(object):
                 if self.get_mode() == "sell":
                     self.Ichat.type_msg(self.selling_greeting)
                     self.Isell.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
-                    
                     products_sold = self.Isell.complete_sale()
                     
-                    sale = {}
-                    
-                    for product in products_sold:
-                        sale["sold"][product["name"]] = product["quantity"]
-                    
+                    receipt = None
+                    if products_sold:
+                        receipt = {"sold":{}, "bought":{}}
+                        for product in products_sold:
+                            receipt["sold"][product["name"]] = product["quantity"]
                     
                 #enter buying mode
                 elif self.get_mode() == "buy":
@@ -1250,11 +1278,15 @@ class Controller(object):
                     #now complete the sale
                     pass
                 
-                session.set_transaction(sale)
-                session.set_time(datetime.now())
-                session.record()
-                del(session)
-        
+                if receipt is not None:
+                    session.set_transaction(receipt)
+                    session.set_time(datetime.now())
+                    session.record()
+                    del(session)
+                else:
+                    #record trade failure
+                    pass
+                    
         #check if bot is part of a bot network before trying to transfer items
         if(self.settings.getSetting("NETWORK")):
         
@@ -1285,5 +1317,5 @@ class Controller(object):
     
     
 #run the bot
-App = Bot()
-App.do_function()
+Bot_App = Bot()
+Bot_App.do_function()

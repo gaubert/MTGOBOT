@@ -1117,13 +1117,13 @@ class DataStorage(object):
         """takes the transaction variable created in Session class and converts it to string"""
         #note, repr will not work because it doesn't remove curly brackets and colons
         record_list = []
-        for mode, trans in transactions:
+        for mode, trans in transaction.iteritems():
             record_list.append(str("mode: " + mode + "  "))
-            for product,quantity in trans:
+            for product,quantity in trans.iteritems():
                 record_list.append(str(product+":"))
                 record_list.append(str(quantity))
                 
-        record_string = "".join(record_list)
+        record_string = "".join(record_list) + "
         return record_string
 
         
