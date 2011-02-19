@@ -861,8 +861,6 @@ class ISell(ITrade):
                     print("looking for " + str(product_abbr))
                     if giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(0.8)) and not product_abbr in giving_products_found:
                         print("confirmation window: "+product_abbr+" found")
-                        current_sim = Settings.MinSimilarity
-                        Settings.MinSimilarity = 0.8
                         
                         #if still at 0 after for loop, error raised
                         amount = 0
@@ -870,7 +868,7 @@ class ISell(ITrade):
                             if number == 0:
                                 continue
                             print(numbers[number])
-                            if giving_number_region.exists(numbers[number]):
+                            if giving_number_region.exists(Pattern(numbers[number]).similar(0.8)):
                                 print("CURRENT NUMBER STRING FOUND " + str(numbers[number]))
                                 amount = number
                                 
@@ -885,8 +883,6 @@ class ISell(ITrade):
                         product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), quantity=amount)
                         giving_products_found.append(product_obj)
                                             
-                        Settings.MinSimilarity = current_sim
-                        del(current_sim)
                         if amount == 0:
                             raise ErrorHandler("Could not find a number for product: " + str(product_abbr))
                         found=True
