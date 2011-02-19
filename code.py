@@ -7,6 +7,8 @@
 #used in controller to set time of transaction for recording
 from datetime import datetime
 
+classified_ad = "Human BUYING     Frost Titan[s5] | Inferno Titan [s3] | Grave Titan [s1][s0] | Devastating Summons [s1] | Mox Opal [s1][s0] | Contested Zone [s3]"
+
 selling_greeting = "Entering selling mode.  When you are finished, please type the word done into the chat window"
 
 def memorize(func):
@@ -58,7 +60,7 @@ class ErrorHandler(Exception):
     #custom Exception parent class to handle errors
     
     def __init__(self, message):
-        ERRORHANDLERAPP = self.settings.getSettings("ERRORHANDLERAPP")
+        ERRORHANDLERAPP = BotSettings.getSettings("ERRORHANDLERAPP")
         self._errormsg = message
         ErrorHandlerApp = App(ERRORHANDLERAPP)
         if not ErrorHandlerApp.window():
@@ -633,12 +635,14 @@ class ISell(ITrade):
     def search_for_images_sale(self):
         print("running search for images")
         #searches a certain area for any image in a dictionary
-        """takes a region image, a dictionary of images an returns the key for the image found"""
         
         #combine all cards and packs for sale into a list
         pack_names_list = self._images.get_pack_keys()
         
         images = self._images.get_packs_text(phase="preconfirm")
+        
+        numbers_list = self._images.get_number(category = "trade", subcategory = "preconfirm")
+        
         #if area searched contains a full sized scroll bar, then scroll down
         #variable to hold last mouse position for the scrollbar movement code
         self.last_mouse_position = False
@@ -673,7 +677,6 @@ class ISell(ITrade):
                     print(str(pack) + " found!")
                     
                     print(str(product_abbr))
-                    numbers_list = self._images.get_number(category = "trade", subcategory = "preconfirm")
                     
                     for key in range(len(numbers_list)):
                         if key == 0:
@@ -792,7 +795,7 @@ class ISell(ITrade):
         
         tickets_found = 0
         #product height = 17, width = 145, relative distance from upper left region corner, y = 46, x =35
-        scan_region_product = Region(self.taking_region.getX()+34, self.taking_region.getY()+45, 145,17)
+        scan_region_product = Region(self.taking_region.getX()+34, self.taking_region.getY()+45, 145, 17)
         #product height = 17, width = 30, relative distance from upper left region corner, y = 46, x =1
         scan_region_number = Region(self.taking_region.getX(), self.taking_region.getY()+45, 30, 17)
 
@@ -1051,8 +1054,42 @@ class IBuy(ITrade):
         
     def preconfirm_scan_purchase(self):
         #will scan the giving and receiving window to see if items match
+        taking_name_region = Region(self.giving_window_region.getX()+34, self.giving_window_region.getY()+45, 145, 17)
+        taking_number_region = Region(self.giving_window_region.getX(), self.giving_window_region.getY()+45, 30, 17)
         
-    
+        pack_images = self._images.get_packs_text(phase="preconfirm")
+        pack_image_keys = self._images.get_pack_keys()
+        
+        numbers_list = self._images.get_number(category = "trade", subcategory = "preconfirm")
+        
+        #will hold the name of all products found
+        products_found = []
+        
+        #will hold all the Product objects of items found
+        products_obj_found = []
+        
+        scroll_bar_loc = Location(self.giving_window_region.getX()+385, self.giving_window_region.getY()+80)
+        found = True
+        while True:
+            found = False
+            
+            for pack_abbr in pack_image_keys:
+            
+                if taking_name_region.exists(Pattern(pack_images[pack_abbr]).similar(0.9)) and not pack_abbr in products_found:
+                    found = True
+                    products_found.append(pack_abbr)
+                    
+                    
+                    for number, number_img in len(range(Pattern(numbers_list).similar(0.8))):
+                    
+                        if taking_number_region.exists(number_img):
+                            pack_obj = Product(name = pack_abbr, buy = self.__pack_prices.get_buy_price(pack_abbr), sell = self.__pack_prices.get_sell_price(pack_abbr), quantity = number)
+                            products_obj_found.append(pack_obj)
+                            break
+                break
+            
+            wheel(scroll_bar_loc, WHEEL_DOWN, 2)
+                    
     def confirmation_scan(self):
         pass
     
