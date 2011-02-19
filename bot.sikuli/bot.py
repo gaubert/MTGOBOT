@@ -154,7 +154,7 @@ class Images(object):
         return self.__classified[filename]
     
     #stores the screencaps for trade window
-    __trade = {"confirm":{"confirm_button":"../Images/trade/confirm_window/confirm_button_confirm.png", "confirm_cancel":"../Images/trade/confirm_window/confirm_cancel.png", "cancel_button":"../Images/trade/confirm_window/cancel_button.png"}, "confirm_button":"../Images/trade/confirm_button.png", "incoming_request": "../Images/incoming_request.png", "accept_request": "../Images/trade_yes.png",  "turn_right": "../Images/turn_right.png", "turn_left": "../Images/turn_left.png", "version_menu":"../Images/trade/version_menu.png", "version_menu_regular":"../Images/trade/version_menu_regular.png", "version_menu_packs_tickets":"../Images/trade/version_menu_packs_tickets.png", "version_menu_premium":"../Images/trade/version_menu_premium.png", "giving_window":"../Images/trade/products_giving.png", "taking_window":"../Images/trade/products_taking.png", "scroll_bar_regular":"../Images/trade/scroll_bar_regular.png", "scroll_bar_mini":"../Images/trade/scroll_bar_mini.png"}
+    __trade = {"confirm":{"confirm_button":"../Images/trade/confirm_window/confirm_button_confirm.png", "confirm_cancel":"../Images/trade/confirm_window/confirm_cancel.png", "cancel_button":"../Images/trade/confirm_window/cancel_button.png"}, "list_view_collection_window":"../Images/trade/list_view_button_collection_window.png", "thumbnail_view_collection_window":"../Images/trade/thumbnail_view_button_collection_window.png", "confirm_button":"../Images/trade/confirm_button.png", "incoming_request": "../Images/incoming_request.png", "accept_request": "../Images/trade_yes.png",  "turn_right": "../Images/turn_right.png", "turn_left": "../Images/turn_left.png", "version_menu":"../Images/trade/version_menu.png", "version_menu_regular":"../Images/trade/version_menu_regular.png", "version_menu_packs_tickets":"../Images/trade/version_menu_packs_tickets.png", "version_menu_premium":"../Images/trade/version_menu_premium.png", "giving_window":"../Images/trade/products_giving.png", "taking_window":"../Images/trade/products_taking.png", "scroll_bar_regular":"../Images/trade/scroll_bar_regular.png", "scroll_bar_mini":"../Images/trade/scroll_bar_mini.png"}
     def get_trade(self, filename, phase=None):
         if phase == None:
             return self.__trade[filename]
@@ -422,7 +422,7 @@ class IChat(Interface):
         close_button=Pattern(self._images.get_chat_window("expand_close")).targetOffset(11, 4)
         if self.app_region.exists(close_button):
             self._slow_click(target=close_button)
-    
+            wait(3)
     def minimize_chat_window(self):
         #minimizes a chat window"
         """takes a minimize button image as parameter, returns True if found and clicked, returns False otherwise"""
@@ -838,17 +838,17 @@ class ISell(ITrade):
             #confirm products receiving
             #set the regions of a single product and and the amount slow
             #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-            recieving_number_region = Region(confirm_button.getX()-289, confirm_button.getY()+42, 34, 14)
+            receiving_number_region = Region(confirm_button.getX()-289, confirm_button.getY()+42, 34, 14)
             #height for each product is 13px, and 4px buffer vertically between each product slot
-            recieving_name_region = Region(confirm_button.getX()-254, confirm_button.getY()+42, 160, 14)
+            receiving_name_region = Region(confirm_button.getX()-254, confirm_button.getY()+42, 160, 14)
             #confirm products giving
             giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+391, 34, 14)
             giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+391, 160, 14)
             found=True
             #scan the giving window
-            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            hover(Location(receiving_number_region.getX(), receiving_number_region.getY()))
             wait(2)
-            hover(Location(recieving_number_region.getX()+34, recieving_number_region.getY()+14))
+            hover(Location(receiving_number_region.getX()+34, receiving_number_region.getY()+14))
             
             while found:
                 print("while loop run")
@@ -899,11 +899,11 @@ class ISell(ITrade):
             
             if expected_number == 0:
                 return False
-            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            hover(Location(receiving_number_region.getX(), receiving_number_region.getY()))
             ticket_text_image = Pattern(self._images.get_ticket_text()).similar(1)
-            if recieving_name_region.exists(ticket_text_image):
+            if receiving_name_region.exists(ticket_text_image):
                 expected_number_image = Pattern(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")).similar(0.7)
-                if recieving_number_region.exists(expected_number_image):
+                if receiving_number_region.exists(expected_number_image):
                     print("event ticket number found")
                     
                     return giving_products_found
@@ -946,20 +946,21 @@ class ISell(ITrade):
         #otherwise returns False
         products_sold = self.confirmation_scan()
         
+        self.Ichat.close_current_chat()
+        
         if products_sold:
             print("passed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
             wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
             
-            self.Ichat.close_current_chat()
             return products_sold
             
         else:
             print("failed final check")
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
             return False
-        
+    
 class IBuy(ITrade):
     #this class is used when the bot is put into buy mode during a trade
     
@@ -967,16 +968,82 @@ class IBuy(ITrade):
         super(IBuy, self).__init__()
         self.__pack_prices = PackPrices()
     
+    def take_all_copies_of_product(self):
+        #this will keep taking the product until there are no more of that product
+        pass
+    
     def take_packs(self):
         #will take all packs found in the customers collection and in buy list
         self.go_to_tickets_packs()
         
-        buy_list = PacksList()
+        #declare variable to hold amount of tickets the customer should take
+        tickets_to_give = 0
+        #holds the prices for all the packs
         prices = PackPrices()
         
-        #take the packs
+        #a dict that holds images of the names of all packs
+        pack_names_keys = self._images.get_pack_keys()
+        pack_names_images = self._images.get_packs_text(phase="confirm")
+        #this will hold all the products that have been taken
+        packs_taken = []
+        number_list = self._images.get_number(number=None, category="trade", subcategory="preconfirm")
+        
+        #this variable is used as an indicator whether the while loop should keep iterating
+        found = True
+        
+        while found:
+            found = False
+            for pack_abbr in pack_names_keys:
+                if self.topmost_product_area.exists(pack_names_images[pack_abbr]):
+                    found = True
+                    amount = 0
+                    for num in len(range(number_list)):
+                        if self.topmost_product_quantity_area.exists(number_list[num]).similar(0.9):
+                            amount = num
+                            break
+
+                    pack_abbr_index = packs_names_keys.index(pack_abbr)+1
+                    pack_names_keys = pack_names_keys[pack_abbr_index:]
+                    
+                    if amount == 0:
+                        raise ErrorHandler("Found 0 of " + str(pack_abbr))
+                    
+                    pack_obj = Product(name=pack_abbr, buy = self.__pack_prices.get_buy_price(pack_abbr), sell = self.__pack_prices.get_sell_price(pack_abbr), quantity=amount)
+                    packs_taken.append(pack_abbr)
+                    
+                    break
         
         return tickets_to_give
+    
+    def take_cards(self):
+        pass
+    
+    def take_products(self):
+        #confirm button will be used for relative positioning the regions for products scanning
+        confirm_button = self.app_region.exists(self._images.get_trade(filename="confirm_button"), 30)
+        #find the position in the window where the topmost product would be located
+        
+        self.topmost_product_area = Region(confirm_button.getX()-272, confirm_button.getY()+43, 159, 13)
+        self.topmost_product_quantity_area = Region(confirm_button.getX()-112, confirm_button.getY()+44, 40, 9)
+        
+        #we don't want to take tickets, just products
+        if self.topmost_product_area.exists(self._images.get_ticket_text()):
+            self.topmost_product_area = Region(self.topmost_product_area.getX(), self.topmost_product_area.getY()+18, 159, 13)
+            self.topmost_product_quantity_area = Region(self.topmost_product_quantity_area.getX(), self.topmost_product_quantity_area.getY()+18, 40, 9)
+        
+        tickets_to_give = 0
+        tickets_to_give += self.take_packs()
+        tickets_to_give += self.take_cards()
+        
+        return tickets_to_give
+        
+    def preconfirm_scan_purchase(self):
+        #will scan the giving and receiving window to see if items match
+        pass
+    
+    def confirmation_scan(self):
+        pass
+    
     
     def complete_purchase(self, method="A"):
         """Will return the transactions details to be recorded if successul
@@ -985,8 +1052,11 @@ class IBuy(ITrade):
         if method == "A":
             #take the products first, then tell customer how many tickets to take
             #requires IChat interface to be passed to tell customers how many tickets to take
-            running_total = self.take_packs()
-            running_total = self.take_cards()
+            
+            #switch to list view in the collection window
+            self._slow_click(target=self._images.get_trade(filename="list_view_collection_window"))
+            
+            running_total = self.take_products()
             
             total_tickets_notice = 'Please take %i tickets.' % running_total
             self.Ichat.type_msg(total_tickets_notice)
@@ -1031,11 +1101,6 @@ class IBuy(ITrade):
             elif response == "cards":
                 self.take_cards(number_of_tickets)
             
-            
-            
-        
-            
-        
     
 class FrontInterface(Interface):
     #this class will handle all interaction with the Magic Online App
@@ -1102,7 +1167,7 @@ class DataStorage(object):
     #methods of storage being considered, xml, excel, mysql
     
     def __init__(self, program):
-        """ program parameter is the executable file of the program to write data to, e.g. notepad.exe"""
+        """ program parameter is the executable file of the program to write data to, e.g. notepad"""
         self._program = program
         
     def write(self, transaction):
@@ -1112,18 +1177,19 @@ class DataStorage(object):
         record_app.focus()
         type(self.convert_trans_to_string(transaction))
         wait(0.5)
+        App.focus("Magic Online")
         
     def convert_trans_to_string(self, transaction):
         """takes the transaction variable created in Session class and converts it to string"""
         #note, repr will not work because it doesn't remove curly brackets and colons
         record_list = []
-        for mode, trans in transactions:
+        for mode, trans in transaction.iteritems():
             record_list.append(str("mode: " + mode + "  "))
-            for product,quantity in trans:
-                record_list.append(str(product+":"))
-                record_list.append(str(quantity))
-                
-        record_string = "".join(record_list)
+            for product,quantity in trans.iteritems():
+                record_list.append(str(product + ":"))
+                record_list.append(str(quantity) + " ")
+            
+        record_string = "".join(record_list) + "\n"
         return record_string
 
         
@@ -1249,7 +1315,7 @@ class Controller(object):
                 #wait(2)
                 #self.Itrade.giving_window_region.onChange(self.set_mode("sell"))
                 if not mode:
-                    mode="sell"
+                    mode="buy"
                 
                 self.set_mode(mode=mode)
                 #open a session to record data to
@@ -1271,12 +1337,13 @@ class Controller(object):
                 #enter buying mode
                 elif self.get_mode() == "buy":
                     self.Ichat.type_msg(self.buying_greeting)
+                    self.Ibuy.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
                     #take packs from the customer
-                    
+                    self.Ibuy.complete_purchase()
                     #now announce to customer how many tickets to take
                     
                     #now complete the sale
-                    pass
+                    
                 
                 if receipt is not None:
                     session.set_transaction(receipt)

@@ -226,7 +226,7 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
         <span class="kw">return</span> self.__classified[filename]
 
     <span class="cmt">#stores the screencaps for trade window
-</span>    __trade = {<span class="str">"confirm"</span>:{<span class="str">"confirm_button"</span>:<img src="../Images/trade/confirm_window/confirm_button_confirm.png" />, <span class="str">"confirm_cancel"</span>:<img src="../Images/trade/confirm_window/confirm_cancel.png" />, <span class="str">"cancel_button"</span>:<img src="../Images/trade/confirm_window/cancel_button.png" />}, <span class="str">"confirm_button"</span>:<img src="../Images/trade/confirm_button.png" />, <span class="str">"incoming_request"</span>: <img src="../Images/incoming_request.png" />, <span class="str">"accept_request"</span>: <img src="../Images/trade_yes.png" />,  <span class="str">"turn_right"</span>: <img src="../Images/turn_right.png" />, <span class="str">"turn_left"</span>: <img src="../Images/turn_left.png" />, <span class="str">"version_menu"</span>:<img src="../Images/trade/version_menu.png" />, <span class="str">"version_menu_regular"</span>:<img src="../Images/trade/version_menu_regular.png" />, <span class="str">"version_menu_packs_tickets"</span>:<img src="../Images/trade/version_menu_packs_tickets.png" />, <span class="str">"version_menu_premium"</span>:<img src="../Images/trade/version_menu_premium.png" />, <span class="str">"giving_window"</span>:<img src="../Images/trade/products_giving.png" />, <span class="str">"taking_window"</span>:<img src="../Images/trade/products_taking.png" />, <span class="str">"scroll_bar_regular"</span>:<img src="../Images/trade/scroll_bar_regular.png" />, <span class="str">"scroll_bar_mini"</span>:<img src="../Images/trade/scroll_bar_mini.png" />}
+</span>    __trade = {<span class="str">"confirm"</span>:{<span class="str">"confirm_button"</span>:<img src="../Images/trade/confirm_window/confirm_button_confirm.png" />, <span class="str">"confirm_cancel"</span>:<img src="../Images/trade/confirm_window/confirm_cancel.png" />, <span class="str">"cancel_button"</span>:<img src="../Images/trade/confirm_window/cancel_button.png" />}, <span class="str">"list_view_collection_window"</span>:<img src="../Images/trade/list_view_button_collection_window.png" />, <span class="str">"thumbnail_view_collection_window"</span>:<img src="../Images/trade/thumbnail_view_button_collection_window.png" />, <span class="str">"confirm_button"</span>:<img src="../Images/trade/confirm_button.png" />, <span class="str">"incoming_request"</span>: <img src="../Images/incoming_request.png" />, <span class="str">"accept_request"</span>: <img src="../Images/trade_yes.png" />,  <span class="str">"turn_right"</span>: <img src="../Images/turn_right.png" />, <span class="str">"turn_left"</span>: <img src="../Images/turn_left.png" />, <span class="str">"version_menu"</span>:<img src="../Images/trade/version_menu.png" />, <span class="str">"version_menu_regular"</span>:<img src="../Images/trade/version_menu_regular.png" />, <span class="str">"version_menu_packs_tickets"</span>:<img src="../Images/trade/version_menu_packs_tickets.png" />, <span class="str">"version_menu_premium"</span>:<img src="../Images/trade/version_menu_premium.png" />, <span class="str">"giving_window"</span>:<img src="../Images/trade/products_giving.png" />, <span class="str">"taking_window"</span>:<img src="../Images/trade/products_taking.png" />, <span class="str">"scroll_bar_regular"</span>:<img src="../Images/trade/scroll_bar_regular.png" />, <span class="str">"scroll_bar_mini"</span>:<img src="../Images/trade/scroll_bar_mini.png" />}
     <span class="kw">def</span> get_trade(self, filename, phase=None):
         <span class="kw">if</span> phase == None:
             <span class="kw">return</span> self.__trade[filename]
@@ -494,7 +494,7 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
 </span>        close_button=Pattern(self._images.get_chat_window(<span class="str">"expand_close"</span>)).targetOffset(<span class="dig">11</span>, <span class="dig">4</span>)
         <span class="kw">if</span> self.app_region.exists(close_button):
             self._slow_click(target=close_button)
-
+            <span class="skw">wait</span>(<span class="dig">3</span>)
     <span class="kw">def</span> minimize_chat_window(self):
         <span class="cmt">#minimizes a chat window"
 </span>        <span class="str">"""takes a minimize button image as parameter, returns True if found and clicked, returns False otherwise"""</span>
@@ -910,17 +910,17 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
             <span class="cmt">#confirm products receiving
 </span>            <span class="cmt">#set the regions of a single product and and the amount slow
 </span>            <span class="cmt">#number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
-</span>            recieving_number_region = Region(confirm_button.getX()-<span class="dig">289</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">34</span>, <span class="dig">14</span>)
+</span>            receiving_number_region = Region(confirm_button.getX()-<span class="dig">289</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">34</span>, <span class="dig">14</span>)
             <span class="cmt">#height for each product is 13px, and 4px buffer vertically between each product slot
-</span>            recieving_name_region = Region(confirm_button.getX()-<span class="dig">254</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">160</span>, <span class="dig">14</span>)
+</span>            receiving_name_region = Region(confirm_button.getX()-<span class="dig">254</span>, confirm_button.getY()+<span class="dig">42</span>, <span class="dig">160</span>, <span class="dig">14</span>)
             <span class="cmt">#confirm products giving
 </span>            giving_number_region = Region(confirm_button.getX()-<span class="dig">291</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">34</span>, <span class="dig">14</span>)
             giving_name_region = Region(confirm_button.getX()-<span class="dig">257</span>, confirm_button.getY()+<span class="dig">391</span>, <span class="dig">160</span>, <span class="dig">14</span>)
             found=True
             <span class="cmt">#scan the giving window
-</span>            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+</span>            hover(Location(receiving_number_region.getX(), receiving_number_region.getY()))
             <span class="skw">wait</span>(<span class="dig">2</span>)
-            hover(Location(recieving_number_region.getX()+<span class="dig">34</span>, recieving_number_region.getY()+<span class="dig">14</span>))
+            hover(Location(receiving_number_region.getX()+<span class="dig">34</span>, receiving_number_region.getY()+<span class="dig">14</span>))
 
             <span class="kw">while</span> found:
                 <span class="kw">print</span>(<span class="str">"while loop run"</span>)
@@ -971,11 +971,11 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
 
             <span class="kw">if</span> expected_number == <span class="dig">0</span>:
                 <span class="kw">return</span> False
-            hover(Location(recieving_number_region.getX(), recieving_number_region.getY()))
+            hover(Location(receiving_number_region.getX(), receiving_number_region.getY()))
             ticket_text_image = Pattern(self._images.get_ticket_text()).similar(<span class="dig">1</span>)
-            <span class="kw">if</span> recieving_name_region.exists(ticket_text_image):
+            <span class="kw">if</span> receiving_name_region.exists(ticket_text_image):
                 expected_number_image = Pattern(self._images.get_number(number=expected_number, category=<span class="str">"trade"</span>, subcategory=<span class="str">"confirm"</span>)).similar(<span class="dig">0.7</span>)
-                <span class="kw">if</span> recieving_number_region.exists(expected_number_image):
+                <span class="kw">if</span> receiving_number_region.exists(expected_number_image):
                     <span class="kw">print</span>(<span class="str">"event ticket number found"</span>)
 
                     <span class="kw">return</span> giving_products_found
@@ -1018,13 +1018,14 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
 </span>        <span class="cmt">#otherwise returns False
 </span>        products_sold = self.confirmation_scan()
 
+        self.Ichat.close_current_chat()
+
         <span class="kw">if</span> products_sold:
             <span class="kw">print</span>(<span class="str">"passed final check"</span>)
             self._slow_click(target=self._images.get_trade(phase=<span class="str">"confirm"</span>, filename=<span class="str">"confirm_button"</span>))
             <span class="skw">wait</span>(Pattern(self._images.get_ok_button()), <span class="dig">600</span>)
             self._slow_click(target=self._images.get_ok_button(), button=<span class="str">"LEFT"</span>)
 
-            self.Ichat.close_current_chat()
             <span class="kw">return</span> products_sold
 
         <span class="kw">else</span>:
@@ -1039,16 +1040,82 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
         super(IBuy, self).__init__()
         self.__pack_prices = PackPrices()
 
+    <span class="kw">def</span> take_all_copies_of_product(self):
+        <span class="cmt">#this will keep taking the product until there are no more of that product
+</span>        <span class="kw">pass</span>
+
     <span class="kw">def</span> take_packs(self):
         <span class="cmt">#will take all packs found in the customers collection and in buy list
 </span>        self.go_to_tickets_packs()
 
-        buy_list = PacksList()
-        prices = PackPrices()
+        <span class="cmt">#declare variable to hold amount of tickets the customer should take
+</span>        tickets_to_give = <span class="dig">0</span>
+        <span class="cmt">#holds the prices for all the packs
+</span>        prices = PackPrices()
 
-        <span class="cmt">#take the packs
-</span>
+        <span class="cmt">#a dict that holds images of the names of all packs
+</span>        pack_names_keys = self._images.get_pack_keys()
+        pack_names_images = self._images.get_packs_text(phase=<span class="str">"confirm"</span>)
+        <span class="cmt">#this will hold all the products that have been taken
+</span>        packs_taken = []
+        number_list = self._images.get_number(number=None, category=<span class="str">"trade"</span>, subcategory=<span class="str">"preconfirm"</span>)
+
+        <span class="cmt">#this variable is used as an indicator whether the while loop should keep iterating
+</span>        found = True
+
+        <span class="kw">while</span> found:
+            found = False
+            <span class="kw">for</span> pack_abbr <span class="kw">in</span> pack_names_keys:
+                <span class="kw">if</span> self.topmost_product_area.exists(pack_names_images[pack_abbr]):
+                    found = True
+                    amount = <span class="dig">0</span>
+                    <span class="kw">for</span> num <span class="kw">in</span> len(range(number_list)):
+                        <span class="kw">if</span> self.topmost_product_quantity_area.exists(number_list[num]).similar(<span class="dig">0.9</span>):
+                            amount = num
+                            <span class="kw">break</span>
+
+                    pack_abbr_index = packs_names_keys.index(pack_abbr)+<span class="dig">1</span>
+                    pack_names_keys = pack_names_keys[pack_abbr_index:]
+
+                    <span class="kw">if</span> amount == <span class="dig">0</span>:
+                        <span class="kw">raise</span> ErrorHandler(<span class="str">"Found 0 of "</span> + str(pack_abbr))
+
+                    pack_obj = Product(name=pack_abbr, buy = self.__pack_prices.get_buy_price(pack_abbr), sell = self.__pack_prices.get_sell_price(pack_abbr), quantity=amount)
+                    packs_taken.append(pack_abbr)
+
+                    <span class="kw">break</span>
+
         <span class="kw">return</span> tickets_to_give
+
+    <span class="kw">def</span> take_cards(self):
+        <span class="kw">pass</span>
+
+    <span class="kw">def</span> take_products(self):
+        <span class="cmt">#confirm button will be used for relative positioning the regions for products scanning
+</span>        confirm_button = self.app_region.exists(self._images.get_trade(filename=<span class="str">"confirm_button"</span>), <span class="dig">30</span>)
+        <span class="cmt">#find the position in the window where the topmost product would be located
+</span>
+        self.topmost_product_area = Region(confirm_button.getX()-<span class="dig">272</span>, confirm_button.getY()+<span class="dig">43</span>, <span class="dig">159</span>, <span class="dig">13</span>)
+        self.topmost_product_quantity_area = Region(confirm_button.getX()-<span class="dig">112</span>, confirm_button.getY()+<span class="dig">44</span>, <span class="dig">40</span>, <span class="dig">9</span>)
+
+        <span class="cmt">#we don't want to take tickets, just products
+</span>        <span class="kw">if</span> self.topmost_product_area.exists(self._images.get_ticket_text()):
+            self.topmost_product_area = Region(self.topmost_product_area.getX(), self.topmost_product_area.getY()+<span class="dig">18</span>, <span class="dig">159</span>, <span class="dig">13</span>)
+            self.topmost_product_quantity_area = Region(self.topmost_product_quantity_area.getX(), self.topmost_product_quantity_area.getY()+<span class="dig">18</span>, <span class="dig">40</span>, <span class="dig">9</span>)
+
+        tickets_to_give = <span class="dig">0</span>
+        tickets_to_give += self.take_packs()
+        tickets_to_give += self.take_cards()
+
+        <span class="kw">return</span> tickets_to_give
+
+    <span class="kw">def</span> preconfirm_scan_purchase(self):
+        <span class="cmt">#will scan the giving and receiving window to see if items match
+</span>        <span class="kw">pass</span>
+
+    <span class="kw">def</span> confirmation_scan(self):
+        <span class="kw">pass</span>
+
 
     <span class="kw">def</span> complete_purchase(self, method=<span class="str">"A"</span>):
         <span class="str">"""Will return the transactions details to be recorded if successul
@@ -1057,8 +1124,11 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
         <span class="kw">if</span> method == <span class="str">"A"</span>:
             <span class="cmt">#take the products first, then tell customer how many tickets to take
 </span>            <span class="cmt">#requires IChat interface to be passed to tell customers how many tickets to take
-</span>            running_total = self.take_packs()
-            running_total = self.take_cards()
+</span>
+            <span class="cmt">#switch to list view in the collection window
+</span>            self._slow_click(target=self._images.get_trade(filename=<span class="str">"list_view_collection_window"</span>))
+
+            running_total = self.take_products()
 
             total_tickets_notice = <span class="str">'Please take %i tickets.'</span> % running_total
             self.Ichat.type_msg(total_tickets_notice)
@@ -1102,11 +1172,6 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
                 self.take_packs(number_of_tickets)
             <span class="kw">elif</span> response == <span class="str">"cards"</span>:
                 self.take_cards(number_of_tickets)
-
-
-
-
-
 
 
 <span class="kw">class</span> FrontInterface(Interface):
@@ -1174,7 +1239,7 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
 </span>    <span class="cmt">#methods of storage being considered, xml, excel, mysql
 </span>
     <span class="kw">def</span> __init__(self, program):
-        <span class="str">""" program parameter is the executable file of the program to write data to, e.g. notepad.exe"""</span>
+        <span class="str">""" program parameter is the executable file of the program to write data to, e.g. notepad"""</span>
         self._program = program
 
     <span class="kw">def</span> write(self, transaction):
@@ -1184,18 +1249,19 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
         record_app.focus()
         <span class="skw">type</span>(self.convert_trans_to_string(transaction))
         <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        App.focus(<span class="str">"Magic Online"</span>)
 
     <span class="kw">def</span> convert_trans_to_string(self, transaction):
         <span class="str">"""takes the transaction variable created in Session class and converts it to string"""</span>
         <span class="cmt">#note, repr will not work because it doesn't remove curly brackets and colons
 </span>        record_list = []
-        <span class="kw">for</span> mode, trans <span class="kw">in</span> transactions:
+        <span class="kw">for</span> mode, trans <span class="kw">in</span> transaction.iteritems():
             record_list.append(str(<span class="str">"mode: "</span> + mode + <span class="str">"  "</span>))
-            <span class="kw">for</span> product,quantity <span class="kw">in</span> trans:
-                record_list.append(str(product+<span class="str">":"</span>))
-                record_list.append(str(quantity))
+            <span class="kw">for</span> product,quantity <span class="kw">in</span> trans.iteritems():
+                record_list.append(str(product + <span class="str">":"</span>))
+                record_list.append(str(quantity) + <span class="str">" "</span>)
 
-        record_string = <span class="str">""</span>.join(record_list)
+        record_string = <span class="str">""</span>.join(record_list) + <span class="str">"\n"</span>
         <span class="kw">return</span> record_string
 
 
@@ -1321,7 +1387,7 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
 </span>                <span class="cmt">#wait(2)
 </span>                <span class="cmt">#self.Itrade.giving_window_region.onChange(self.set_mode("sell"))
 </span>                <span class="kw">if</span> <span class="kw">not</span> mode:
-                    mode=<span class="str">"sell"</span>
+                    mode=<span class="str">"buy"</span>
 
                 self.set_mode(mode=mode)
                 <span class="cmt">#open a session to record data to
@@ -1343,12 +1409,13 @@ selling_greeting = <span class="str">"Entering selling mode.  When you are finis
                 <span class="cmt">#enter buying mode
 </span>                <span class="kw">elif</span> self.get_mode() == <span class="str">"buy"</span>:
                     self.Ichat.type_msg(self.buying_greeting)
+                    self.Ibuy.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
                     <span class="cmt">#take packs from the customer
-</span>
+</span>                    self.Ibuy.complete_purchase()
                     <span class="cmt">#now announce to customer how many tickets to take
 </span>
                     <span class="cmt">#now complete the sale
-</span>                    <span class="kw">pass</span>
+</span>
 
                 <span class="kw">if</span> receipt <span class="kw">is</span> <span class="kw">not</span> None:
                     session.set_transaction(receipt)
