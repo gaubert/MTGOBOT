@@ -70,12 +70,15 @@
 <h2>test.sikuli\test.sikuli</h2> <a href="test.sikuli\test.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-ticket = <img src="Scars.png" />
+ticket = Pattern(<img src="../Images/product/packs/text/Scars.png" />).similar(<span class="dig">0.8</span>)
 
-match = <span class="skw">find</span>(ticket)
+<span class="cmt">#scan = Region(466, 251, 159, 13)
+</span>
+match = exists(ticket)
 
 <span class="kw">if</span> match:
-    hover(match.getTarget())<img src="1296226969768.png" />
+        <span class="kw">print</span>(str(match.x) + <span class="str">", "</span> + str(match.y)  + <span class="str">", "</span>)
+        hover(match.getTarget())
 </pre>
 </body>
 </html>

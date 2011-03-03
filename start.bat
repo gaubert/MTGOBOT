@@ -1,0 +1,1 @@
+"c:/program files (x86)/sikuli x/sikuli-IDE.bat" bot.sikuli

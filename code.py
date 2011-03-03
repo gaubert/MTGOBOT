@@ -7,7 +7,11 @@
 #used in controller to set time of transaction for recording
 from datetime import datetime
 
-classified_ad = "Human BUYING     Frost Titan[s5] | Inferno Titan [s3] | Grave Titan [s1][s0] | Devastating Summons [s1] | Mox Opal [s1][s0] | Contested Zone [s3]"
+
+
+classified_ad = "Human BUYING     Frost Titan [s4] | Inferno Titan [s3] | Grave Titan [s9] | Devastating Summons [s1] | Mox Opal [s9] | Contested Zone [s2]  Please PM me first"
+classified_ad_selling = "Human SELLING ZEN ZEN WWK ZZW [s1][s3] | Grave Titan [s1][s2] | Kargan Dragonlord [s1][s1] | Koth [s1][s7] | Stoneforge Mystic [s1][s0] | Demon of Death's Gate [s4] | Elvish Archdruid [s1]     BUYING Slagstorm [s1]"
+
 
 selling_greeting = "Entering selling mode.  When you are finished, please type the word done into the chat window"
 
@@ -101,7 +105,7 @@ class Images(object):
     def get_ticket_text(self):
         return self.__ticket_text
         
-    __ticket_amount = {1:"../Images/trade/context_menu/get_1.png", 4:"../Images/trade/context_menu/get_4.png", 10:"../Images/trade/context_menu/get_10.png", 32:"../Images/trade/context_menu/get_32.png"}
+    __amount = {1:"../Images/trade/context_menu/get_1.png", 4:"../Images/trade/context_menu/get_4.png", 10:"../Images/trade/context_menu/get_10.png", 32:"../Images/trade/context_menu/get_32.png"}
     def get_amount(self, amount):
         return self.__amount[amount]
         
@@ -156,7 +160,7 @@ class Images(object):
         return self.__classified[filename]
     
     #stores the screencaps for trade window
-    __trade = {"confirm":{"confirm_button":"../Images/trade/confirm_window/confirm_button_confirm.png", "confirm_cancel":"../Images/trade/confirm_window/confirm_cancel.png", "cancel_button":"../Images/trade/confirm_window/cancel_button.png"}, "list_view_collection_window":"../Images/trade/list_view_button_collection_window.png", "thumbnail_view_collection_window":"../Images/trade/thumbnail_view_button_collection_window.png", "confirm_button":"../Images/trade/confirm_button.png", "incoming_request": "../Images/incoming_request.png", "accept_request": "../Images/trade_yes.png",  "turn_right": "../Images/turn_right.png", "turn_left": "../Images/turn_left.png", "version_menu":"../Images/trade/version_menu.png", "version_menu_regular":"../Images/trade/version_menu_regular.png", "version_menu_packs_tickets":"../Images/trade/version_menu_packs_tickets.png", "version_menu_premium":"../Images/trade/version_menu_premium.png", "giving_window":"../Images/trade/products_giving.png", "taking_window":"../Images/trade/products_taking.png", "scroll_bar_regular":"../Images/trade/scroll_bar_regular.png", "scroll_bar_mini":"../Images/trade/scroll_bar_mini.png"}
+    __trade = {"confirm":{"confirm_button":"../Images/trade/confirm_window/confirm_button_confirm.png", "confirm_cancel":"../Images/trade/confirm_window/confirm_cancel.png", "cancel_button":"../Images/trade/confirm_window/cancel_button.png"}, "sort_name": "../Images/trade/sort_name.png", "list_view_collection_window":"../Images/trade/list_view_button_collection_window.png", "thumbnail_view_collection_window":"../Images/trade/thumbnail_view_button_collection_window.png", "confirm_button":"../Images/trade/confirm_button.png", "cancel_button":"../Images/trade/cancel_button.png", "incoming_request": "../Images/incoming_request.png", "accept_request": "../Images/trade_yes.png",  "turn_right": "../Images/turn_right.png", "turn_left": "../Images/turn_left.png", "version_menu":"../Images/trade/version_menu.png", "version_menu_regular":"../Images/trade/version_menu_regular.png", "version_menu_packs_tickets":"../Images/trade/version_menu_packs_tickets.png", "version_menu_premium":"../Images/trade/version_menu_premium.png", "giving_window":"../Images/trade/products_giving.png", "taking_window":"../Images/trade/products_taking.png", "scroll_bar_regular":"../Images/trade/scroll_bar_regular.png", "scroll_bar_mini":"../Images/trade/scroll_bar_mini.png"}
     def get_trade(self, filename, phase=None):
         if phase == None:
             return self.__trade[filename]
@@ -180,11 +184,11 @@ class Images(object):
             
     #stores the images of each pack
     #this is a list of all packs to buy and sell
-    __packs_name_list = ["M11", "ME4", "ROE", "SOM", "WWK", "ZEN"]
+    __packs_name_list = ["M11", "ME4", "MBS", "ROE", "SOM", "WWK", "ZEN"]
     
-    __packs_images = {"M11":"../Images/product/packs/Magic2011.png", "M10":"../Images/product/packs/Magic2010.png", "10E":"../Images/product/packs/UrzasLegacy.png", "9ED":"../Images/product/packs/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/Scars.png", "ROE":"../Images/product/packs/RiseEldrazi.png", "WWK":"../Images/product/packs/Worldwake.png", "ZEN":"../Images/product/packs/Zendikar.png","UZS":"../Images/product/packs/UrzasSaga.png", "UZL":"../Images/product/packs/UrzasLegacy.png", "ARB":"../Images/product/packs/AlaraReborn.png", "CSP":"../Images/product/packs/Coldsnap.png", "CON":"../Images/product/packs/Conflux.png", "DIS":"../Images/product/packs/Dissension.png", "EXO":"../Images/product/packs/Exodus.png", "FUT":"../Images/product/packs/Future.png", "CHK":"../Images/product/packs/KamigawaChampions.png", "LEG":"../Images/product/packs/Legions.png", "LRW":"../Images/product/packs/Lorwyn.png", "MOR":"../Images/product/packs/Morningtide.png", "PLC":"../Images/product/packs/PlanarChaos.png", "ALA":"../Images/product/packs/ShardsAlara.png", "STH":"../Images/product/packs/Stronghold.png", "WTH":"../Images/product/packs/Weatherlight.png", "ME4":"../Images/product/packs/Masters4.png", "ME3":"../Images/product/packs/Masters3.png", "ME2":"../Images/product/packs/Masters2.png", "ME1":"../Images/product/packs/Masters1.png", "ALB":"../Images/product/packs/AlaraBlock.png"},
-    __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/RiseEldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
-                    "confirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png"}}
+    __packs_images = {"M11":"../Images/product/packs/Magic2011.png", "M10":"../Images/product/packs/Magic2010.png", "10E":"../Images/product/packs/UrzasLegacy.png", "9ED":"../Images/product/packs/Magic9.png", "8ED":"../Images/product/packs/Magic8.png", "7ED":"../Images/product/packs/Magic7.png", "MBS": "../Images/product/packs/Besieged.png", "SOM":"../Images/product/packs/Scars.png", "ROE":"../Images/product/packs/RiseEldrazi.png", "WWK":"../Images/product/packs/Worldwake.png", "ZEN":"../Images/product/packs/Zendikar.png","UZS":"../Images/product/packs/UrzasSaga.png", "UZL":"../Images/product/packs/UrzasLegacy.png", "ARB":"../Images/product/packs/AlaraReborn.png", "CSP":"../Images/product/packs/Coldsnap.png", "CON":"../Images/product/packs/Conflux.png", "DIS":"../Images/product/packs/Dissension.png", "EXO":"../Images/product/packs/Exodus.png", "FUT":"../Images/product/packs/Future.png", "CHK":"../Images/product/packs/KamigawaChampions.png", "LEG":"../Images/product/packs/Legions.png", "LRW":"../Images/product/packs/Lorwyn.png", "MOR":"../Images/product/packs/Morningtide.png", "PLC":"../Images/product/packs/PlanarChaos.png", "ALA":"../Images/product/packs/ShardsAlara.png", "STH":"../Images/product/packs/Stronghold.png", "WTH":"../Images/product/packs/Weatherlight.png", "ME4":"../Images/product/packs/Masters4.png", "ME3":"../Images/product/packs/Masters3.png", "ME2":"../Images/product/packs/Masters2.png", "ME1":"../Images/product/packs/Masters1.png", "ALB":"../Images/product/packs/AlaraBlock.png"},
+    __packs_text = {"preconfirm": {"M11":"../Images/product/packs/text/Magic2011.png", "M10":"../Images/product/packs/text/Magic2010.png", "10E":"../Images/product/packs/text/UrzasLegacy.png", "9ED":"../Images/product/packs/text/Magic9.png", "8ED":"../Images/product/packs/text/Magic8.png", "7ED":"../Images/product/packs/text/Magic7.png","MBS": "../Images/product/packs/text/Besieged.png", "SOM":"../Images/product/packs/text/Scars.png", "ZEN":"../Images/product/packs/text/Zendikar.png", "WWK":"../Images/product/packs/text/Worldwake.png", "ROE":"../Images/product/packs/text/RiseEldrazi.png", "UZS":"../Images/product/packs/text/UrzasSaga.png", "UZL":"../Images/product/packs/text/UrzasLegacy.png", "ARB":"../Images/product/packs/text/AlaraReborn.png", "CSP":"../Images/product/packs/text/Coldsnap.png", "CON":"../Images/product/packs/text/Conflux.png", "DIS":"../Images/product/packs/text/Dissension.png", "EXO":"../Images/product/packs/text/Exodus.png", "FUT":"../Images/product/packs/text/Future.png", "CHK":"../Images/product/packs/text/KamigawaChampions.png", "LEG":"../Images/product/packs/text/Legions.png", "LRW":"../Images/product/packs/text/Lorwyn.png", "MOR":"../Images/product/packs/text/Morningtide.png", "PLC":"../Images/product/packs/text/PlanarChaos.png", "ALA":"../Images/product/packs/text/ShardsAlara.png", "STH":"../Images/product/packs/text/Stronghold.png", "WTH":"../Images/product/packs/text/Weatherlight.png", "ME4":"../Images/product/packs/text/Masters4.png", "ME3":"../Images/product/packs/text/Masters3.png", "ME2":"../Images/product/packs/text/Masters2.png", "ME1":"../Images/product/packs/text/Masters1.png", "ALB":"../Images/product/packs/text/AlaraBlock.png"},
+                    "confirm":{"M11":"../Images/product/packs/text/confirm/Magic2011.png", "ME4":"../Images/product/packs/text/confirm/Masters4.png", "ROE":"../Images/product/packs/text/confirm/RiseEldrazi.png", "MBS": "../Images/product/packs/text/confirm/Besieged.png", "SOM":"../Images/product/packs/text/confirm/Scars.png", "ZEN":"../Images/product/packs/text/confirm/Zendikar.png", "WWK":"../Images/product/packs/text/confirm/Worldwake.png"}}
     def get_pack_keys(self):
         return self.__packs_name_list
     def get_packs_text(self, phase, filename=None):
@@ -229,8 +233,8 @@ class Prices(object):
         
 class PackPrices(Prices):
     #pricelist for buying and selling packs
-    __sell_prices = {"M11": 4, "M10": 4, "SOM" : 4, "ZEN": 4, "WWK": 4, "ROE": 4, "ME1": 4, "ME2": 4, "ME3": 4, "ME4":4}
-    __buy_prices = {"M11": 3, "M10": 3, "SOM" : 3, "ZEN": 3, "WWK": 3, "ROE": 3, "ME1": 3, "ME2": 3, "ME3": 3, "ME4":4}
+    __sell_prices = {"M11": 4, "M10": 4, "MBS": 4, "SOM" : 4, "ZEN": 4, "WWK": 4, "ROE": 4, "ME1": 4, "ME2": 4, "ME3": 4, "ME4":4}
+    __buy_prices = {"M11": 3, "M10": 3, "MBS": 3, "SOM" : 3, "ZEN": 3, "WWK": 3, "ROE": 3, "ME1": 3, "ME2": 3, "ME3": 3, "ME4":3}
     def __init__(self):
         super(PackPrices, self).__init__()
     
@@ -583,11 +587,6 @@ class ITrade(Interface):
         else:
             return False
     
-    def set_giving_taking_windows(self, giving_region, taking_region):
-        self.giving_region = giving_region
-        #these are the pre-confirmation window regions
-        self.taking_region = taking_region
-    
     def go_to_tickets_packs(self):
         #go to the tickets section
         self._slow_click(target=self._images.get_trade("version_menu"))
@@ -649,10 +648,9 @@ class ISell(ITrade):
         #list of all images found
         products = []
         #keep a record of product names found to prevent duplicates
-        list_of_product_names = []
         regular_scroll_bar = None
         mini_scroll_bar = None
-        scroll_bar = self.giving_region.exists(self._images.get_trade(("scroll_bar_regular")))
+        scroll_bar = self.giving_window_region.exists(self._images.get_trade(("scroll_bar_regular")))
         if not scroll_bar:
             scroll_bar = region.exists(self._images.get_trade(("scroll_bar_mini")))
         #hover over scroll bar for mouse wheel manipulation
@@ -660,7 +658,7 @@ class ISell(ITrade):
         #scan_region will be used as the region to scan for the packs and number of packs
         #using the giving window as region, each product row is scanned for a product name and quantity
         #NOTE: A single area reserved for the text of a single product is a 192px(width) by 16/17px(height) area, with a 1px buffer in between each string
-        scan_region = Region(self.giving_region.getX()+2, self.giving_region.getY()+43, 196, 17)
+        scan_region = Region(self.giving_window_region.getX()+2, self.giving_window_region.getY()+43, 196, 17)
         #keep while loop as long as there is still a pack to be scanned
         found = True
         while found:
@@ -671,7 +669,7 @@ class ISell(ITrade):
                 #determine which packs are in the giving window
                 pack = self._images.get_packs_text(phase="preconfirm", filename=product_abbr)
                 
-                if scan_region.exists(Pattern(pack).similar(0.9)) and not product_abbr in list_of_product_names:
+                if scan_region.exists(Pattern(pack).similar(0.9)):
                     
                     found = True
                     print(str(pack) + " found!")
@@ -795,12 +793,10 @@ class ISell(ITrade):
         
         tickets_found = 0
         #product height = 17, width = 145, relative distance from upper left region corner, y = 46, x =35
-        scan_region_product = Region(self.taking_region.getX()+34, self.taking_region.getY()+45, 145, 17)
+        scan_region_product = Region(self.taking_window_region.getX()+34, self.taking_window_region.getY()+45, 145, 17)
         #product height = 17, width = 30, relative distance from upper left region corner, y = 46, x =1
-        scan_region_number = Region(self.taking_region.getX(), self.taking_region.getY()+45, 30, 17)
+        scan_region_number = Region(self.taking_window_region.getX(), self.taking_window_region.getY()+45, 30, 17)
 
-        print("region coords: "+str(self.taking_region.getX()) + " "+str(self.taking_region.getY()) + " " + str(self.taking_region.getW()) + " " + str(self.taking_region.getH()))
-        print("scan_region_number coords: "+str(scan_region_number.getX()) + " "+str(scan_region_number.getY()) + " " + str(scan_region_number.getW()) + " " + str(scan_region_number.getH()))
         if scan_region_product.exists(ticket):
             print("found ticket in taking window")
             #for performance, start the number scan with the expected number
@@ -833,7 +829,6 @@ class ISell(ITrade):
         
         if isinstance(confirm_button, Match):
             #keeps record of products found and their amount so far
-            list_of_product_names = []
             giving_products_found = []
             pack_names_keys = self._images.get_pack_keys()
             pack_names = self._images.get_packs_text(phase="confirm")
@@ -859,7 +854,7 @@ class ISell(ITrade):
                 found=False
                 for product_abbr in pack_names_keys:
                     print("looking for " + str(product_abbr))
-                    if giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(0.8)) and not product_abbr in giving_products_found:
+                    if giving_name_region.exists(Pattern(pack_names[product_abbr]).similar(0.8)):
                         print("confirmation window: "+product_abbr+" found")
                         
                         #if still at 0 after for loop, error raised
@@ -991,8 +986,8 @@ class IBuy(ITrade):
         
         #a dict that holds images of the names of all packs
         pack_names_keys = self._images.get_pack_keys()
-        pack_names_images = self._images.get_packs_text(phase="confirm")
-        #this will hold all the products that have been taken
+        pack_names_images = self._images.get_packs_text(phase="preconfirm")
+        #this will hold all the product objects that have been taken
         packs_taken = []
         number_list = self._images.get_number(number=None, category="trade", subcategory="preconfirm")
         
@@ -1002,23 +997,28 @@ class IBuy(ITrade):
         while found:
             found = False
             for pack_abbr in pack_names_keys:
-                if self.topmost_product_area.exists(pack_names_images[pack_abbr]):
+                print("searching for " + str(pack_names_images[pack_abbr]))
+                if self.topmost_product_name_area.exists(Pattern(pack_names_images[pack_abbr]).similar(0.8)):
+                    print("found " + str(pack_abbr) + "!")
                     found = True
                     amount = 0
-                    for num in len(range(number_list)):
-                        if self.topmost_product_quantity_area.exists(number_list[num]).similar(0.9):
+                    for num in range(len(number_list)):
+                        if num == 0:
+                            continue
+                        print("searching for number: " + str(number_list[num]))
+                        if self.topmost_product_quantity_area.exists(Pattern(number_list[num]).similar(0.9)):
                             amount = num
-                            self.take_single_pack(product_loc=self.topmost_product_area.getCenter(),amount)
+                            self.take_single_pack(product_loc=self.topmost_product_name_area.getCenter(), quantity=amount)
                             break
 
-                    pack_abbr_index = packs_names_keys.index(pack_abbr)+1
+                    pack_abbr_index = pack_names_keys.index(pack_abbr)+1
                     pack_names_keys = pack_names_keys[pack_abbr_index:]
                     
                     if amount == 0:
                         raise ErrorHandler("Found 0 of " + str(pack_abbr))
                     
                     pack_obj = Product(name=pack_abbr, buy = self.__pack_prices.get_buy_price(pack_abbr), sell = self.__pack_prices.get_sell_price(pack_abbr), quantity=amount)
-                    packs_taken.append(pack_abbr)
+                    packs_taken.append(pack_obj)
                     break
         
         for pack in packs_taken:
@@ -1028,30 +1028,41 @@ class IBuy(ITrade):
     
     def take_cards(self):
         pass
+        
+        return 0
     
     def take_products(self):
         #confirm button will be used for relative positioning the regions for products scanning
         confirm_button = self.app_region.exists(self._images.get_trade(filename="confirm_button"), 30)
         #find the position in the window where the topmost product would be located
         
-        self.topmost_product_area = Region(confirm_button.getX()-272, confirm_button.getY()+43, 159, 13)
-        self.topmost_product_quantity_area = Region(confirm_button.getX()-112, confirm_button.getY()+44, 40, 9)
+        self.topmost_product_name_area = Region(confirm_button.getX()-271, confirm_button.getY()+47, 159, 13)
+        self.topmost_product_quantity_area = Region(confirm_button.getX()-113, confirm_button.getY()+47, 40, 13)
+        
+        name_sort_button_location = Location(confirm_button.getX()-231, confirm_button.getY()+23)
+        self._slow_click(loc=name_sort_button_location)
         
         #we don't want to take tickets, just products
-        if self.topmost_product_area.exists(self._images.get_ticket_text()):
-            self.topmost_product_area = Region(self.topmost_product_area.getX(), self.topmost_product_area.getY()+18, 159, 13)
+        if self.topmost_product_name_area.exists(self._images.get_ticket_text()):
+            print("event ticket found, moving down")
+            self.topmost_product_name_area = Region(self.topmost_product_area.getX(), self.topmost_product_area.getY()+18, 159, 13)
             self.topmost_product_quantity_area = Region(self.topmost_product_quantity_area.getX(), self.topmost_product_quantity_area.getY()+18, 40, 9)
+        print("LOC IS : X =" + str(self.topmost_product_name_area.getX()) + " AND Y = " + str(self.topmost_product_name_area.getY()))
         
         tickets_to_give = 0
         tickets_to_give += self.take_packs()
+        print(str(tickets_to_give))
         tickets_to_give += self.take_cards()
         
         return tickets_to_give
         
     def preconfirm_scan_purchase(self):
         #will scan the giving and receiving window to see if items match
-        taking_name_region = Region(self.giving_window_region.getX()+34, self.giving_window_region.getY()+45, 145, 17)
-        taking_number_region = Region(self.giving_window_region.getX(), self.giving_window_region.getY()+45, 30, 17)
+        taking_name_region = Region(self.taking_window_region.getX()+34, self.taking_window_region.getY()+45, 145, 17)
+        taking_number_region = Region(self.taking_window_region.getX(), self.taking_window_region.getY()+45, 30, 17)
+        
+        giving_name_region = Region(self.giving_window_region.getX()+35, self.giving_window_region.getY()+43, 197, 17)
+        giving_number_region = Region(self.giving_window_region.getX()+3, self.giving_window_region.getY()+43, 30, 17)
         
         pack_images = self._images.get_packs_text(phase="preconfirm")
         pack_image_keys = self._images.get_pack_keys()
@@ -1064,32 +1075,128 @@ class IBuy(ITrade):
         #will hold all the Product objects of items found
         products_obj_found = []
         
-        scroll_bar_loc = Location(self.giving_window_region.getX()+385, self.giving_window_region.getY()+80)
+        scroll_bar_loc = Location(self.giving_window_region.getX()+388, self.giving_window_region.getY()+80)
         found = True
         while True:
             found = False
             
             for pack_abbr in pack_image_keys:
             
-                if taking_name_region.exists(Pattern(pack_images[pack_abbr]).similar(0.9)) and not pack_abbr in products_found:
+                if taking_name_region.exists(Pattern(pack_images[pack_abbr]).similar(0.9)):
                     found = True
                     products_found.append(pack_abbr)
                     
                     
-                    for number, number_img in len(range(Pattern(numbers_list).similar(0.8))):
+                    for number, number_img in range(len(Pattern(numbers_list).similar(0.8))):
                     
                         if taking_number_region.exists(number_img):
                             pack_obj = Product(name = pack_abbr, buy = self.__pack_prices.get_buy_price(pack_abbr), sell = self.__pack_prices.get_sell_price(pack_abbr), quantity = number)
                             products_obj_found.append(pack_obj)
                             break
-                break
+                    break
             
             wheel(scroll_bar_loc, WHEEL_DOWN, 2)
-                    
+        total_expected_tickets = 0
+        for product in product_obj_found:
+            total_expected_tickets += product["buy"] * product["quantity"]
+        
+        #wait 2 minutes for the customer to find event ticket, then 2 minutes to take the correct amount
+        if giving_name_region.wait(Pattern(self._images.get_ticket_text()).similar(0.9), 120):
+            giving_name_region.wait(Pattern(numbers_list[total_expected_tickets]).similar(0.9), 120)
+            return True
+        #if he still hasn't taken a ticket, then close the trade
+        else:
+            return False
+        
     def confirmation_scan(self):
-        pass
-    
-    
+        """will return number of tickets taken for transaction recording"""
+        #verify confirm window by checking for confirm cancel buttons, then set regions relative to those buttons
+        confirm_button = exists(self._images.get_trade(filename="confirm_button", phase="confirm"), 1200)
+        
+        if not confirm_button:
+            self._slow_click(loc=Pattern(self._images.get_trade["cancel_button"]))
+        
+        if isinstance(confirm_button, Match):
+            #keeps record of products found and their amount so far
+            receiving_products_found = []
+            pack_names_keys = self._images.get_pack_keys()
+            pack_names = self._images.get_packs_text(phase="confirm")
+            numbers = self._images.get_number(number=None, category="trade", subcategory="confirm")
+            #confirm products receiving
+            #set the regions of a single product and and the amount slow
+            #number region is 20px down and 260px to the left, 13px height and 30px wide, 4px buffer vertically
+            receiving_number_region = Region(confirm_button.getX()-289, confirm_button.getY()+41, 34, 14)
+            #height for each product is 13px, and 4px buffer vertically between each product slot
+            receiving_name_region = Region(confirm_button.getX()-254, confirm_button.getY()+41, 160, 14)
+            #confirm products giving
+            giving_number_region = Region(confirm_button.getX()-291, confirm_button.getY()+391, 34, 14)
+            giving_name_region = Region(confirm_button.getX()-257, confirm_button.getY()+391, 160, 14)
+            #this is a variable that will hold the number of pixels to move down after scanning each area
+            how_many_pixels_to_move_down = 0
+            
+            found=True
+            while found:
+                print("while loop run")
+                hover(Location(receiving_number_region.getX(), receiving_number_region.getY()))
+                found=False
+                for product_abbr in pack_names_keys:
+                    print("looking for " + str(product_abbr))
+                    if receiving_name_region.exists(Pattern(pack_names[product_abbr]).similar(0.8)):
+                        print("confirmation window: "+product_abbr+" found")
+                        
+                        #if still at 0 after for loop, error raised
+                        amount = 0
+                        for number in range(len(numbers)):
+                            if number == 0:
+                                continue
+                            print(numbers[number])
+                            if receiving_number_region.exists(Pattern(numbers[number]).similar(0.8)):
+                                print("CURRENT NUMBER STRING FOUND " + str(numbers[number]))
+                                amount = number
+                                
+                                #packs are listed in Magic in the same sequence they are listed in the list of pack keys,
+                                #if a pack is found, all packs including it and before, are removed from the list of packs
+                                #to search
+                                pack_index = pack_names_keys.index(product_abbr) + 1
+                                pack_names_keys = pack_names_keys[pack_index:]
+                                
+                                break
+                            
+                        product_obj = Product(name=product_abbr, buy = self.__pack_prices.get_buy_price(product_abbr), sell = self.__pack_prices.get_sell_price(product_abbr), quantity=amount)
+                        receiving_products_found.append(product_obj)
+                                            
+                        if amount == 0:
+                            raise ErrorHandler("Could not find a number for product: " + str(product_abbr))
+                        found=True
+                        
+                        if how_many_pixels_to_move_down != 17:
+                            how_many_pixels_to_move_down = 17
+                        else:
+                            how_many_pixels_to_move_down =  18
+                        receiving_number_region = Region(receiving_number_region.getX(), receiving_number_region.getY()+how_many_pixels_to_move_down, receiving_number_region.getW(), receiving_number_region.getH())
+                        receiving_name_region = Region(receiving_name_region.getX(), receiving_name_region.getY()+how_many_pixels_to_move_down, receiving_name_region.getW(), receiving_name_region.getH())
+                        break
+            
+            #get image of number expected to scan for it first, to save time, else search through all other numbers
+            expected_number = 0
+            for product in receiving_products_found:
+                expected_number += product["quantity"] * product["buy"]
+            print(str(expected_number))
+            
+            if expected_number == 0:
+                return False
+                
+            hover(Location(giving_number_region.getX(), giving_number_region.getY()))
+            ticket_text_image = Pattern(self._images.get_ticket_text()).similar(1)
+            if giving_name_region.exists(ticket_text_image):
+                expected_number_image = Pattern(self._images.get_number(number=expected_number, category="trade", subcategory="confirm")).similar(0.7)
+                if giving_number_region.exists(expected_number_image):
+                    print("event ticket number found")
+                    
+                    return receiving_products_found
+                else:
+                    return False
+            
     def complete_purchase(self, method="A"):
         """Will return the transactions details to be recorded if successul
         else will return False"""
@@ -1106,14 +1213,17 @@ class IBuy(ITrade):
             total_tickets_notice = 'Please take %i tickets.' % running_total
             self.Ichat.type_msg(total_tickets_notice)
             
-            #scan the giving region area, and click confirm when it hits right number
-            self.preconfirm_scan_purchase()
+            #scan the giving region area, if customer doesn't take ticket in time or scan files, cancel trade
+            #if not self.preconfirm_scan_purchase(): 
+            #    self._slow_click(loc=Pattern(self._images.get_trade["cancel_button"]))
             
             self.go_to_confirmation()
             
             #run a final confirmation scan to check the products and tickets taken
             products_bought = self.confirmation_scan()
             
+            self.Ichat.close_current_chat()
+        
             if products_bought:
                 print("passed final check")
                 
@@ -1353,7 +1463,6 @@ class Controller(object):
             #minimize the chat window to the side
             if(self.Itrade.accept_trade()):
                 self.Ichat.minimize_chat_window()
-                self.Itrade.set_windows()
                   
                 ## DEBUG: onChange method is not working correctly, ##
                 #signals that the customer is taking something and the transaction will be a sale
@@ -1370,7 +1479,7 @@ class Controller(object):
                 #enter selling mode
                 if self.get_mode() == "sell":
                     self.Ichat.type_msg(self.selling_greeting)
-                    self.Isell.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
+                    self.Isell.set_windows()
                     products_sold = self.Isell.complete_sale()
                     
                     receipt = None
@@ -1382,12 +1491,15 @@ class Controller(object):
                 #enter buying mode
                 elif self.get_mode() == "buy":
                     self.Ichat.type_msg(self.buying_greeting)
-                    self.Ibuy.set_giving_taking_windows(giving_region=self.Itrade.giving_window_region, taking_region=self.Itrade.taking_window_region)
+                    self.Ibuy.set_windows()
                     #take packs from the customer
-                    self.Ibuy.complete_purchase()
-                    #now announce to customer how many tickets to take
+                    products_bought = self.Ibuy.complete_purchase()
                     
-                    #now complete the sale
+                    receipt = None
+                    if products_bought:
+                        receipt = {"sold":{}, "bought":{}}
+                        for product in products_bought:
+                            receipt["bought"][product["name"]] = product["quantity"]
                     
                 
                 if receipt is not None:

@@ -1,8 +1,9 @@
-ticket = "Scars.png"
+ticket = Pattern("../Images/product/packs/text/Scars.png").similar(0.8)
 
-match = find(ticket)
+#scan = Region(466, 251, 159, 13)
+
+match = exists(ticket)
 
 if match:
-    hover(match.getTarget())"1296226969768.png"
-
-    
+	print(str(match.x) + ", " + str(match.y)  + ", ")
+	hover(match.getTarget())
