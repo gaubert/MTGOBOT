@@ -6,11 +6,14 @@
 #DEPENDENCIES
 #used in controller to set time of transaction for recording
 from datetime import datetime
+import sys
 
+sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot")
+import model
 
 
 classified_ad = "Human BUYING     Frost Titan [s4] | Inferno Titan [s3] | Grave Titan [s9] | Devastating Summons [s1] | Mox Opal [s9] | Contested Zone [s2]  Please PM me first"
-classified_ad_selling = "Human SELLING ZEN ZEN WWK ZZW [s1][s3] | Grave Titan [s1][s2] | Kargan Dragonlord [s1][s1] | Koth [s1][s7] | Stoneforge Mystic [s1][s0] | Demon of Death's Gate [s4] | Elvish Archdruid [s1]     BUYING Slagstorm [s1]"
+classified_ad_selling = "Human SELLING ZEN ZEN WWK ZZW [s1][s3] | Kargan Dragonlord [s1][s1] | Koth [s1][s6] | Demon of Death's Gate [s4] | Elvish Archdruid [s1] | Go for the throat [s1]     BUYING Slagstorm [s1]"
 
 
 selling_greeting = "Entering selling mode.  When you are finished, please type the word done into the chat window"
@@ -160,7 +163,7 @@ class Images(object):
         return self.__classified[filename]
     
     #stores the screencaps for trade window
-    __trade = {"confirm":{"confirm_button":"../Images/trade/confirm_window/confirm_button_confirm.png", "confirm_cancel":"../Images/trade/confirm_window/confirm_cancel.png", "cancel_button":"../Images/trade/confirm_window/cancel_button.png"}, "sort_name": "../Images/trade/sort_name.png", "list_view_collection_window":"../Images/trade/list_view_button_collection_window.png", "thumbnail_view_collection_window":"../Images/trade/thumbnail_view_button_collection_window.png", "confirm_button":"../Images/trade/confirm_button.png", "cancel_button":"../Images/trade/cancel_button.png", "incoming_request": "../Images/incoming_request.png", "accept_request": "../Images/trade_yes.png",  "turn_right": "../Images/turn_right.png", "turn_left": "../Images/turn_left.png", "version_menu":"../Images/trade/version_menu.png", "version_menu_regular":"../Images/trade/version_menu_regular.png", "version_menu_packs_tickets":"../Images/trade/version_menu_packs_tickets.png", "version_menu_premium":"../Images/trade/version_menu_premium.png", "giving_window":"../Images/trade/products_giving.png", "taking_window":"../Images/trade/products_taking.png", "scroll_bar_regular":"../Images/trade/scroll_bar_regular.png", "scroll_bar_mini":"../Images/trade/scroll_bar_mini.png"}
+    __trade = {"confirm":{"confirm_button":"../Images/trade/confirm_window/confirm_button_confirm.png", "confirm_cancel":"../Images/trade/confirm_window/confirm_cancel.png", "cancel_button":"../Images/trade/confirm_window/cancel_button.png"}, "canceled_trade": "canceled_trade.png", "sort_name": "../Images/trade/sort_name.png", "list_view_collection_window":"../Images/trade/list_view_button_collection_window.png", "thumbnail_view_collection_window":"../Images/trade/thumbnail_view_button_collection_window.png", "confirm_button":"../Images/trade/confirm_button.png", "cancel_button":"../Images/trade/cancel_button.png", "incoming_request": "../Images/incoming_request.png", "accept_request": "../Images/trade_yes.png",  "turn_right": "../Images/turn_right.png", "turn_left": "../Images/turn_left.png", "version_menu":"../Images/trade/version_menu.png", "version_menu_regular":"../Images/trade/version_menu_regular.png", "version_menu_packs_tickets":"../Images/trade/version_menu_packs_tickets.png", "version_menu_premium":"../Images/trade/version_menu_premium.png", "giving_window":"../Images/trade/products_giving.png", "taking_window":"../Images/trade/products_taking.png", "scroll_bar_regular":"../Images/trade/scroll_bar_regular.png", "scroll_bar_mini":"../Images/trade/scroll_bar_mini.png"}
     def get_trade(self, filename, phase=None):
         if phase == None:
             return self.__trade[filename]
@@ -221,41 +224,33 @@ class Images(object):
         return self.__menu[filename]
 
 
-class Prices(object):
-    #parent class for all price lists
-    def __init__(self):
-        self._prices = {}
-    def setPrices(self, prices):
-        pass
-    def getPrices(self):
-        pass
-
         
-class PackPrices(Prices):
-    #pricelist for buying and selling packs
-    __sell_prices = {"M11": 4, "M10": 4, "MBS": 4, "SOM" : 4, "ZEN": 4, "WWK": 4, "ROE": 4, "ME1": 4, "ME2": 4, "ME3": 4, "ME4":4}
-    __buy_prices = {"M11": 3, "M10": 3, "MBS": 3, "SOM" : 3, "ZEN": 3, "WWK": 3, "ROE": 3, "ME1": 3, "ME2": 3, "ME3": 3, "ME4":3}
+class PackPricesDAL(object):
+    #DAL layer for pricelist for buying and selling packs
     def __init__(self):
-        super(PackPrices, self).__init__()
-    
+        price_model = ProductPriceModel()
+        self.buy = price_model.get_prices("packs_buy")
+        self.sell = price_model.get_prices("packs_sell")
+        
     #set prices is to be done in gui bot settings prior to transaction
     def set_buy_price(self, name, price):
-        self.__buy_prices[name] = price
+        self.buy[name.upper()] = price
     def set_sell_price(self, name, price):
-        self.__sell_prices[name] = price
+        self.sell[name.upper()] = price
     
     def get_buy_price(self, name):
-        return self.__buy_prices[name]
+        return self.buy[name.upper()]
     def get_sell_price(self, name):
-        return self.__sell_prices[name]
+        return self.sell[name.upper()]
         
         
-class CardPrices(Prices):
-    #pricelist for buying and selling single cards
+class CardPricesDAL(object):
+    #DAL layer for pricelist for buying and selling single cards
     
     def __init__(self):
-        super(PackPrices, self).__init__()
-    
+        price_model = ProductPriceModel()
+        self.pack_buy = price_model.get_prices("cards_buy")
+        self.pack_sell = price_model.get_prices("cards_sell")
     
 class List(object):
     #parent class for cards and packs wanted classes
@@ -332,7 +327,7 @@ class Interface(object):
     #parent class for all Interface classes
     
     def __init__(self):
-        self._images = Images()
+        self._images = model.ImagesModel()
         
         magic_online = App("Magic Online")
         if not magic_online.window():
@@ -361,7 +356,12 @@ class Interface(object):
         #will click on a target or location with designated mouse button
         wait(0.2)
         if loc == None:
-            target_match = self.app_region.find(target)
+            target_match = self.app_region.exists(target)
+            
+            #if click was called in middle of trade, check if it was cancelled
+            if not target_match:
+                if self.app_region.exists(self._images.get_trade("canceled_trade")):
+                    return False
             loc = target_match.getTarget()
         if isinstance(loc, Location):
             hover(loc); wait(0.3)
@@ -375,7 +375,9 @@ class Interface(object):
             mouseUp(Button.RIGHT)
         else:
             mouseUp(Button.LEFT)
-            
+        return True
+        
+        
 class IChat(Interface):
     
     #Text recognition is EXPERIMENTAL, SIKULI X only, currently, and INCONSISTENT RESULTS
@@ -390,6 +392,10 @@ class IChat(Interface):
     #methods for interacting with chat window
     def __init__(self):
         super(IChat, self).__init__()
+    
+    def get_customer_name(self):
+        click()
+        
         
     def type_msg(self, msg):
         #if there is a minimize button click it first
@@ -602,7 +608,7 @@ class ISell(ITrade):
     
     def __init__(self):
         super(ISell, self).__init__()
-        self.__pack_prices = PackPrices()
+        self.__pack_prices = PackPricesDAL()
         
     def tickets_to_take_for_cards(self):
         #scan which cards taken and how many and determine tickets to take ticket
@@ -624,6 +630,11 @@ class ISell(ITrade):
         #start search for pack image
         #call image search function with giving window region and all pack images as parameters
         found = self.search_for_images_sale()
+        
+        #in case the user has canceled
+        if not number_of_tickets:
+            return False
+            
         self.products_giving = found
         #calculate tickets to take
         total_tickets_to_take = self.calculate_products_to_tickets(found)
@@ -695,7 +706,7 @@ class ISell(ITrade):
                     products.append(product)
                     
                     wheel(scroll_bar_loc, WHEEL_DOWN, 2)
-                    
+                
                 if found == True:
                     print("found is true")
                     break
@@ -705,6 +716,11 @@ class ISell(ITrade):
             scan_region = Region(scan_region.getX(), scan_region.getY()+17, scan_region.getW(), scan_region.getH())
             print("reassigning scan region")
         print("finished while loop")
+        
+        #in case the customer has canceled the trade
+        if self.app_region.exists(self._images.get_trade("canceled_trade")):
+            self._slow_click(loc=self._images.get_ok_button())
+            return False
         
         return products
 
@@ -746,27 +762,43 @@ class ISell(ITrade):
                 for i in range(number-taken):
                     taken = self.click_tickets(take=1, taken=taken, cache=location_cache)
             print("finished one while loop, total tickets take = "+str(taken))
+            #taken is assigned false is any click function is interrupted by the user canceling the trade
+            if not taken:
+                return False
         print("finished taking tickets")
         del(location_cache)
+        return True
         
     def click_tickets(self, take, taken, cache):
         """this function is used in the take_ticket method, three required parameters are passed
         take=the number of tickets to take. taken=how many tickets have been taken, 
         this number will be returned after having added the numbers of tickets taken in this invocation.
-        cache=the cached locations of the the buttons needed for this interaction"""
+        cache=the cached locations of the the buttons needed for this interaction
+        click_check is used to see if the image could be found, if not this returns False,
+        signifying that the trade was probably caneled"""
+        
         if cache["ticket"] is None:
-            self._slow_click(target=self._images.get_ticket(), button="Right")
+        
+            click_check = self._slow_click(target=self._images.get_ticket(), button="Right")
+            if not click_check:
+                return False
             cache["ticket"] = Env.getMouseLocation()
         else:
-            self._slow_click(loc=cache["ticket"], button="Right")
+            click_check = self._slow_click(loc=cache["ticket"], button="Right")
+            if not click_check:
+                return False
         if cache["take_"+str(take)+"_tickets"] is None:
             print("Line 658, taken = "+str(taken) + " and take=" + str(take))
-            self._slow_click(target=self._images.get_amount(take))
+            click_check = self._slow_click(target=self._images.get_amount(take))
+            if not click_check:
+                return False
             cache["take_"+str(take)+"_tickets"] = Env.getMouseLocation()
             taken += take
             print("Line 662, taken = "+str(taken) + " and take=" + str(take))
         else:
-            self._slow_click(loc=cache["take_"+str(take)+"_tickets"])
+            click_check = self._slow_click(loc=cache["take_"+str(take)+"_tickets"])
+            if not click_check:
+                return False
             print("Line 663, taken = "+str(taken) + " and take=" + str(take))
             taken += take
             print("Line 665, taken = "+str(taken) + " and take=" + str(take))
@@ -802,6 +834,9 @@ class ISell(ITrade):
             #for performance, start the number scan with the expected number
             if scan_region_number.exists(self._images.get_number(number=expected_total, category="trade", subcategory="preconfirm")):
                 tickets_found = expected_total
+            #in case user canceled trade
+            elif self.app_region.exists(self._images.get_trade("canceled_trade")):
+                return False
             else:
                 for number, number_image in numbers.items():
                     print("looking for number: " + str(number))
@@ -810,14 +845,11 @@ class ISell(ITrade):
                         tickets_found = number
                         break
 
-        #shift down to next product slow
-        scan_region_product = Region(scan_region_product.getX(), scan_region_product.getY()+17, 145,17)
-        scan_region_number = Region(scan_region_number.getX(), scan_region_number.getY()+17, 30, 17)
-        #check what else is in the taking window
-
-        if tickets_found == expected_total:
+        if tickets_found >= expected_total:
+            return True
             print("Pre confirm scan found %i tickets and expected %i tickets" % (tickets_found, expected_total))
         else:
+            return False
             print("Total tickets found and expected tickets don't match.  Tickets found:"+str(tickets_found)+" and Tickets expected:"+str(expected_total))
   
     def confirmation_scan(self, type=None):
@@ -893,6 +925,11 @@ class ISell(ITrade):
             
             if expected_number == 0:
                 return False
+            
+            #in case the customer has canceled trade
+            if self.app_region.exists(self._images.get_trade("canceled_trade")):
+                return False
+
             hover(Location(receiving_number_region.getX(), receiving_number_region.getY()))
             ticket_text_image = Pattern(self._images.get_ticket_text()).similar(1)
             if receiving_name_region.exists(ticket_text_image):
@@ -914,18 +951,40 @@ class ISell(ITrade):
         self.Ichat.type_msg("Calculating tickets to take.  Please wait..")
         
         number_of_tickets = self.tickets_to_take_for_packs()
+        
+        #in case the user has canceled
+        if not number_of_tickets:
+            return False
+            
         print("complete_sale step1 finished, number of tickets to take:%i" % number_of_tickets)
         
         self.go_to_tickets_packs()
         print("complete_sale step2 finished")
-        self.take_ticket(number_of_tickets)
+        
+        take_result = self.take_ticket(number_of_tickets)
+        #if trade was canceled or take tickets failed
+        if not take_result:
+            if self.app_region.exists(self._images.get_trade("cancel_button")):
+                self._slow_click(self._images.get_trade("cancel_button"))
+            elif self.app_region.exists(self._images.get_trade("canceled_trade")):
+                self._slow_click(self._images.get_ok_button())
+            return False
+        
         
         #INSERT PRE-CONFIRM TRANSACTION CHECK HERE#
         
         #image of the total number of tickets to take
         number_image = self._images.get_number(number = number_of_tickets, category = "trade", subcategory = "preconfirm")
         
-        self.preconfirm_scan_sale(products_giving=self.products_giving)
+        preconfirm = self.preconfirm_scan_sale(products_giving=self.products_giving)
+        
+        #if trade was canceled or preconfirm failed
+        if not preconfirm:
+            if self.app_region.exists(self._images.get_trade("cancel_button")):
+                self._slow_click(self._images.get_trade("cancel_button"))
+            elif self.app_region.exists(self._images.get_trade("canceled_trade")):
+                self._slow_click(self._images.get_ok_button())
+            return False
         
         self.go_to_confirmation()
         #check to make sure correct number of tickets taken
@@ -947,12 +1006,15 @@ class ISell(ITrade):
             self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
             wait(Pattern(self._images.get_ok_button()), 600)
             self._slow_click(target=self._images.get_ok_button(), button="LEFT")
-            
             return products_sold
             
         else:
+            #if false returned, either customer canceled trade in conformation screen, or product check failed
             print("failed final check")
-            self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
+            cancel_button = self.app_region.exists(self._images.get_trade(phase="confirm", filename="cancel_button"))
+            if cancel_button:
+                self.slow_click(cancel_button.getTarget())
+            self._slow_click(target=self._images.get_ok_button())
             return False
     
 class IBuy(ITrade):
@@ -960,7 +1022,7 @@ class IBuy(ITrade):
     
     def __init__(self):
         super(IBuy, self).__init__()
-        self.__pack_prices = PackPrices()
+        self.__pack_prices = PackPricesDAL()
     
     def take_all_copies_of_product(self):
         #this will keep taking the product until there are no more of that product
@@ -982,7 +1044,7 @@ class IBuy(ITrade):
         #declare variable to hold amount of tickets the customer should take
         tickets_to_give = 0
         #holds the prices for all the packs
-        prices = PackPrices()
+        prices = PackPricesDAL()
         
         #a dict that holds images of the names of all packs
         pack_names_keys = self._images.get_pack_keys()
@@ -1023,7 +1085,9 @@ class IBuy(ITrade):
         
         for pack in packs_taken:
             tickets_to_give += pack["quantity"] * pack["buy"]
-            
+        
+        if self.app_region(self._images.get_trade("canceled_trade")):
+            return False
         return tickets_to_give
     
     def take_cards(self):
@@ -1050,10 +1114,20 @@ class IBuy(ITrade):
         print("LOC IS : X =" + str(self.topmost_product_name_area.getX()) + " AND Y = " + str(self.topmost_product_name_area.getY()))
         
         tickets_to_give = 0
-        tickets_to_give += self.take_packs()
-        print(str(tickets_to_give))
-        tickets_to_give += self.take_cards()
+        tickets_for_packs = self.take_packs()
+        #if customer cancels trade
+        if not tickets_for_packs:
+            return False
+        else:
+            tickets_to_give += tickets_for_packs
+        tickets_for_cards = self.take_cards()
+        #if customer cancels trade
+        if not tickets_for_cards:
+            return False
+        else:
+            tickets_to_give += tickets_for_cards
         
+        print(str(tickets_to_give))
         return tickets_to_give
         
     def preconfirm_scan_purchase(self):
@@ -1229,13 +1303,16 @@ class IBuy(ITrade):
                 
                 self._slow_click(target=self._images.get_trade(phase="confirm", filename="confirm_button"))
                 wait(Pattern(self._images.get_ok_button()), 600)
-                self._slow_click(target=self._images.get_ok_button(), button="LEFT")
+                self._slow_click(target=self._images.get_ok_button())
             
                 return products_bought
                 
             else:
                 print("failed final check")
-                self._slow_click(target=self._images.get_trade(phase="confirm", filename="cancel_button"))
+                cancel_button = self.app_region.exists(self._images.get_trade(phase="confirm", filename="cancel_button"))
+                if cancel_button:
+                    self.slow_click(loc=cancel_button.getTarget())
+                self._slow_click(target=self._images.get_ok_button())
                 return False
             
         elif method == "B":
@@ -1539,7 +1616,8 @@ class Controller(object):
         else:
             raise ErrorHandler("Current Mode Uknown")
     
-    
+test = model.PackPricesDAL()
+print(test.get_sell_price("M11"))
 #run the bot
 Bot_App = Bot()
 Bot_App.do_function()
