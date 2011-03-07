@@ -1,7 +1,7 @@
 from sikuli.Sikuli import *
 
 #this object will hold all global settings for the application
-settings = {"ERRORHANDLERAPP":"Notepad", "LOGIN_WAIT":45, "PASSWORD":"nancy214", "BOTUSERNAME":"rcdark16", "BOTPASSWORD":"Esther", "FORCEMODE":"", "NETWORK":False, "DEFAULTMODE":"sell"}
+settings = {"ERRORHANDLERAPP":"Notepad", "LOGIN_WAIT":45, "PASSWORD":"yourpasswordhere", "NETWORK":False, "DEFAULTMODE":"sell"}
 
 #default is 1
 Settings.MoveMouseDelay = 0.2
