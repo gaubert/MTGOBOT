@@ -70,15 +70,11 @@
 <h2>test.sikuli\test.sikuli</h2> <a href="test.sikuli\test.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-ticket = Pattern(<img src="../Images/product/packs/text/Scars.png" />).similar(<span class="dig">0.8</span>)
-
-<span class="cmt">#scan = Region(466, 251, 159, 13)
-</span>
-match = exists(ticket)
-
-<span class="kw">if</span> match:
-        <span class="kw">print</span>(str(match.x) + <span class="str">", "</span> + str(match.y)  + <span class="str">", "</span>)
-        hover(match.getTarget())
+<span class="kw">import</span> sys
+sys.path.append(<span class="str">"c:/users/darkray16/desktop/my dropbox/mtgo bot"</span>)
+<span class="kw">import</span> model
+<span class="kw">import</span> view
+<span class="kw">print</span>(repr(view.ITrade.__dict__.keys()))
 </pre>
 </body>
 </html>

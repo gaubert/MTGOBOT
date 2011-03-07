@@ -1,4 +1,4 @@
-#handles reading and writing to files
+#handles reading and writing to pricelist files
 
 from sys import *
 
@@ -6,23 +6,23 @@ class ProductPriceModel(object):
     
     def __init__(self):
         
-        self.pricelist = {}
+        self.pricelist_files = {}
         try:
-            self.pricelist["packs_buy"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/packs/buy.txt", "r")
+            self.pricelist_files["packs_buy"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/packs/buy.txt", "r")
         except IOError:
-            sys.exit("Pack buy price file not found at pricelist/packs/buy/")
+            print("Pack buy price file not found at pricelist/packs/buy/")
         try:
-            self.pricelist["packs_sell"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/packs/sell.txt", "r")
+            self.pricelist_files["packs_sell"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/packs/sell.txt", "r")
         except IOError:
-            sys.exit("Pack sell price file not found at pricelist/packs/sell/")
+            print("Pack sell price file not found at pricelist/packs/sell/")
         try:
-            self.pricelist["cards_buy"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/cards/buy.txt", "r")
+            self.pricelist_files["cards_buy"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/cards/buy.txt", "r")
         except IOError:
-            sys.exit("Card buy price file not found at pricelist/packs/buy/")
+            print("Card buy price file not found at pricelist/cards/buy/")
         try:
-            self.pricelist["cards_sell"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/cards/sell.txt", "r")
+            self.pricelist_files["cards_sell"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/cards/sell.txt", "r")
         except IOError:
-            sys.exit("Card sell price file not found at pricelist/packs/buy/")
+            print("Card sell price file not found at pricelist/cards/buy/")
     
     def get_prices(self, pricelist):
         """valid strings for pricelist = "packs_buy", "packs_sell", "cards_buy", "cards_sell" """
@@ -30,7 +30,7 @@ class ProductPriceModel(object):
         
         pricelist_dict = {}
         
-        raw_feed = self.pricelist[pricelist]
+        raw_feed = self.pricelist_files[pricelist]
         
         while True:
             newline = raw_feed.readline()
@@ -41,7 +41,17 @@ class ProductPriceModel(object):
                 int(single_product[1])
             except ValueError:
                 sys.exit("A non-number found as a price for " + single_product[0] + " in in response to a " + pricelist + " request")
-                
-            pricelist_dict[single_product[0]] = int(single_product[1])
+            product_name = str(single_product[0])
+            
+            #if there is no price next to the name of the product, then 
+            try:
+                product_price = int(single_product[1])
+            except IndexError:
+                pass
+            except ValueError:
+                pass
+            else:
+                pricelist_dict[product_name.upper()] = product_price
         
+        pricelist_dict["Rack"] = 15
         return pricelist_dict

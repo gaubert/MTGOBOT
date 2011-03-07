@@ -1,8 +1,12 @@
+import sys
+sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/model")
+import ProductPriceModel
+
 
 class PackPricesDAL(object):
     #DAL layer for pricelist for buying and selling packs
     def __init__(self):
-        price_model = ProductPriceModel()
+        price_model = ProductPriceModel.ProductPriceModel()
         self.buy = price_model.get_prices("packs_buy")
         self.sell = price_model.get_prices("packs_sell")
         
