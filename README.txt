@@ -20,6 +20,8 @@ Obviously.
 
 
 Starting the application:
+You should already be logged in to Magic Online.  I have not completed the signin function yet.  As soon as you are logged in, just start the bot and it will respond to a trade request.
+
 I have created a convenient start.bat for those who are not especially experienced in programming.  This file will start the Sikuli application, and all you have to do to start the application is click "Run".
 
 Structure:

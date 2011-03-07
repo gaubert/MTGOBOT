@@ -32,7 +32,7 @@ class MainController(object):
         self.selling_greeting = """Entering selling mode.  When you are finished taking products, please type the word \"DONE\" in all lowercase"""
         self.buying_greeting = """Entering buying mode.  I will search your collection for products to buy.  Please wait..."""
         
-        #make controller object a singleton class.  only one instance should be run at a time
+        #make controller object a singleton class.  only one instance should be run at a time 
         if MainController.__single:
             raise ErrorHandler.ErrorHandler("Controller class cannot be instantiated more than once")
         MainController.__single = self
