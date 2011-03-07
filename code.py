@@ -13,12 +13,6 @@ import view
 import controller
 
 exec(open("c:/users/darkray16/desktop/my dropbox/mtgo bot/ini.py", "rb").read())
-
-
-classified_ad = "Human BUYING     Frost Titan [s4] | Inferno Titan [s3] | Grave Titan [s9] | Devastating Summons [s1] | Mox Opal [s9] | Contested Zone [s2]  Please PM me first"
-classified_ad_selling = "Human SELLING ZEN ZEN WWK ZZW [s1][s3] | Kargan Dragonlord [s1][s1] | Demon of Death's Gate [s4] | Elvish Archdruid [s1]                     BUYING Slagstorm [s1] | Memnarch [s2]"
-
-
  
 class Bot(object):
     #this is at the highest level and owns all other classes
