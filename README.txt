@@ -41,4 +41,4 @@ In the main folder you will find the main app file.  It instantiates the control
 
 
 Planned Features:
-As of March 7th 2011, the next feature I plan to add is the core functions handling card buying and selling.  I also plan to add a networking module which will allow the bot to communicate with a server.  I also want the bot to be able to interact with other bots, which is where the networking would come in.
+As of March 7th 2011, the next feature I plan to add is the core functions handling card buying and selling.  I also plan to add a networking module which will allow the bot to communicate with a central bot server.  I also want the bot to be able to interact with other bots, which is where the networking would come in.
