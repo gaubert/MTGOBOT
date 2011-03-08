@@ -20,13 +20,19 @@ Obviously.
 
 
 Starting the application:
-First thing's first.  You must go through each of the python files(.py) and edit the import path at the top to wherever you have this folder located.  I'm still trying to figure out a way to get the relative paths from Python.
+First thing's first.  I'm still trying to figure out a way to get the relative paths from Python.
 
+You must go through each of the python files(.py) and edit the import path at the top to wherever you have this folder located.
 *Technical
 With Sikuli, there are no sys.argv variables, so I am unable to get the relative path of the script file that way.
 
+*IMPORTANT
+I have screencapture all the images while the Magic Online App was in it's default size.  What this means is that you should not maximize the Magic Online or change it's size.  I plan to add support for a maximized window in the future.
+
 You should already be logged in to Magic Online.  As soon as you are logged in, just start the bot and it will respond to a trade request.
 For testing purposes I have have turned off signin feature.  This is so the user doesn't need to exit Magic Online everytime they have to restart the bot.
+
+After a successful transaction, the bot will open Notepad and write the transaction.  
 
 I have created a convenient start.bat for those who are not especially experienced in programming.  This file will start the Sikuli application, and all you have to do to start the application is click "Run".
 
@@ -36,7 +42,7 @@ The view folder contains all the class definitions for interaction with the appl
 The model folder contains all classes that deal with storing or retrieving database information, like prices, images for pixel scans, transaction records, etc.
 The controller folder contains the MainController, which will coordinate the entire application.
 
-In the main folder you will find the main app file.  It instantiates the controller and starts everything.
+In the main folder you will find the main app file, "bot.sikuli".  It instantiates the controller and starts everything.
 
 
 

@@ -1,10 +1,11 @@
+path_to_bot = ""
 import sys
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/view")
+sys.path.append(path_to_bot + "view")
 import PackPricesDAL
 import CardPricesDAL
 import Product
 
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/view")
+sys.path.append(path_to_bot + "view")
 import ITrade
 from sikuli.Sikuli import *
 

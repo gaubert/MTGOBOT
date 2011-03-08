@@ -1,4 +1,6 @@
-exec(open("c:/users/darkray16/desktop/my dropbox/mtgo bot/ini.py", "rb").read())
+path_to_bot = ""
+
+exec(open(path_to_bot + "ini.py", "rb").read())
 
 class ErrorHandler(Exception):
     #custom Exception parent class to handle errors

@@ -5,14 +5,19 @@
 
 #DEPENDENCIES
 #used in controller to set time of transaction for recording
+path_to_bot = "c:/users/darkray16/desktop/my dropbox/mtgobot/"
+
 from datetime import datetime
 import sys
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot")
+
+path_to_bot = ""
+sys.path.append(path_to_bot)
+
 import model
 import view
 import controller
 
-exec(open("c:/users/darkray16/desktop/my dropbox/mtgo bot/ini.py", "rb").read())
+exec(open(path_to_bot  "ini.py", "rb").read())
  
 class Bot(object):
     #this is at the highest level and owns all other classes

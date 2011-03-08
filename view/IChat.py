@@ -1,5 +1,6 @@
+path_to_bot = ""
 import sys
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/view")
+sys.path.append(path_to_bot + "view")
 import Interface
 from sikuli.Sikuli import *
 

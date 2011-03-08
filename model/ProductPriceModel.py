@@ -1,4 +1,5 @@
 #handles reading and writing to pricelist files
+path_to_bot = ""
 
 from sys import *
 
@@ -8,19 +9,19 @@ class ProductPriceModel(object):
         
         self.pricelist_files = {}
         try:
-            self.pricelist_files["packs_buy"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/packs/buy.txt", "r")
+            self.pricelist_files["packs_buy"] = open(path_to_bot + "pricelist/packs/buy.txt", "r")
         except IOError:
             print("Pack buy price file not found at pricelist/packs/buy/")
         try:
-            self.pricelist_files["packs_sell"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/packs/sell.txt", "r")
+            self.pricelist_files["packs_sell"] = open(path_to_bot + "pricelist/packs/sell.txt", "r")
         except IOError:
             print("Pack sell price file not found at pricelist/packs/sell/")
         try:
-            self.pricelist_files["cards_buy"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/cards/buy.txt", "r")
+            self.pricelist_files["cards_buy"] = open(path_to_bot + "pricelist/cards/buy.txt", "r")
         except IOError:
             print("Card buy price file not found at pricelist/cards/buy/")
         try:
-            self.pricelist_files["cards_sell"] = open("c:/users/darkray16/desktop/my dropbox/mtgo bot/pricelist/cards/sell.txt", "r")
+            self.pricelist_files["cards_sell"] = open(path_to_bot + "pricelist/cards/sell.txt", "r")
         except IOError:
             print("Card sell price file not found at pricelist/cards/buy/")
     

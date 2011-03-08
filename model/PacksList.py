@@ -1,5 +1,6 @@
+path_to_bot = ""
 import sys
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/model")
+sys.path.append(path_to_bot + "model")
 from List import *
 
 class PacksList(List):

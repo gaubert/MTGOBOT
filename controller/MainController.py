@@ -1,9 +1,11 @@
-exec(open("c:/users/darkray16/desktop/my dropbox/mtgo bot/ini.py", "rb").read())
+path_to_bot = ""
+
+exec(open(path_to_bot + "ini.py", "rb").read())
 
 import sys
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/model")
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/controller")
-sys.path.append("c:/users/darkray16/desktop/my dropbox/mtgo bot/view")
+sys.path.append(path_to_bot + "model")
+sys.path.append(path_to_bot + "controller")
+sys.path.append(path_to_bot + "view")
 import ErrorHandler
 import Session
 
@@ -73,7 +75,7 @@ class MainController(object):
                 #wait(2)
                 #self.Itrade.giving_window_region.onChange(self.set_mode("sell"))
                 if not mode:
-                    mode="buy"
+                    mode=settings["DEFAULTMODE"]
                 
                 self.set_mode(mode=mode)
                 #open a session to record data to

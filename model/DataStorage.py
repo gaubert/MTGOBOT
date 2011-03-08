@@ -1,5 +1,6 @@
 import sikuli.Sikuli
 
+
 class DataStorage(object):
     #object that will handle exporting transaction history
     #you must have the program that you want to send the transaction to, open
@@ -10,6 +11,9 @@ class DataStorage(object):
         self._program = program
         
     def write(self, transaction):
+        #write the transaction record to a text file
+        transaction_file = open(
+        
         record_app = App("Notepad")
         if not record_app.window():
             App.open("Notepad"); wait(1)
