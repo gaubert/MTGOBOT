@@ -1,3 +1,4 @@
+path_to_bot = ""
 import sikuli.Sikuli
 
 
@@ -12,15 +13,9 @@ class DataStorage(object):
         
     def write(self, transaction):
         #write the transaction record to a text file
-        transaction_file = open(
-        
-        record_app = App("Notepad")
-        if not record_app.window():
-            App.open("Notepad"); wait(1)
-        record_app.focus()
-        type(self.convert_trans_to_string(transaction))
-        wait(0.5)
-        App.focus("Magic Online")
+        transaction_file = open(path_to_bot + "transaction_records/transactions.txt", "w")
+        current_transaction = self.convert_trans_to_string(transaction)
+        #now write the transaction to the file
         
     def convert_trans_to_string(self, transaction):
         """takes the transaction variable created in Session class and converts it to string"""
