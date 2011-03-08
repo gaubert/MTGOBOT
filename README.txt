@@ -20,6 +20,11 @@ Obviously.
 
 
 Starting the application:
+First thing's first.  You must go through each of the python files(.py) and edit the import path at the top to wherever you have this folder located.  I'm still trying to figure out a way to get the relative paths from Python.
+
+*Technical
+With Sikuli, there are no sys.argv variables, so I am unable to get the relative path of the script file that way.
+
 You should already be logged in to Magic Online.  As soon as you are logged in, just start the bot and it will respond to a trade request.
 For testing purposes I have have turned off signin feature.  This is so the user doesn't need to exit Magic Online everytime they have to restart the bot.
 
