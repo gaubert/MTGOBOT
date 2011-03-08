@@ -1,6 +1,6 @@
 This Magic Online Trading Bot was created  by Raymond Cheung.  I can be contacted at darkray16@yahoo.com .
 
-As of March 7th 2011, the bot is able to interact with Magic Online version 4.  Of it's four core functions, buying booster packs, selling booster packs, buying cards, and selling cards, two are currently working.  It is able to buy and sell booster packs.
+As of March 7th 2011, the bot is able to interact with Magic Online version 3.  Of it's four core functions, buying booster packs, selling booster packs, buying cards, and selling cards, two are currently working.  It is able to buy and sell booster packs.
 
 Disclaimer:
 I am a new programmer who is still studying much.  If you find some places in the app which I can improve, please send me an email.  It would be greatly appreciated.
@@ -20,7 +20,8 @@ Obviously.
 
 
 Starting the application:
-You should already be logged in to Magic Online.  I have not completed the signin function yet.  As soon as you are logged in, just start the bot and it will respond to a trade request.
+You should already be logged in to Magic Online.  As soon as you are logged in, just start the bot and it will respond to a trade request.
+For testing purposes I have have turned off signin feature.  This is so the user doesn't need to exit Magic Online everytime they have to restart the bot.
 
 I have created a convenient start.bat for those who are not especially experienced in programming.  This file will start the Sikuli application, and all you have to do to start the application is click "Run".
 
